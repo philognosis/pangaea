@@ -1,0 +1,102 @@
+manifest: "0.1"
+capability:
+  id: acme.timesheet
+  name: Timesheet Management
+  description: Submit, review, and approve employee timesheets for payroll processing
+  owner: payroll-team
+  lifecycle: ga
+  version: "1.0.0"
+runtime:
+  base_url: http://localhost:8101
+  health_url: /healthz
+  fulfillment_modes:
+    - direct
+auth:
+  idp: keycloak
+  audience: timesheet-service
+  obo:
+    grant_type: "urn:ietf:params:oauth:grant-type:token-exchange"
+    token_ttl_seconds: 300
+  scopes:
+    - timesheet.read
+    - timesheet.submit
+    - timesheet.approve
+entities:
+  - type: Timesheet
+    owns: true
+    resolution:
+      search_endpoint: /timesheets/search
+      disambiguators:
+        - employee_name
+        - period
+        - status
+  - type: Employee
+    ref: acme.directory#Employee
+intents:
+  - id: approve_timesheet
+    description: Approve a submitted timesheet for payroll processing
+    utterances:
+      - "approve timesheet for {employee}"
+      - "approve {employee}'s timesheet"
+      - "sign off on {employee}'s hours"
+      - "approve hours for {employee}"
+    confidence:
+      min_route: 0.85
+  - id: submit_timesheet
+    description: Submit a timesheet for manager approval
+    utterances:
+      - "submit my timesheet"
+      - "submit timesheet for {period}"
+      - "send my hours for approval"
+    confidence:
+      min_route: 0.85
+actions:
+  - id: approve_timesheet_action
+    intent: approve_timesheet
+    risk: consequential
+    endpoint: POST /timesheets/{timesheet_id}/approve
+    required_scopes:
+      - timesheet.approve
+    confirmation:
+      template: "Approve timesheet for {{employee.full_name}} ({{employee.employee_id}}) — period {{timesheet.period}}. Total hours: {{timesheet.total_hours}}."
+      show_fields:
+        - employee.full_name
+        - employee.employee_id
+        - timesheet.period
+        - timesheet.total_hours
+      requires:
+        - explicit_tap
+      voice_blocked: true
+  - id: submit_timesheet_action
+    intent: submit_timesheet
+    risk: reversible
+    endpoint: POST /timesheets/{timesheet_id}/submit
+    required_scopes:
+      - timesheet.submit
+    undo_window_seconds: 600
+surfaces:
+  catalog_version: "0.1"
+  components:
+    - intent: approve_timesheet
+      component: ConfirmationCard
+    - intent: submit_timesheet
+      component: ActionCard
+notifications:
+  - id: timesheet_submitted
+    event: timesheet.submitted
+    template:
+      title: "Timesheet ready for approval"
+      body: "{{employee.full_name}}'s timesheet for {{timesheet.period}} is awaiting your approval."
+    actions:
+      - label: Approve
+        intent: approve_timesheet_action
+        style: primary
+      - label: View
+        intent: view_timesheet
+        style: secondary
+policy:
+  visibility:
+    discoverable_by:
+      - role:manager
+      - role:hr
+      - role:payroll

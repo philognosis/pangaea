@@ -1,0 +1,47 @@
+[project]
+name = "pangaea"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.111",
+    "httpx>=0.27",
+    "pydantic>=2.0",
+    "pyyaml>=6.0",
+    "jsonschema>=4.0",
+    "anyio>=4.0",
+    "uvicorn>=0.30",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+]
+
+[tool.uv.workspace]
+members = [
+    "stubs/timesheet",
+    "stubs/people-data",
+    "stubs/permissions",
+    "services/registry",
+    "services/broker",
+    "services/gateway",
+    "services/router",
+    "packages/a2ui-catalog",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = [
+    "stubs/timesheet/tests",
+    "stubs/people-data/tests",
+    "stubs/permissions/tests",
+    "stubs/tests",
+    "packages/manifest-schema/tests",
+    "packages/a2ui-catalog/tests",
+    "services/registry/tests",
+    "services/broker/tests",
+    "services/gateway/tests",
+    "services/router/tests",
+    "tests/e2e",
+]

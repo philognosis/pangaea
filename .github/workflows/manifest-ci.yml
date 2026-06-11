@@ -1,0 +1,52 @@
+name: Manifest Validation
+
+on:
+  pull_request:
+    paths:
+      - "**/capability.yaml"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install pyyaml jsonschema
+
+      - name: Validate changed capability manifests
+        run: |
+          python - <<'EOF'
+          import subprocess, sys, yaml, json, jsonschema, os
+
+          result = subprocess.run(
+              ["git", "diff", "--name-only", "origin/main...HEAD"],
+              capture_output=True, text=True
+          )
+          changed = [f for f in result.stdout.splitlines() if f.endswith("capability.yaml")]
+
+          schema_path = "packages/manifest-schema/capability.schema.json"
+          with open(schema_path) as f:
+              schema = json.load(f)
+
+          errors = []
+          for path in changed:
+              print(f"Validating {path}...")
+              with open(path) as f:
+                  manifest = yaml.safe_load(f)
+              try:
+                  jsonschema.validate(manifest, schema)
+                  print(f"  ✓ {path}")
+              except jsonschema.ValidationError as e:
+                  print(f"  ✗ {path}: {e.message}")
+                  errors.append(path)
+
+          if errors:
+              print(f"\nFailed: {errors}")
+              sys.exit(1)
+          print(f"\nAll {len(changed)} manifest(s) valid.")
+          EOF

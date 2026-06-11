@@ -1,0 +1,37 @@
+name: Tests
+
+on:
+  push:
+    branches: [main, "claude/**"]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install fastapi httpx pydantic pyyaml jsonschema anyio pytest pytest-asyncio uvicorn
+
+      - name: Run Phase 0 tests (stubs + schema)
+        run: |
+          pytest stubs/timesheet/tests stubs/people-data/tests stubs/permissions/tests \
+                 stubs/tests packages/manifest-schema/tests \
+                 -v --tb=short
+
+      - name: Run Phase 1 tests (services + catalog + e2e)
+        run: |
+          pytest packages/a2ui-catalog/tests \
+                 services/registry/tests services/broker/tests \
+                 services/gateway/tests services/router/tests \
+                 tests/e2e \
+                 -v --tb=short
+
+      - name: Full suite
+        run: pytest -v --tb=short
