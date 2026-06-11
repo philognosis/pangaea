@@ -1,0 +1,323 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="3340" viewBox="0 0 1500 3340">
+<style>
+  text { font-family: Arial, Helvetica, sans-serif; }
+  .mega { font-size:40px; font-weight:bold; }
+  .big  { font-size:26px; font-weight:bold; }
+  .med  { font-size:18px; font-weight:bold; }
+  .h    { font-size:15px; font-weight:bold; }
+  .s    { font-size:13px; }
+  .m    { font-size:12px; }
+  .t    { font-size:11px; font-style:italic; }
+  .glow-g { filter: drop-shadow(0 0 6px #4ADE80); }
+  .glow-c { filter: drop-shadow(0 0 6px #22D3EE); }
+  .glow-m { filter: drop-shadow(0 0 6px #E879F9); }
+</style>
+<rect width="1500" height="3340" fill="#05080F"/>
+<defs>
+  <marker id="a"  viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#475569" stroke-width="2"/></marker>
+  <marker id="ag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#4ADE80" stroke-width="2"/></marker>
+  <marker id="ac" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#22D3EE" stroke-width="2"/></marker>
+  <marker id="am" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#E879F9" stroke-width="2"/></marker>
+  <linearGradient id="title-grad" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#4ADE80"/><stop offset="50%" stop-color="#22D3EE"/><stop offset="100%" stop-color="#E879F9"/>
+  </linearGradient>
+</defs>
+
+<!-- ════════════════ HEADER ════════════════ -->
+<text x="750" y="80" class="mega" fill="url(#title-grad)" text-anchor="middle" font-family="Arial">PANGAEA</text>
+<text x="750" y="116" class="med" fill="#94A3B8" text-anchor="middle" font-family="Arial">The operating system of the organisation</text>
+<text x="750" y="146" class="s" fill="#475569" text-anchor="middle" font-family="Arial">From scattered apps → to one nervous system → to an organisation that reasons about itself</text>
+<line x1="100" y1="170" x2="1400" y2="170" stroke="#1E293B" stroke-width="1"/>
+
+<!-- ════════════════ THE PROBLEM ════════════════ -->
+<text x="100" y="216" class="big" fill="#F87171" font-family="Arial">① THE PROBLEM</text>
+<text x="100" y="244" class="s" fill="#94A3B8" font-family="Arial">Not "too many apps." The problem is structural — and invisible until you measure it.</text>
+
+<rect x="100" y="262" width="420" height="120" rx="10" fill="#1A0E0E" stroke="#F87171" stroke-width="1.5"/>
+<text x="120" y="290" class="h" fill="#F87171" font-family="Arial">Work waits</text>
+<text x="120" y="316" class="m" fill="#94A3B8" font-family="Arial">Approvals sit unseen in apps</text>
+<text x="120" y="334" class="m" fill="#94A3B8" font-family="Arial">nobody opened that day.</text>
+<text x="120" y="360" class="t" fill="#F87171" font-family="Arial">4-day approval = invisible cost</text>
+
+<rect x="540" y="262" width="420" height="120" rx="10" fill="#1A0E0E" stroke="#F87171" stroke-width="1.5"/>
+<text x="560" y="290" class="h" fill="#F87171" font-family="Arial">Capability rebuilt, not advanced</text>
+<text x="560" y="316" class="m" fill="#94A3B8" font-family="Arial">Every team builds auth, UI, push,</text>
+<text x="560" y="334" class="m" fill="#94A3B8" font-family="Arial">audit, a11y — 30× over.</text>
+<text x="560" y="360" class="t" fill="#F87171" font-family="Arial">~35% of every sprint on non-product</text>
+
+<rect x="980" y="262" width="420" height="120" rx="10" fill="#1A0E0E" stroke="#F87171" stroke-width="1.5"/>
+<text x="1000" y="290" class="h" fill="#F87171" font-family="Arial">Capability is invisible</text>
+<text x="1000" y="316" class="m" fill="#94A3B8" font-family="Arial">Nobody can find what exists.</text>
+<text x="1000" y="334" class="m" fill="#94A3B8" font-family="Arial">No map. Only tribal knowledge.</text>
+<text x="1000" y="360" class="t" fill="#F87171" font-family="Arial">Firm capability goes unused</text>
+
+<!-- as-is visual: scattered apps -->
+<text x="100" y="430" class="med" fill="#64748B" font-family="Arial">As-is today: the employee at the centre of a maze</text>
+<g class="glow-c">
+<circle cx="750" cy="600" r="44" fill="#0D1322" stroke="#94A3B8" stroke-width="2"/>
+<circle cx="735" cy="592" r="5" fill="#94A3B8"/><circle cx="765" cy="592" r="5" fill="#94A3B8"/>
+<path d="M732 614 Q750 602 768 614" fill="none" stroke="#94A3B8" stroke-width="3" stroke-linecap="round"/>
+</g>
+<!-- scattered app tiles around -->
+<g fill="#0D1322" stroke="#475569" stroke-width="1.5">
+<rect x="430" y="480" width="70" height="70" rx="12"/><rect x="560" y="448" width="70" height="70" rx="12"/>
+<rect x="900" y="460" width="70" height="70" rx="12"/><rect x="1030" y="500" width="70" height="70" rx="12"/>
+<rect x="420" y="640" width="70" height="70" rx="12"/><rect x="1020" y="650" width="70" height="70" rx="12"/>
+<rect x="540" y="710" width="70" height="70" rx="12"/><rect x="900" y="710" width="70" height="70" rx="12"/>
+<rect x="700" y="440" width="70" height="70" rx="12"/><rect x="700" y="740" width="70" height="70" rx="12"/>
+</g>
+<g stroke="#475569" stroke-width="1" stroke-dasharray="4 4" fill="none">
+<path d="M520 530 L710 585"/><path d="M610 510 L715 575"/><path d="M880 500 L790 580"/>
+<path d="M1020 540 L795 595"/><path d="M490 660 L710 610"/><path d="M1010 670 L795 610"/>
+<path d="M600 720 L720 630"/><path d="M900 730 L785 625"/>
+</g>
+<text x="450" y="525" class="m" fill="#64748B" text-anchor="middle" font-family="Arial">HR</text>
+<text x="595" y="490" class="m" fill="#64748B" text-anchor="middle" font-family="Arial">Staffing</text>
+<text x="935" y="502" class="m" fill="#64748B" text-anchor="middle" font-family="Arial">Evals</text>
+<text x="1065" y="542" class="m" fill="#64748B" text-anchor="middle" font-family="Arial">Learning</text>
+<text x="455" y="685" class="m" fill="#64748B" text-anchor="middle" font-family="Arial">Goals</text>
+<text x="1055" y="695" class="m" fill="#64748B" text-anchor="middle" font-family="Arial">Bench</text>
+<text x="575" y="755" class="m" fill="#64748B" text-anchor="middle" font-family="Arial">Time</text>
+<text x="935" y="755" class="m" fill="#64748B" text-anchor="middle" font-family="Arial">Feedback</text>
+<circle cx="465" cy="485" r="7" fill="#F87171"/><circle cx="1055" cy="655" r="7" fill="#F87171"/><circle cx="935" cy="745" r="7" fill="#F87171"/>
+<text x="750" y="850" class="t" fill="#475569" text-anchor="middle" font-family="Arial">red dots = pending work nobody sees · the employee must hunt, learn, and remember every system</text>
+
+<line x1="100" y1="890" x2="1400" y2="890" stroke="#1E293B" stroke-width="1"/>
+
+<!-- ════════════════ THE VISION + PROMISE ════════════════ -->
+<text x="100" y="936" class="big glow-g" fill="#4ADE80" font-family="Arial">② THE VISION &amp; THE PROMISE</text>
+
+<rect x="100" y="958" width="1300" height="90" rx="12" fill="#0A1410" stroke="#4ADE80" stroke-width="2"/>
+<text x="750" y="995" class="med" fill="#86EFAC" text-anchor="middle" font-family="Arial">Express a human need. The right system does the work.</text>
+<text x="750" y="1024" class="s" fill="#94A3B8" text-anchor="middle" font-family="Arial">With your permissions. With a receipt. Through whichever surface fits the moment. Without knowing what systems exist.</text>
+
+<!-- to-be visual: one hub -->
+<text x="100" y="1090" class="med" fill="#4ADE80" font-family="Arial">To-be: one front door · apps reassembled into one landmass</text>
+<g class="glow-c">
+<circle cx="380" cy="1230" r="44" fill="#0D1322" stroke="#22D3EE" stroke-width="2"/>
+<circle cx="365" cy="1222" r="5" fill="#22D3EE"/><circle cx="395" cy="1222" r="5" fill="#22D3EE"/>
+<path d="M362 1242 Q380 1252 398 1242" fill="none" stroke="#22D3EE" stroke-width="3" stroke-linecap="round"/>
+</g>
+<rect x="300" y="1290" width="160" height="44" rx="22" fill="#0D1322" stroke="#22D3EE" stroke-width="1.5"/>
+<text x="380" y="1318" class="s" fill="#67E8F9" text-anchor="middle" font-family="Arial">"help me with X"</text>
+<path d="M462 1230 C 540 1230, 560 1230, 616 1230" fill="none" stroke="#22D3EE" stroke-width="2" stroke-dasharray="8 6" marker-end="url(#ac)"/>
+<g class="glow-g">
+<circle cx="700" cy="1230" r="60" fill="#0A1410" stroke="#4ADE80" stroke-width="3"/>
+<text x="700" y="1226" class="med" fill="#4ADE80" text-anchor="middle" font-family="Arial">PANGAEA</text>
+<text x="700" y="1248" class="t" fill="#5EEAD4" text-anchor="middle" font-family="Arial">one OS</text>
+</g>
+<g stroke="#4ADE80" stroke-width="2" opacity="0.5">
+<line x1="700" y1="1158" x2="700" y2="1135"/><line x1="700" y1="1302" x2="700" y2="1325"/>
+<line x1="630" y1="1185" x2="610" y2="1170"/><line x1="770" y1="1185" x2="790" y2="1170"/></g>
+<!-- neatly federated tiles on right -->
+<rect x="820" y="1140" width="540" height="180" rx="14" fill="#0D1322" stroke="#4ADE80" stroke-width="2"/>
+<g>
+<rect x="845" y="1165" width="76" height="60" rx="10" fill="#131B2A" stroke="#2DD4BF" stroke-width="1.5"/>
+<rect x="935" y="1165" width="76" height="60" rx="10" fill="#131B2A" stroke="#22D3EE" stroke-width="1.5"/>
+<rect x="1025" y="1165" width="76" height="60" rx="10" fill="#131B2A" stroke="#E879F9" stroke-width="1.5"/>
+<rect x="1115" y="1165" width="76" height="60" rx="10" fill="#131B2A" stroke="#4ADE80" stroke-width="1.5"/>
+<rect x="1205" y="1165" width="76" height="60" rx="10" fill="#131B2A" stroke="#FCD34D" stroke-width="1.5"/>
+<rect x="845" y="1240" width="76" height="60" rx="10" fill="#131B2A" stroke="#22D3EE" stroke-width="1.5"/>
+<rect x="935" y="1240" width="76" height="60" rx="10" fill="#131B2A" stroke="#E879F9" stroke-width="1.5"/>
+<rect x="1025" y="1240" width="76" height="60" rx="10" fill="#131B2A" stroke="#4ADE80" stroke-width="1.5"/>
+<rect x="1115" y="1240" width="76" height="60" rx="10" fill="#131B2A" stroke="#2DD4BF" stroke-width="1.5"/>
+<rect x="1205" y="1240" width="76" height="60" rx="10" fill="#131B2A" stroke="#22D3EE" stroke-width="1.5"/>
+</g>
+<path d="M762 1230 C 790 1230, 800 1230, 818 1230" fill="none" stroke="#4ADE80" stroke-width="2" stroke-dasharray="8 6" marker-end="url(#ag)"/>
+<text x="1090" y="1340" class="t" fill="#475569" text-anchor="middle" font-family="Arial">teams keep their terrain · the ocean between them disappears</text>
+
+<line x1="100" y1="1380" x2="1400" y2="1380" stroke="#1E293B" stroke-width="1"/>
+
+<!-- ════════════════ THE SOLUTION ════════════════ -->
+<text x="100" y="1426" class="big" fill="#22D3EE" font-family="Arial">③ THE SOLUTION — teams build capabilities, not experiences</text>
+<text x="100" y="1454" class="s" fill="#94A3B8" font-family="Arial">AOP extracted cross-cutting concerns from classes. Pangaea extracts them from the whole organisation.</text>
+
+<!-- old vs new bars -->
+<rect x="100" y="1474" width="620" height="300" rx="10" fill="#1A0E0E" stroke="#F87171" stroke-width="1.5"/>
+<text x="410" y="1502" class="h" fill="#F87171" text-anchor="middle" font-family="Arial">Teams build today (all of it)</text>
+<g font-family="Arial">
+<rect x="120" y="1518" width="580" height="28" rx="5" fill="#2D1010"/><text x="135" y="1537" class="m" fill="#F87171" font-family="Arial">Frontend / UI</text>
+<rect x="120" y="1552" width="580" height="28" rx="5" fill="#2D1010"/><text x="135" y="1571" class="m" fill="#F87171" font-family="Arial">Authentication / SSO</text>
+<rect x="120" y="1586" width="580" height="28" rx="5" fill="#2D1010"/><text x="135" y="1605" class="m" fill="#F87171" font-family="Arial">Push notifications</text>
+<rect x="120" y="1620" width="580" height="28" rx="5" fill="#2D1010"/><text x="135" y="1639" class="m" fill="#F87171" font-family="Arial">Security review</text>
+<rect x="120" y="1654" width="580" height="28" rx="5" fill="#2D1010"/><text x="135" y="1673" class="m" fill="#F87171" font-family="Arial">Accessibility audit</text>
+<rect x="120" y="1688" width="580" height="28" rx="5" fill="#2D1010"/><text x="135" y="1707" class="m" fill="#F87171" font-family="Arial">Audit trail · discoverability · hosting</text>
+<rect x="120" y="1722" width="580" height="34" rx="5" fill="#0D2010" stroke="#4ADE80" stroke-width="1"/><text x="135" y="1744" class="h" fill="#86EFAC" font-family="Arial">Domain logic + data + API</text>
+</g>
+
+<rect x="780" y="1474" width="620" height="300" rx="10" fill="#0A1410" stroke="#4ADE80" stroke-width="1.5"/>
+<text x="1090" y="1502" class="h" fill="#4ADE80" text-anchor="middle" font-family="Arial">Teams build on Pangaea (only this)</text>
+<g font-family="Arial">
+<rect x="800" y="1518" width="580" height="28" rx="5" fill="#131B2A"/><text x="815" y="1537" class="m" fill="#475569" font-family="Arial">Frontend → platform A2UI renderer</text>
+<rect x="800" y="1552" width="580" height="28" rx="5" fill="#131B2A"/><text x="815" y="1571" class="m" fill="#475569" font-family="Arial">Auth → declared in manifest, OBO broker</text>
+<rect x="800" y="1586" width="580" height="28" rx="5" fill="#131B2A"/><text x="815" y="1605" class="m" fill="#475569" font-family="Arial">Push → platform service, manifest template</text>
+<rect x="800" y="1620" width="580" height="28" rx="5" fill="#131B2A"/><text x="815" y="1639" class="m" fill="#475569" font-family="Arial">Security → certified once, inherited</text>
+<rect x="800" y="1654" width="580" height="28" rx="5" fill="#131B2A"/><text x="815" y="1673" class="m" fill="#475569" font-family="Arial">a11y → WCAG 2.2 AA in catalog</text>
+<rect x="800" y="1688" width="580" height="28" rx="5" fill="#131B2A"/><text x="815" y="1707" class="m" fill="#475569" font-family="Arial">Audit → hash-chained ledger, automatic</text>
+<rect x="800" y="1722" width="580" height="34" rx="5" fill="#0D2010" stroke="#4ADE80" stroke-width="2"/><text x="815" y="1744" class="h" fill="#86EFAC" font-family="Arial">Domain logic + data + API + domain agent</text>
+</g>
+
+<line x1="100" y1="1800" x2="1400" y2="1800" stroke="#1E293B" stroke-width="1"/>
+
+<!-- ════════════════ WHAT'S NOW ════════════════ -->
+<text x="100" y="1846" class="big glow-g" fill="#4ADE80" font-family="Arial">④ WHAT'S NOW — deterministic core, light agency, real value</text>
+
+<rect x="100" y="1868" width="1300" height="70" rx="10" fill="#0D1322" stroke="#22D3EE" stroke-width="1"/>
+<text x="750" y="1900" class="h" fill="#67E8F9" text-anchor="middle" font-family="Arial">Today Pangaea routes intent → resolves entity → mints scoped token → renders → seals receipt.</text>
+<text x="750" y="1922" class="s" fill="#94A3B8" text-anchor="middle" font-family="Arial">Push-driven approvals. Voice summon. Composite views across systems. Discoverability via concept graph.</text>
+
+<!-- today capability cards -->
+<rect x="100" y="1956" width="312" height="150" rx="10" fill="#0D1322" stroke="#4ADE80" stroke-width="1.5"/>
+<text x="256" y="1982" class="h" fill="#86EFAC" text-anchor="middle" font-family="Arial">Work finds you</text>
+<text x="120" y="2008" class="m" fill="#94A3B8" font-family="Arial">"Approve Maya's extension"</text>
+<text x="120" y="2028" class="m" fill="#94A3B8" font-family="Arial">arrives on lock screen.</text>
+<text x="120" y="2048" class="m" fill="#94A3B8" font-family="Arial">One tap. Signed receipt.</text>
+<text x="120" y="2082" class="t" fill="#475569" font-family="Arial">days → minutes</text>
+
+<rect x="430" y="1956" width="312" height="150" rx="10" fill="#0D1322" stroke="#22D3EE" stroke-width="1.5"/>
+<text x="586" y="1982" class="h" fill="#67E8F9" text-anchor="middle" font-family="Arial">Say what you need</text>
+<text x="450" y="2008" class="m" fill="#94A3B8" font-family="Arial">"Evaluate John Doe" →</text>
+<text x="450" y="2028" class="m" fill="#94A3B8" font-family="Arial">guided flow appears,</text>
+<text x="450" y="2048" class="m" fill="#94A3B8" font-family="Arial">scoped to your permissions.</text>
+<text x="450" y="2082" class="t" fill="#475569" font-family="Arial">no URL · no training</text>
+
+<rect x="760" y="1956" width="312" height="150" rx="10" fill="#0D1322" stroke="#E879F9" stroke-width="1.5"/>
+<text x="916" y="1982" class="h" fill="#F0ABFC" text-anchor="middle" font-family="Arial">Five systems, one view</text>
+<text x="780" y="2008" class="m" fill="#94A3B8" font-family="Arial">"Show me Angie's staffing,</text>
+<text x="780" y="2028" class="m" fill="#94A3B8" font-family="Arial">learning, feedback, goals,</text>
+<text x="780" y="2048" class="m" fill="#94A3B8" font-family="Arial">github" → one surface.</text>
+<text x="780" y="2082" class="t" fill="#475569" font-family="Arial">composite syscall</text>
+
+<rect x="1090" y="1956" width="310" height="150" rx="10" fill="#0D1322" stroke="#FCD34D" stroke-width="1.5"/>
+<text x="1245" y="1982" class="h" fill="#FCD34D" text-anchor="middle" font-family="Arial">Find the unknown</text>
+<text x="1110" y="2008" class="m" fill="#94A3B8" font-family="Arial">"Do something nice for</text>
+<text x="1110" y="2028" class="m" fill="#94A3B8" font-family="Arial">my team" → concept graph</text>
+<text x="1110" y="2048" class="m" fill="#94A3B8" font-family="Arial">surfaces the right system.</text>
+<text x="1110" y="2082" class="t" fill="#475569" font-family="Arial">discover without knowing</text>
+
+<line x1="100" y1="2140" x2="1400" y2="2140" stroke="#1E293B" stroke-width="1"/>
+
+<!-- ════════════════ WHY AGENTIC LIGHT ════════════════ -->
+<text x="100" y="2186" class="big" fill="#22D3EE" font-family="Arial">⑤ WHY AGENTIC-LIGHT (and why that's the point)</text>
+
+<rect x="100" y="2208" width="620" height="220" rx="10" fill="#0D1322" stroke="#4ADE80" stroke-width="1.5"/>
+<text x="410" y="2236" class="h" fill="#86EFAC" text-anchor="middle" font-family="Arial">Platform = light, by design</text>
+<text x="120" y="2264" class="m" fill="#94A3B8" font-family="Arial">It sits on the critical path of trust.</text>
+<text x="120" y="2286" class="m" fill="#94A3B8" font-family="Arial">You do NOT want deep, unpredictable</text>
+<text x="120" y="2308" class="m" fill="#94A3B8" font-family="Arial">reasoning between a user and a</text>
+<text x="120" y="2330" class="m" fill="#94A3B8" font-family="Arial">consequential action.</text>
+<text x="120" y="2362" class="s" fill="#4ADE80" font-family="Arial">Job: be fast, safe, boring.</text>
+<text x="120" y="2386" class="t" fill="#475569" font-family="Arial">Invariants keep agency OUT of the</text>
+<text x="120" y="2404" class="t" fill="#475569" font-family="Arial">parts that must be deterministic.</text>
+
+<rect x="780" y="2208" width="620" height="220" rx="10" fill="#0D1322" stroke="#E879F9" stroke-width="1.5"/>
+<text x="1090" y="2236" class="h" fill="#F0ABFC" text-anchor="middle" font-family="Arial">Teams = heavy, where it belongs</text>
+<text x="800" y="2264" class="m" fill="#94A3B8" font-family="Arial">Deep domain reasoning lives with the</text>
+<text x="800" y="2286" class="m" fill="#94A3B8" font-family="Arial">teams who own the knowledge.</text>
+<text x="800" y="2308" class="m" fill="#94A3B8" font-family="Arial">Staffing agent reasons about fit.</text>
+<text x="800" y="2330" class="m" fill="#94A3B8" font-family="Arial">Learning agent builds dev plans.</text>
+<text x="800" y="2362" class="s" fill="#E879F9" font-family="Arial">The only place reasoning is correct.</text>
+<text x="800" y="2386" class="t" fill="#475569" font-family="Arial">Teams reason WITHIN domains.</text>
+<text x="800" y="2404" class="t" fill="#475569" font-family="Arial">Platform will reason ACROSS them.</text>
+
+<rect x="100" y="2448" width="1300" height="40" rx="8" fill="#0A1410" stroke="#4ADE80" stroke-width="1"/>
+<text x="750" y="2474" class="h" fill="#86EFAC" text-anchor="middle" font-family="Arial">Light isn't lesser. You EARN agency by proving trust — layer by layer, above the commit line, never on it.</text>
+
+<line x1="100" y1="2520" x2="1400" y2="2520" stroke="#1E293B" stroke-width="1"/>
+
+<!-- ════════════════ THE FUTURE ════════════════ -->
+<text x="100" y="2566" class="big glow-m" fill="#E879F9" font-family="Arial">⑥ THE FUTURE — the platform becomes a reasoner about the whole</text>
+
+<rect x="100" y="2588" width="1300" height="96" rx="12" fill="#160A18" stroke="#E879F9" stroke-width="2"/>
+<text x="120" y="2616" class="s" fill="#F0ABFC" font-family="Arial">A staffing agent knows staffing. A learning agent knows learning. But only the platform sees that an evaluation just</text>
+<text x="120" y="2638" class="s" fill="#F0ABFC" font-family="Arial">flagged a growth area, that a matching course exists, that an open role needs exactly that skill, that the person's</text>
+<text x="120" y="2660" class="s" fill="#F0ABFC" font-family="Arial">GitHub activity already shows them moving in that direction, and that their mentor has availability next week.</text>
+<text x="120" y="2678" class="t" fill="#94A3B8" font-family="Arial">No domain agent can see this. No human can. The platform stands alone at the intersection of every domain.</text>
+
+<!-- four magic capabilities -->
+<text x="100" y="2724" class="med" fill="#E879F9" font-family="Arial">Four capabilities that would feel like magic</text>
+
+<rect x="100" y="2744" width="312" height="200" rx="10" fill="#0D1322" stroke="#E879F9" stroke-width="1.5"/>
+<text x="256" y="2772" class="h" fill="#F0ABFC" text-anchor="middle" font-family="Arial">Anticipation</text>
+<text x="120" y="2800" class="m" fill="#94A3B8" font-family="Arial">Notices patterns no human</text>
+<text x="120" y="2820" class="m" fill="#94A3B8" font-family="Arial">framed as a question.</text>
+<text x="120" y="2848" class="m" fill="#94A3B8" font-family="Arial">"Three people hit this wall —</text>
+<text x="120" y="2868" class="m" fill="#94A3B8" font-family="Arial">here's what unblocked the 4th."</text>
+<text x="120" y="2902" class="t" fill="#E879F9" font-family="Arial">organisational</text>
+<text x="120" y="2920" class="t" fill="#E879F9" font-family="Arial">proprioception</text>
+
+<rect x="430" y="2744" width="312" height="200" rx="10" fill="#0D1322" stroke="#E879F9" stroke-width="1.5"/>
+<text x="586" y="2772" class="h" fill="#F0ABFC" text-anchor="middle" font-family="Arial">Agents negotiate</text>
+<text x="450" y="2800" class="m" fill="#94A3B8" font-family="Arial">Staffing + learning + goals</text>
+<text x="450" y="2820" class="m" fill="#94A3B8" font-family="Arial">agents resolve via A2A what</text>
+<text x="450" y="2848" class="m" fill="#94A3B8" font-family="Arial">humans broker in meetings.</text>
+<text x="450" y="2868" class="m" fill="#94A3B8" font-family="Arial">Human still decides.</text>
+<text x="450" y="2902" class="t" fill="#E879F9" font-family="Arial">coordination cost</text>
+<text x="450" y="2920" class="t" fill="#E879F9" font-family="Arial">starts to fall</text>
+
+<rect x="760" y="2744" width="312" height="200" rx="10" fill="#0D1322" stroke="#E879F9" stroke-width="1.5"/>
+<text x="916" y="2772" class="h" fill="#F0ABFC" text-anchor="middle" font-family="Arial">Compounding memory</text>
+<text x="780" y="2800" class="m" fill="#94A3B8" font-family="Arial">Every decision becomes</text>
+<text x="780" y="2820" class="m" fill="#94A3B8" font-family="Arial">institutional learning.</text>
+<text x="780" y="2848" class="m" fill="#94A3B8" font-family="Arial">How things actually get done</text>
+<text x="780" y="2868" class="m" fill="#94A3B8" font-family="Arial">— no longer walks out the door.</text>
+<text x="780" y="2902" class="t" fill="#E879F9" font-family="Arial">the firm stops</text>
+<text x="780" y="2920" class="t" fill="#E879F9" font-family="Arial">forgetting itself</text>
+
+<rect x="1090" y="2744" width="310" height="200" rx="10" fill="#0D1322" stroke="#E879F9" stroke-width="2"/>
+<text x="1245" y="2772" class="h" fill="#F0ABFC" text-anchor="middle" font-family="Arial">Self-composing</text>
+<text x="1110" y="2800" class="m" fill="#94A3B8" font-family="Arial">"Onboard a contractor for</text>
+<text x="1110" y="2820" class="m" fill="#94A3B8" font-family="Arial">6 weeks" → platform assembles</text>
+<text x="1110" y="2848" class="m" fill="#94A3B8" font-family="Arial">5 systems into one workflow</text>
+<text x="1110" y="2868" class="m" fill="#94A3B8" font-family="Arial">nobody built.</text>
+<text x="1110" y="2902" class="t" fill="#E879F9" font-family="Arial">capability nobody</text>
+<text x="1110" y="2920" class="t" fill="#E879F9" font-family="Arial">programmed</text>
+
+<!-- the discipline -->
+<rect x="100" y="2968" width="1300" height="56" rx="10" fill="#160A18" stroke="#FCD34D" stroke-width="1.5"/>
+<text x="750" y="2992" class="h" fill="#FCD34D" text-anchor="middle" font-family="Arial">The magic is downside-symmetric. Every capability that feels otherworldly when right feels dystopian when wrong.</text>
+<text x="750" y="3012" class="s" fill="#94A3B8" text-anchor="middle" font-family="Arial">You earn the right to be magical by being relentlessly boring and correct underneath. Grow agency only above the commit line.</text>
+
+<line x1="100" y1="3060" x2="1400" y2="3060" stroke="#1E293B" stroke-width="1"/>
+
+<!-- ════════════════ EVOLUTION TIMELINE ════════════════ -->
+<text x="100" y="3104" class="big" fill="#22D3EE" font-family="Arial">⑦ HOW THE SYSTEM EVOLVES</text>
+
+<!-- timeline bar -->
+<line x1="160" y1="3200" x2="1360" y2="3200" stroke="#334155" stroke-width="2"/>
+
+<circle cx="250" cy="3200" r="14" fill="#0D1322" stroke="#4ADE80" stroke-width="3" class="glow-g"/>
+<text x="250" y="3160" class="h" fill="#86EFAC" text-anchor="middle" font-family="Arial">NOW</text>
+<text x="250" y="3240" class="m" fill="#94A3B8" text-anchor="middle" font-family="Arial">Push · voice · compose</text>
+<text x="250" y="3258" class="t" fill="#475569" text-anchor="middle" font-family="Arial">deterministic core</text>
+<text x="250" y="3274" class="t" fill="#475569" text-anchor="middle" font-family="Arial">light agency</text>
+
+<circle cx="530" cy="3200" r="14" fill="#0D1322" stroke="#22D3EE" stroke-width="3" class="glow-c"/>
+<text x="530" y="3160" class="h" fill="#67E8F9" text-anchor="middle" font-family="Arial">NEXT</text>
+<text x="530" y="3240" class="m" fill="#94A3B8" text-anchor="middle" font-family="Arial">Domain agents deepen</text>
+<text x="530" y="3258" class="t" fill="#475569" text-anchor="middle" font-family="Arial">teams build reasoning</text>
+<text x="530" y="3274" class="t" fill="#475569" text-anchor="middle" font-family="Arial">richer concept graph</text>
+
+<circle cx="810" cy="3200" r="14" fill="#0D1322" stroke="#E879F9" stroke-width="3" class="glow-m"/>
+<text x="810" y="3160" class="h" fill="#F0ABFC" text-anchor="middle" font-family="Arial">SOON</text>
+<text x="810" y="3240" class="m" fill="#94A3B8" text-anchor="middle" font-family="Arial">Cross-domain reasoning</text>
+<text x="810" y="3258" class="t" fill="#475569" text-anchor="middle" font-family="Arial">platform sees the whole</text>
+<text x="810" y="3274" class="t" fill="#475569" text-anchor="middle" font-family="Arial">anticipation begins</text>
+
+<circle cx="1090" cy="3200" r="14" fill="#0D1322" stroke="#FCD34D" stroke-width="3"/>
+<text x="1090" y="3160" class="h" fill="#FCD34D" text-anchor="middle" font-family="Arial">FUTURE</text>
+<text x="1090" y="3240" class="m" fill="#94A3B8" text-anchor="middle" font-family="Arial">Agents negotiate</text>
+<text x="1090" y="3258" class="t" fill="#475569" text-anchor="middle" font-family="Arial">compounding memory</text>
+<text x="1090" y="3274" class="t" fill="#475569" text-anchor="middle" font-family="Arial">coordination cost falls</text>
+
+<circle cx="1330" cy="3200" r="16" fill="#160A18" stroke="#E879F9" stroke-width="3" class="glow-m"/>
+<text x="1330" y="3160" class="h" fill="#F0ABFC" text-anchor="middle" font-family="Arial">MAGIC</text>
+<text x="1330" y="3240" class="m" fill="#94A3B8" text-anchor="middle" font-family="Arial">Self-composing</text>
+<text x="1330" y="3258" class="t" fill="#475569" text-anchor="middle" font-family="Arial">capability nobody built</text>
+<text x="1330" y="3274" class="t" fill="#475569" text-anchor="middle" font-family="Arial">org reasons about itself</text>
+
+<!-- progress glow line -->
+<line x1="160" y1="3200" x2="250" y2="3200" stroke="#4ADE80" stroke-width="3" class="glow-g"/>
+
+<text x="750" y="3320" class="s" fill="#475569" text-anchor="middle" font-family="Arial">Each stage earns the next. The deterministic foundation is what makes the magic safe to turn on.</text>
+</svg>
