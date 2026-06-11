@@ -10,7 +10,7 @@ Pangaea is the operating system of the organization — not a portal, not a sear
 
 ## Before writing any code
 
-1. Read `docs/vision/pangaea-VISION.md` completely. Every decision traces back to it.
+1. Read `docs/vision/pangaea-VISION.md` and the future and evolved vision in `docs/vision/pangaea-vision-evolved.md` completely. Every decision traces back to it. A visual representation of the vision and what the future could hold is here `docs/vision/pangaea-vision-visual.svg`
 2. Read `docs/plan/pangaea-BUILDPLAN.md` and find the current phase + task.
 3. Identify the test gate for that phase. Do not write feature code until you can describe exactly what "passing" looks like.
 
@@ -124,6 +124,7 @@ xp publish path/to/capability.yaml --registry-url http://localhost:8200
 - **E2E / phase gate:** `tests/e2e/test_phase{N}_{name}.py` — these are the stakeholder demos; each assertion prints in plain English.
 - Test users: `alice@acme.com` (manager), `bob@acme.com` (engineer), `carol@acme.com` (HR), `dave@acme.com` (new employee). Employee IDs: `E-{5digits}`.
 - Fixtures in `tests/fixtures/` and `mock-domain-stubs/data/seed.json` (faker-seeded, never production data).
+- Ensure it adhreres to the goal and show the new capabilities built or bugs fixed and a visual way of the state of the system after each of the above
 
 ## Work rules
 
