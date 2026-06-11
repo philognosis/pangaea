@@ -1,0 +1,450 @@
+manifest: "0.1"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# EVALUATIONS CAPABILITY MANIFEST
+# Owns the full lifecycle of performance evaluations: schedule, author,
+# review, calibrate, and submit evaluations across review cycles.
+# ─────────────────────────────────────────────────────────────────────────────
+
+capability:
+  id: acme.evaluations
+  name: Evaluations
+  description: >
+    Performance evaluations for employees across review cycles.
+    Covers authoring, peer feedback requests, manager reviews,
+    calibration, and final submission. The source of record for
+    all structured performance data in the organisation.
+  owner:
+    team: people-systems/evaluations
+    slack: "#evals-eng"
+    oncall: pagerduty:evaluations-oncall
+  lifecycle: ga
+  version: 2.1.0
+  tags: [performance, people, hr, feedback, reviews]
+
+runtime:
+  fulfillment_modes: [agent, direct]
+  agent:
+    protocol: a2a/0.3
+    endpoint: https://evals.internal.acme.com/a2a
+    card: https://evals.internal.acme.com/.well-known/agent.json
+  api:
+    openapi: https://evals.internal.acme.com/openapi.json
+    base_url: https://evals.internal.acme.com/api/v2
+  health: https://evals.internal.acme.com/healthz
+  slo:
+    read_p95_ms: 400
+    action_p95_ms: 800
+    availability_target: 99.5
+
+auth:
+  idp: okta
+  audience: api://acme.evaluations
+  flow: on_behalf_of
+  token_ttl_seconds: 300
+  scopes:
+    - id: evals.read
+      description: >
+        Read evaluations and cycles visible to the caller based on their
+        role (manager sees reports, HR sees all, employee sees own).
+    - id: evals.write
+      description: Author or edit a draft evaluation owned by the caller.
+    - id: evals.request_feedback
+      description: Request peer or upward feedback on behalf of the caller.
+    - id: evals.submit
+      description: >
+        Submit a finalised evaluation. Triggers notifications to subject
+        and their manager. Irreversible — requires consequential confirmation.
+    - id: evals.calibrate
+      description: >
+        Access calibration views and adjust ratings during calibration
+        sessions. Restricted to HR and senior leadership roles.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# ENTITIES — owns Evaluation and ReviewCycle; references Employee from directory
+# ─────────────────────────────────────────────────────────────────────────────
+entities:
+
+  - type: Evaluation
+    owns: true
+    description: >
+      A structured performance evaluation of one employee for one review cycle.
+      Contains ratings, written comments, goal assessments, and metadata.
+    schema: "#/components/schemas/Evaluation"
+    key: evaluation_id
+    display:
+      title: "{{subject.full_name}} — {{cycle.name}}"
+      subtitle: "{{status}} · due {{due_date}} · authored by {{author.full_name}}"
+    resolution:
+      search_endpoint: /evaluations/search
+      search_params: [subject_query, cycle_id, status, author_id]
+      disambiguators:
+        - field: subject.employee_id
+          label: Employee ID
+        - field: cycle.name
+          label: Review cycle
+        - field: status
+          label: Status
+        - field: due_date
+          label: Due date
+
+  - type: ReviewCycle
+    owns: true
+    description: >
+      An organisation-wide or team-scoped review cycle with defined
+      open/close dates, participant lists, and calibration windows.
+    schema: "#/components/schemas/ReviewCycle"
+    key: cycle_id
+    display:
+      title: "{{name}}"
+      subtitle: "{{status}} · {{start_date}} → {{end_date}}"
+    resolution:
+      search_endpoint: /cycles/search
+      search_params: [name_query, status, year]
+      disambiguators:
+        - field: name
+          label: Cycle name
+        - field: status
+          label: Status
+
+  # ── Federated references ─────────────────────────────────────────────────
+
+  - type: Employee
+    ref: acme.directory#Employee
+    role_in_domain: [subject, author, reviewer, manager]
+
+  - type: Team
+    ref: acme.directory#Team
+    role_in_domain: [owning_team]
+
+# ─────────────────────────────────────────────────────────────────────────────
+# INTENTS
+# ─────────────────────────────────────────────────────────────────────────────
+intents:
+
+  - id: evaluate_person
+    description: >
+      Start, resume, or complete a performance evaluation for a specific
+      employee. Opens the guided evaluation authoring flow scoped to the
+      caller's permissions and the current or specified review cycle.
+    utterances:
+      - "evaluate {employee}"
+      - "write {employee}'s evaluation"
+      - "start {employee}'s review"
+      - "open eval for {employee}"
+      - "complete my evaluation of {employee}"
+      - "I need to evaluate {employee} for {cycle}"
+      - "finish {employee}'s performance review"
+    slots:
+      - name: employee
+        entity: acme.directory#Employee
+        required: true
+        disambiguation:
+          strategy: card
+          rank_by: [direct_report, same_team, recent_interaction]
+      - name: cycle
+        entity: ReviewCycle
+        required: false
+        default: current_open_cycle
+        disambiguation:
+          strategy: auto
+          rank_by: [most_recent_open]
+    fulfillment:
+      mode: agent
+      task: evaluations.author_flow
+    surface_hint: focus
+    confidence:
+      min_route: 0.85
+
+  - id: view_my_pending_evaluations
+    description: >
+      Show all evaluations the caller has been assigned to author that
+      are not yet submitted — across all open cycles.
+    utterances:
+      - "my pending evals"
+      - "what evaluations do I owe"
+      - "show me my outstanding reviews"
+      - "which evals haven't I finished"
+      - "evaluations I need to complete"
+    slots: []
+    fulfillment:
+      mode: direct
+      operation: listMyPendingEvaluations
+    surface_hint: inline
+    confidence:
+      min_route: 0.80
+
+  - id: view_team_evaluations
+    description: >
+      Show evaluation status across a manager's direct reports or an
+      entire team for a given cycle. Used by managers tracking completion.
+    utterances:
+      - "evaluation status for my team"
+      - "who on my team hasn't been evaluated yet"
+      - "show {team}'s eval progress for {cycle}"
+      - "team evaluation dashboard"
+    slots:
+      - name: team
+        entity: acme.directory#Team
+        required: false
+        default: caller_primary_team
+      - name: cycle
+        entity: ReviewCycle
+        required: false
+        default: current_open_cycle
+    fulfillment:
+      mode: direct
+      operation: getTeamEvaluationStatus
+    surface_hint: inline
+    confidence:
+      min_route: 0.82
+
+  - id: request_peer_feedback
+    description: >
+      Request structured feedback from peers or stakeholders for a specific
+      employee's evaluation. Sends notifications to requested reviewers.
+    utterances:
+      - "request feedback for {employee}"
+      - "ask {employee}'s peers for input"
+      - "add peer reviewers for {employee}'s eval"
+      - "get feedback from {employee}'s stakeholders"
+    slots:
+      - name: employee
+        entity: acme.directory#Employee
+        required: true
+        disambiguation:
+          strategy: card
+          rank_by: [direct_report, same_team]
+      - name: cycle
+        entity: ReviewCycle
+        required: false
+        default: current_open_cycle
+    fulfillment:
+      mode: direct
+      operation: requestPeerFeedback
+    surface_hint: focus
+    confidence:
+      min_route: 0.85
+
+  - id: view_evaluation
+    description: >
+      Open a specific evaluation to read it. What the caller can see
+      depends on their role — authors see everything, subjects see
+      released evals only, peers see their own feedback contribution.
+    utterances:
+      - "show {employee}'s evaluation"
+      - "open {employee}'s eval"
+      - "read {employee}'s review for {cycle}"
+      - "view my evaluation"
+    slots:
+      - name: employee
+        entity: acme.directory#Employee
+        required: true
+      - name: cycle
+        entity: ReviewCycle
+        required: false
+        default: most_recent_complete
+    fulfillment:
+      mode: direct
+      operation: getEvaluation
+    surface_hint: focus
+    confidence:
+      min_route: 0.83
+
+# ─────────────────────────────────────────────────────────────────────────────
+# ACTIONS
+# ─────────────────────────────────────────────────────────────────────────────
+actions:
+
+  - id: save_draft
+    description: Save the current state of an evaluation without submitting.
+    operation: saveEvaluationDraft
+    risk: reversible
+    scopes: [evals.write]
+    idempotency: required
+    undo:
+      window_seconds: 0   # can re-edit freely; no explicit undo needed
+    audit:
+      retention_days: 365
+
+  - id: submit_evaluation
+    description: Finalise and submit an evaluation. Notifies subject and manager.
+    operation: submitEvaluation
+    risk: consequential
+    scopes: [evals.submit]
+    idempotency: required
+    confirmation:
+      template: >
+        Submit performance evaluation for
+        {{subject.full_name}} ({{subject.employee_id}}, {{subject.team.name}})
+        — cycle {{cycle.name}}.
+        Overall rating: {{overall_rating}}.
+        This is final and will notify {{subject.full_name}}
+        and their manager {{subject.manager.full_name}}.
+      show_fields:
+        - subject.full_name
+        - subject.employee_id
+        - subject.team.name
+        - cycle.name
+        - overall_rating
+        - submission_date
+      requires: [explicit_tap]
+      voice_blocked: true   # voice-only commit never permitted for consequential
+    undo:
+      window_seconds: 0     # not reversible once submitted
+    audit:
+      retention_days: 2555  # 7 years for HR compliance
+
+  - id: request_feedback
+    description: Send feedback requests to named reviewers.
+    operation: requestPeerFeedback
+    risk: reversible
+    scopes: [evals.request_feedback]
+    idempotency: required
+    undo:
+      window_seconds: 300   # can cancel within 5 min before reviewer is notified
+    audit:
+      retention_days: 365
+
+  - id: get_evaluation
+    description: Read an evaluation. Enforced by subject visibility rules server-side.
+    operation: getEvaluation
+    risk: read
+    scopes: [evals.read]
+    idempotency: not_applicable
+    audit:
+      retention_days: 90
+
+  - id: list_pending
+    description: List evaluations pending for the caller.
+    operation: listMyPendingEvaluations
+    risk: read
+    scopes: [evals.read]
+    idempotency: not_applicable
+    audit:
+      retention_days: 30
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SURFACES — A2UI bindings
+# ─────────────────────────────────────────────────────────────────────────────
+surfaces:
+  catalog: a2ui/core@2
+  bindings:
+    - entity: Evaluation
+      card: EvaluationCard
+      detail: EvaluationDetail
+      list: EvaluationTable
+    - entity: ReviewCycle
+      card: ReviewCycleCard
+      list: ReviewCycleList
+    - intent: evaluate_person
+      flow: GuidedFormFlow
+    - intent: view_team_evaluations
+      layout: StatusGridLayout
+  layout:
+    stability: pinned           # same layout every visit; adapts only on request
+    density_default: comfortable
+  accessibility:
+    requires: none              # WCAG 2.2 AA guaranteed by catalog
+
+# ─────────────────────────────────────────────────────────────────────────────
+# NOTIFICATIONS
+# ─────────────────────────────────────────────────────────────────────────────
+notifications:
+
+  - id: eval_due_reminder
+    trigger: webhook
+    payload_schema: "#/components/schemas/EvalDueEvent"
+    template: >
+      Time to evaluate {{subject.full_name}} — due {{due_date}}
+      ({{days_remaining}} days remaining)
+    actions:
+      - open:evaluate_person
+      - snooze
+      - dismiss
+    priority: normal
+    quiet_hours: respect_user
+
+  - id: eval_overdue
+    trigger: webhook
+    payload_schema: "#/components/schemas/EvalDueEvent"
+    template: >
+      {{subject.full_name}}'s evaluation is {{days_overdue}} days overdue
+    actions:
+      - open:evaluate_person
+      - snooze
+    priority: high
+    quiet_hours: ignore          # overdue evals break quiet hours
+
+  - id: feedback_requested
+    trigger: webhook
+    payload_schema: "#/components/schemas/FeedbackRequestEvent"
+    template: >
+      {{requester.full_name}} asks for your feedback on {{subject.full_name}}
+      — due {{due_date}}
+    actions:
+      - open:view_evaluation
+      - dismiss
+    priority: normal
+    quiet_hours: respect_user
+
+  - id: eval_released
+    trigger: webhook
+    payload_schema: "#/components/schemas/EvalReleasedEvent"
+    template: >
+      Your {{cycle.name}} evaluation has been released by {{manager.full_name}}
+    actions:
+      - open:view_evaluation
+      - dismiss
+    priority: normal
+    quiet_hours: respect_user
+
+# ─────────────────────────────────────────────────────────────────────────────
+# POLICY
+# ─────────────────────────────────────────────────────────────────────────────
+policy:
+  authorization: pep_local      # acme.evaluations API enforces all access rules
+  data_classification: confidential-hr
+  pii:
+    - subject.full_name
+    - subject.employee_id
+    - ratings
+    - written_comments
+    - overall_rating
+  residency: us-only
+  retention_default_days: 2555
+  visibility:
+    discoverable_by: "role:employee"   # all employees can discover, RBAC filters what they see
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CROSS-CAPABILITY CONTEXT HINTS
+# These tell the platform what data from other capabilities enriches
+# an Evaluation surface (used for composite views — the mentee view pattern).
+# The platform requests this data in parallel; the team's API is never called
+# for data it doesn't own.
+# ─────────────────────────────────────────────────────────────────────────────
+context_hints:
+  - for_entity: acme.directory#Employee
+    enrich_from:
+      - capability: acme.staffing
+        fetch: staffing_history
+        display_as: StaffingTimeline
+        section_label: "Staffing history"
+      - capability: acme.learning
+        fetch: completed_courses
+        display_as: LearningSnapshot
+        section_label: "Learning & certifications"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# OBSERVABILITY
+# ─────────────────────────────────────────────────────────────────────────────
+observability:
+  telemetry: opt_in_full
+  failed_intent_reports: weekly
+  slo_alerts:
+    - metric: read_p95_ms
+      threshold: 400
+      notify: pagerduty:evaluations-oncall
+    - metric: submit_error_rate
+      threshold: 0.01
+      notify: "#evals-eng"

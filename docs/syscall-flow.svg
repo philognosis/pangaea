@@ -1,0 +1,224 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="920" viewBox="0 0 1200 920">
+<style>
+  text { font-family: Arial, Helvetica, sans-serif; }
+  .h  { font-size:15px; font-weight:700; }
+  .s  { font-size:12px; }
+  .c  { font-size:11px; font-family: 'Courier New', monospace; }
+  .dim{ font-size:11px; }
+</style>
+<rect width="1200" height="920" fill="#0B0F1A"/>
+
+<!-- USER INTENT -->
+<rect x="30" y="30" width="340" height="76" rx="12" fill="#131B2A" stroke="#22D3EE" stroke-width="2"/>
+<text x="200" y="58" class="h" fill="#67E8F9" text-anchor="middle">User intent (voice or text)</text>
+<text x="200" y="82" class="s" fill="#94A3B8" text-anchor="middle">"Show me everything about my mentee Alex"</text>
+
+<!-- arrow down -->
+<line x1="200" y1="108" x2="200" y2="142" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#475569" stroke-width="2"/></marker></defs>
+
+<!-- CONCEPT GRAPH RESOLUTION -->
+<rect x="30" y="148" width="340" height="96" rx="12" fill="#131B2A" stroke="#E879F9" stroke-width="2"/>
+<text x="200" y="174" class="h" fill="#F0ABFC" text-anchor="middle">Concept graph resolution</text>
+<text x="50" y="198" class="c" fill="#94A3B8">entity: "Alex" → acme.directory#Employee</text>
+<text x="50" y="216" class="c" fill="#94A3B8">intent: mentee_overview →</text>
+<text x="50" y="232" class="c" fill="#94A3B8">  [staffing, feedback, credentials]</text>
+
+<!-- arrow down -->
+<line x1="200" y1="246" x2="200" y2="280" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+
+<!-- PERMISSION CHECK -->
+<rect x="30" y="286" width="340" height="76" rx="12" fill="#131B2A" stroke="#4ADE80" stroke-width="2"/>
+<text x="200" y="312" class="h" fill="#86EFAC" text-anchor="middle">Trust fabric</text>
+<text x="50" y="334" class="c" fill="#94A3B8">rbac: caller is mentor of Alex ✓</text>
+<text x="50" y="350" class="c" fill="#94A3B8">mint 3 × OBO tokens (read-scoped)</text>
+
+<!-- arrow down -->
+<line x1="200" y1="364" x2="200" y2="398" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+
+<!-- PARALLEL DISPATCH -->
+<rect x="30" y="404" width="340" height="60" rx="12" fill="#131B2A" stroke="#4ADE80" stroke-width="2"/>
+<text x="200" y="430" class="h" fill="#86EFAC" text-anchor="middle">Orchestrator — parallel syscalls</text>
+<text x="200" y="452" class="s" fill="#94A3B8" text-anchor="middle">fan-out to 3 systems simultaneously</text>
+
+<!-- fan out lines -->
+<line x1="100" y1="466" x2="100" y2="510" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="200" y1="466" x2="200" y2="510" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="300" y1="466" x2="300" y2="510" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- SYSCALL 1 -->
+<rect x="30" y="516" width="140" height="120" rx="10" fill="#0D1322" stroke="#2DD4BF" stroke-width="2"/>
+<text x="100" y="540" class="h" fill="#5EEAD4" text-anchor="middle">syscall 1</text>
+<text x="100" y="558" class="dim" fill="#64748B" text-anchor="middle">Staffing</text>
+<text x="42" y="580" class="c" fill="#94A3B8">GET /staff/</text>
+<text x="42" y="596" class="c" fill="#94A3B8">history?</text>
+<text x="42" y="612" class="c" fill="#94A3B8">emp=alex-99</text>
+<text x="42" y="630" class="c" fill="#4ADE80">→ 4 placements</text>
+
+<!-- SYSCALL 2 -->
+<rect x="130" y="516" width="140" height="120" rx="10" fill="#0D1322" stroke="#2DD4BF" stroke-width="2"/>
+<text x="200" y="540" class="h" fill="#5EEAD4" text-anchor="middle">syscall 2</text>
+<text x="200" y="558" class="dim" fill="#64748B" text-anchor="middle">Feedback</text>
+<text x="142" y="580" class="c" fill="#94A3B8">query {</text>
+<text x="142" y="596" class="c" fill="#94A3B8"> feedback(</text>
+<text x="142" y="612" class="c" fill="#94A3B8">  subject:alex)</text>
+<text x="142" y="630" class="c" fill="#4ADE80">→ 6 entries</text>
+
+<!-- SYSCALL 3 -->
+<rect x="230" y="516" width="140" height="120" rx="10" fill="#0D1322" stroke="#2DD4BF" stroke-width="2"/>
+<text x="300" y="540" class="h" fill="#5EEAD4" text-anchor="middle">syscall 3</text>
+<text x="300" y="558" class="dim" fill="#64748B" text-anchor="middle">Credentials</text>
+<text x="242" y="580" class="c" fill="#94A3B8">GET /certs/</text>
+<text x="242" y="596" class="c" fill="#94A3B8">employee/</text>
+<text x="242" y="612" class="c" fill="#94A3B8">alex-99</text>
+<text x="242" y="630" class="c" fill="#4ADE80">→ 3 certs</text>
+
+<!-- converge -->
+<line x1="100" y1="638" x2="100" y2="680" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="200" y1="638" x2="200" y2="680" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="300" y1="638" x2="300" y2="680" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- RESPONSE ASSEMBLY -->
+<rect x="30" y="686" width="340" height="60" rx="12" fill="#131B2A" stroke="#E879F9" stroke-width="2"/>
+<text x="200" y="712" class="h" fill="#F0ABFC" text-anchor="middle">Response assembly</text>
+<text x="200" y="732" class="s" fill="#94A3B8" text-anchor="middle">normalize → schema-bind → A2UI compose</text>
+
+<!-- arrow down -->
+<line x1="200" y1="748" x2="200" y2="782" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+
+<!-- COMPOSITE UI -->
+<rect x="30" y="788" width="340" height="76" rx="12" fill="#131B2A" stroke="#22D3EE" stroke-width="2"/>
+<text x="200" y="814" class="h" fill="#67E8F9" text-anchor="middle">Composite surface rendered</text>
+<text x="200" y="836" class="s" fill="#94A3B8" text-anchor="middle">one screen — 3 system payloads</text>
+<text x="200" y="856" class="s" fill="#4ADE80" text-anchor="middle">pinned layout · each section owned by its team</text>
+
+<!-- ======= RIGHT SIDE: UI WIREFRAME ======= -->
+<rect x="440" y="30" width="730" height="860" rx="16" fill="#0D1322" stroke="#273244" stroke-width="1.5"/>
+<text x="805" y="64" class="h" fill="#E2E8F0" text-anchor="middle" font-size="17">Composite surface — Alex Chen · Mentee overview</text>
+
+<!-- Entity header -->
+<rect x="466" y="82" width="678" height="70" rx="10" fill="#131B2A" stroke="#64748B" stroke-width="1"/>
+<rect x="482" y="96" width="44" height="44" rx="22" fill="#1E293B" stroke="#64748B" stroke-width="1.5"/>
+<text x="504" y="122" class="h" fill="#E2E8F0" text-anchor="middle">AC</text>
+<text x="542" y="108" class="h" fill="#E2E8F0" font-size="16">Alex Chen  ·  E-48291</text>
+<text x="542" y="130" class="s" fill="#94A3B8">Senior Engineer · Team Supernova · Reports to J. Park</text>
+<rect x="1056" y="100" width="72" height="26" rx="13" fill="#4ADE80" fill-opacity="0.15" stroke="#4ADE80" stroke-width="1"/>
+<text x="1092" y="117" class="s" fill="#86EFAC" text-anchor="middle">mentee ✓</text>
+
+<!-- SECTION 1: Staffing -->
+<rect x="466" y="166" width="678" height="214" rx="10" fill="#131B2A" stroke="#2DD4BF" stroke-width="1.5"/>
+<rect x="482" y="180" width="10" height="10" rx="2" fill="#2DD4BF"/>
+<text x="502" y="190" class="h" fill="#5EEAD4" font-size="13">Staffing history</text>
+<text x="1116" y="190" class="dim" fill="#475569" text-anchor="end">via acme.staffing</text>
+
+<!-- table header -->
+<rect x="482" y="202" width="646" height="24" rx="4" fill="#0D1322"/>
+<text x="496" y="218" class="dim" fill="#64748B">Team</text>
+<text x="650" y="218" class="dim" fill="#64748B">Role</text>
+<text x="830" y="218" class="dim" fill="#64748B">From</text>
+<text x="960" y="218" class="dim" fill="#64748B">To</text>
+<text x="1090" y="218" class="dim" fill="#64748B" text-anchor="end">Type</text>
+
+<!-- rows -->
+<line x1="482" y1="228" x2="1128" y2="228" stroke="#1E293B" stroke-width="1"/>
+<text x="496" y="248" class="s" fill="#CBD5E1">Team Supernova</text>
+<text x="650" y="248" class="s" fill="#CBD5E1">Sr. Engineer</text>
+<text x="830" y="248" class="s" fill="#94A3B8">Jan 2024</text>
+<text x="960" y="248" class="s" fill="#94A3B8">present</text>
+<rect x="1052" y="236" width="68" height="20" rx="10" fill="#4ADE80" fill-opacity="0.15" stroke="#4ADE80" stroke-width="1"/>
+<text x="1086" y="250" class="dim" fill="#86EFAC" text-anchor="middle">current</text>
+
+<line x1="482" y1="262" x2="1128" y2="262" stroke="#1E293B" stroke-width="1"/>
+<text x="496" y="282" class="s" fill="#CBD5E1">Team Atlas</text>
+<text x="650" y="282" class="s" fill="#CBD5E1">Engineer II</text>
+<text x="830" y="282" class="s" fill="#94A3B8">Mar 2022</text>
+<text x="960" y="282" class="s" fill="#94A3B8">Dec 2023</text>
+<rect x="1052" y="270" width="68" height="20" rx="10" fill="#475569" fill-opacity="0.3" stroke="#475569" stroke-width="1"/>
+<text x="1086" y="284" class="dim" fill="#94A3B8" text-anchor="middle">transfer</text>
+
+<line x1="482" y1="296" x2="1128" y2="296" stroke="#1E293B" stroke-width="1"/>
+<text x="496" y="316" class="s" fill="#CBD5E1">Team Nova (intern)</text>
+<text x="650" y="316" class="s" fill="#CBD5E1">Engineer I</text>
+<text x="830" y="316" class="s" fill="#94A3B8">Jun 2021</text>
+<text x="960" y="316" class="s" fill="#94A3B8">Feb 2022</text>
+<rect x="1040" y="304" width="80" height="20" rx="10" fill="#22D3EE" fill-opacity="0.12" stroke="#22D3EE" stroke-width="1"/>
+<text x="1080" y="318" class="dim" fill="#67E8F9" text-anchor="middle">converted</text>
+
+<text x="496" y="362" class="dim" fill="#475569">+ 1 earlier placement · show all</text>
+
+<!-- SECTION 2: Feedback -->
+<rect x="466" y="394" width="330" height="280" rx="10" fill="#131B2A" stroke="#E879F9" stroke-width="1.5"/>
+<rect x="482" y="408" width="10" height="10" rx="2" fill="#E879F9"/>
+<text x="502" y="418" class="h" fill="#F0ABFC" font-size="13">Feedback</text>
+<text x="780" y="418" class="dim" fill="#475569" text-anchor="end">via acme.feedback</text>
+
+<!-- sentiment bar -->
+<rect x="482" y="432" width="298" height="10" rx="5" fill="#1E293B"/>
+<rect x="482" y="432" width="224" height="10" rx="5" fill="#4ADE80"/>
+<text x="482" y="460" class="dim" fill="#64748B">75% positive · 6 entries · last 12 mo</text>
+
+<!-- feedback items -->
+<rect x="482" y="472" width="298" height="70" rx="8" fill="#0D1322"/>
+<text x="496" y="494" class="s" fill="#CBD5E1">"Strong technical ownership on</text>
+<text x="496" y="510" class="s" fill="#CBD5E1"> the platform migration."</text>
+<text x="496" y="528" class="dim" fill="#64748B">J. Park · Q4 2024 · peer</text>
+
+<rect x="482" y="552" width="298" height="70" rx="8" fill="#0D1322"/>
+<text x="496" y="574" class="s" fill="#CBD5E1">"Mentorship of juniors noted by</text>
+<text x="496" y="590" class="s" fill="#CBD5E1"> 3 team members."</text>
+<text x="496" y="608" class="dim" fill="#64748B">M. Lee · Q3 2024 · manager</text>
+
+<text x="496" y="650" class="dim" fill="#475569">+ 4 more · view all</text>
+
+<!-- SECTION 3: Credentials -->
+<rect x="810" y="394" width="334" height="280" rx="10" fill="#131B2A" stroke="#4ADE80" stroke-width="1.5"/>
+<rect x="826" y="408" width="10" height="10" rx="2" fill="#4ADE80"/>
+<text x="846" y="418" class="h" fill="#86EFAC" font-size="13">Certifications</text>
+<text x="1128" y="418" class="dim" fill="#475569" text-anchor="end">via acme.credentials</text>
+
+<!-- cert items -->
+<rect x="826" y="432" width="302" height="70" rx="8" fill="#0D1322"/>
+<rect x="842" y="448" width="8" height="8" rx="4" fill="#4ADE80"/>
+<text x="862" y="457" class="s" fill="#CBD5E1">AWS Solutions Architect</text>
+<text x="862" y="474" class="dim" fill="#64748B">Issued Mar 2024 · expires Mar 2026</text>
+<rect x="1066" y="444" width="54" height="20" rx="10" fill="#4ADE80" fill-opacity="0.15" stroke="#4ADE80" stroke-width="1"/>
+<text x="1093" y="458" class="dim" fill="#86EFAC" text-anchor="middle">valid</text>
+
+<rect x="826" y="514" width="302" height="70" rx="8" fill="#0D1322"/>
+<rect x="842" y="530" width="8" height="8" rx="4" fill="#4ADE80"/>
+<text x="862" y="539" class="s" fill="#CBD5E1">Kubernetes Administrator</text>
+<text x="862" y="556" class="dim" fill="#64748B">Issued Nov 2023 · expires Nov 2025</text>
+<rect x="1066" y="526" width="54" height="20" rx="10" fill="#4ADE80" fill-opacity="0.15" stroke="#4ADE80" stroke-width="1"/>
+<text x="1093" y="540" class="dim" fill="#86EFAC" text-anchor="middle">valid</text>
+
+<rect x="826" y="596" width="302" height="54" rx="8" fill="#0D1322"/>
+<rect x="842" y="612" width="8" height="8" rx="4" fill="#F87171"/>
+<text x="862" y="621" class="s" fill="#CBD5E1">Security+ (CompTIA)</text>
+<text x="862" y="638" class="dim" fill="#64748B">Expired Jun 2024</text>
+<rect x="1066" y="608" width="54" height="20" rx="10" fill="#F87171" fill-opacity="0.15" stroke="#F87171" stroke-width="1"/>
+<text x="1093" y="622" class="dim" fill="#F87171" text-anchor="middle">expired</text>
+
+<!-- ACTION BAR -->
+<rect x="466" y="688" width="678" height="52" rx="10" fill="#0D1322" stroke="#334155" stroke-width="1"/>
+<text x="482" y="718" class="s" fill="#64748B">Actions:</text>
+<rect x="550" y="702" width="142" height="28" rx="14" fill="#22D3EE" fill-opacity="0.12" stroke="#22D3EE" stroke-width="1"/>
+<text x="621" y="720" class="s" fill="#67E8F9" text-anchor="middle">Write feedback</text>
+<rect x="704" y="702" width="156" height="28" rx="14" fill="#22D3EE" fill-opacity="0.12" stroke="#22D3EE" stroke-width="1"/>
+<text x="782" y="720" class="s" fill="#67E8F9" text-anchor="middle">Suggest for staffing</text>
+<rect x="872" y="702" width="172" height="28" rx="14" fill="#22D3EE" fill-opacity="0.12" stroke="#22D3EE" stroke-width="1"/>
+<text x="958" y="720" class="s" fill="#67E8F9" text-anchor="middle">Nominate certification</text>
+
+<!-- provenance footer -->
+<rect x="466" y="754" width="678" height="36" rx="8" fill="#0D1322"/>
+<text x="482" y="776" class="dim" fill="#334155">syscalls: staffing.getHistory · feedback.query · credentials.list  ·  3 OBO tokens · receipt #9f2c-a8d1</text>
+
+<!-- legend -->
+<rect x="466" y="806" width="10" height="10" rx="2" fill="#2DD4BF"/>
+<text x="482" y="815" class="dim" fill="#475569">staffing</text>
+<rect x="560" y="806" width="10" height="10" rx="2" fill="#E879F9"/>
+<text x="576" y="815" class="dim" fill="#475569">feedback</text>
+<rect x="658" y="806" width="10" height="10" rx="2" fill="#4ADE80"/>
+<text x="674" y="815" class="dim" fill="#475569">credentials</text>
+<text x="1128" y="815" class="dim" fill="#334155" text-anchor="end">each section owned + versioned by its team</text>
+
+</svg>

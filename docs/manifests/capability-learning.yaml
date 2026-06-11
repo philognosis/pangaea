@@ -1,0 +1,654 @@
+manifest: "0.1"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# LEARNING CAPABILITY MANIFEST
+# Owns courses, learning paths, certifications, and skill records.
+# Source of record for what every employee has learned, is learning,
+# and is certified in across internal and external programmes.
+# ─────────────────────────────────────────────────────────────────────────────
+
+capability:
+  id: acme.learning
+  name: Learning
+  description: >
+    Learning and development: course catalogue, learning paths, skill
+    tracking, certification management, and development plans. Employees
+    discover and enrol in learning, managers track team skill coverage,
+    and the system maintains a live skill and certification record used
+    by staffing, evaluations, and the concept graph for richer context.
+  owner:
+    team: people-systems/learning-platform
+    slack: "#learning-eng"
+    oncall: pagerduty:learning-oncall
+  lifecycle: ga
+  version: 1.4.2
+  tags: [learning, skills, certifications, development, courses, lnd]
+
+runtime:
+  fulfillment_modes: [direct, agent]
+  api:
+    openapi: https://learning.internal.acme.com/openapi.json
+    base_url: https://learning.internal.acme.com/api/v1
+  agent:
+    protocol: a2a/0.3
+    endpoint: https://learning.internal.acme.com/a2a
+    card: https://learning.internal.acme.com/.well-known/agent.json
+  health: https://learning.internal.acme.com/healthz
+  slo:
+    read_p95_ms: 300
+    action_p95_ms: 600
+    availability_target: 99.5
+
+auth:
+  idp: okta
+  audience: api://acme.learning
+  flow: on_behalf_of
+  token_ttl_seconds: 300
+  scopes:
+    - id: learning.read
+      description: >
+        Read the course catalogue and the caller's own learning history,
+        enrolled courses, and completed certifications.
+    - id: learning.enrol
+      description: >
+        Enrol the caller in a course or learning path. Subject to seat
+        availability and manager budget approval where configured.
+    - id: learning.team.read
+      description: >
+        Read learning progress and skill coverage for the caller's
+        direct reports. Available to managers and above.
+    - id: learning.nominate
+      description: >
+        Nominate an employee for a course or certification programme.
+        Available to managers; subject to budget rules.
+    - id: learning.certify
+      description: >
+        Record an external certification completion for an employee.
+        Available to HR and the employee themselves with evidence upload.
+    - id: learning.plan.write
+      description: >
+        Create or update a development plan for an employee.
+        Available to managers and the employee themselves.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# ENTITIES — owns Course, LearningPath, Certification, LearnerProfile, Skill;
+# references Employee and Team from directory
+# ─────────────────────────────────────────────────────────────────────────────
+entities:
+
+  - type: Course
+    owns: true
+    description: >
+      A discrete learning unit — video, workshop, e-learning module, or
+      external programme — with defined duration, skill tags, level, and
+      delivery format. May be internal (hosted) or external (linked).
+    schema: "#/components/schemas/Course"
+    key: course_id
+    display:
+      title: "{{title}}"
+      subtitle: "{{format}} · {{duration_hours}}h · {{level}} · {{skill_tags}}"
+    resolution:
+      search_endpoint: /courses/search
+      search_params: [title_query, skill_tags, level, format, provider]
+      disambiguators:
+        - field: title
+          label: Course title
+        - field: provider
+          label: Provider
+        - field: level
+          label: Level
+        - field: format
+          label: Format
+
+  - type: LearningPath
+    owns: true
+    description: >
+      A curated sequence of courses and milestones designed to develop
+      a specific skill area or prepare for a role or level.
+    schema: "#/components/schemas/LearningPath"
+    key: path_id
+    display:
+      title: "{{name}}"
+      subtitle: "{{course_count}} courses · {{total_hours}}h · {{target_role_or_skill}}"
+    resolution:
+      search_endpoint: /paths/search
+      search_params: [name_query, target_skill, target_role, level]
+      disambiguators:
+        - field: name
+          label: Path name
+        - field: target_role_or_skill
+          label: Targets
+
+  - type: Certification
+    owns: true
+    description: >
+      A verifiable credential — internal badge or external certification —
+      awarded on completion of a course or exam, with issue and expiry dates.
+    schema: "#/components/schemas/Certification"
+    key: cert_id
+    display:
+      title: "{{name}}"
+      subtitle: "{{issuer}} · issued {{issued_date}} · {{expiry_status}}"
+    resolution:
+      search_endpoint: /certifications/search
+      search_params: [name_query, issuer, skill_tags, status]
+      disambiguators:
+        - field: name
+          label: Certification name
+        - field: issuer
+          label: Issuer
+        - field: expiry_status
+          label: Status
+
+  - type: LearnerProfile
+    owns: true
+    description: >
+      An employee's full learning record: completed courses, active
+      enrolments, earned certifications, declared skills, and development
+      plan. The canonical skill profile used by staffing for candidate
+      matching and by evaluations for context enrichment.
+    schema: "#/components/schemas/LearnerProfile"
+    key: employee_id                  # keyed on the entity spine ID
+    display:
+      title: "{{employee.full_name}} · Learning profile"
+      subtitle: "{{completed_count}} completed · {{cert_count}} certifications · {{active_count}} in progress"
+    resolution:
+      search_endpoint: /profiles/search
+      search_params: [employee_id, employee_query]
+      disambiguators:
+        - field: employee.employee_id
+          label: Employee ID
+        - field: employee.full_name
+          label: Name
+
+  - type: Skill
+    owns: true
+    description: >
+      A named, versioned skill in the org's skill taxonomy. Skills are
+      tagged to courses, certifications, roles (in staffing), and
+      evaluation competencies. The shared vocabulary for the concept graph.
+    schema: "#/components/schemas/Skill"
+    key: skill_id
+    display:
+      title: "{{name}}"
+      subtitle: "{{category}} · {{level_descriptors}}"
+    resolution:
+      search_endpoint: /skills/search
+      search_params: [name_query, category]
+      disambiguators:
+        - field: name
+          label: Skill name
+        - field: category
+          label: Category
+
+  # ── Federated references ─────────────────────────────────────────────────
+
+  - type: Employee
+    ref: acme.directory#Employee
+    role_in_domain: [learner, nominee, plan_owner]
+
+  - type: Team
+    ref: acme.directory#Team
+    role_in_domain: [team_for_skill_coverage_view]
+
+  # ── Cross-capability enrichment references ───────────────────────────────
+
+  - type: EvaluationCompetency
+    ref: acme.evaluations#Evaluation
+    role_in_domain: [development_context]
+    enrichment_only: true
+    description: >
+      When building a development plan, the platform can optionally pull
+      evaluation competency gaps to suggest relevant courses.
+      Learning never stores evaluation data.
+
+  - type: RoleSkillRequirements
+    ref: acme.staffing#Role
+    role_in_domain: [target_role_for_path]
+    enrichment_only: true
+    description: >
+      Learning paths can be targeted at a specific role's skill requirements
+      sourced from staffing. Learning never stores role definitions.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# INTENTS
+# ─────────────────────────────────────────────────────────────────────────────
+intents:
+
+  - id: find_course
+    description: >
+      Find courses or learning paths relevant to a skill, role, or topic.
+      Returns ranked results from the catalogue filtered by the caller's
+      level and learning history.
+    utterances:
+      - "find a course on {skill}"
+      - "learn {skill}"
+      - "I want to learn {topic}"
+      - "courses for {role}"
+      - "show me learning for {skill}"
+      - "what can I learn about {topic}"
+      - "recommend a course for me"
+      - "learning path for {role}"
+    slots:
+      - name: skill
+        entity: Skill
+        required: false
+        disambiguation:
+          strategy: auto
+          rank_by: [text_similarity, related_skills]
+      - name: topic
+        entity: Skill
+        required: false
+      - name: role
+        entity: acme.staffing#Role
+        required: false
+    fulfillment:
+      mode: direct
+      operation: searchCatalogue
+    surface_hint: inline
+    confidence:
+      min_route: 0.80
+
+  - id: enrol_in_course
+    description: >
+      Enrol the caller (or a nominated employee) in a specific course or
+      learning path. Handles seat availability and budget approval flows.
+    utterances:
+      - "enrol in {course}"
+      - "sign me up for {course}"
+      - "register for {course}"
+      - "I want to take {course}"
+      - "start {course}"
+      - "enrol {employee} in {course}"
+      - "nominate {employee} for {course}"
+    slots:
+      - name: course
+        entity: Course
+        required: true
+        disambiguation:
+          strategy: card
+          rank_by: [title_match, skill_match, level_match]
+      - name: employee
+        entity: acme.directory#Employee
+        required: false
+        default: caller
+        disambiguation:
+          strategy: card
+          rank_by: [direct_report, same_team]
+    fulfillment:
+      mode: direct
+      operation: enrolInCourse
+    surface_hint: inline
+    confidence:
+      min_route: 0.86
+
+  - id: view_my_learning
+    description: >
+      Show the caller's full learning profile: completed courses, active
+      enrolments, earned certifications, and their development plan.
+    utterances:
+      - "my learning"
+      - "my courses"
+      - "show my certifications"
+      - "what have I completed"
+      - "my learning history"
+      - "my development plan"
+      - "my skill profile"
+    slots: []
+    fulfillment:
+      mode: direct
+      operation: getMyLearnerProfile
+    surface_hint: inline
+    confidence:
+      min_route: 0.80
+
+  - id: view_employee_learning
+    description: >
+      Show another employee's learning profile — their completed courses,
+      certifications, and skill record. Available to managers for their
+      reports, HR for all, and employees for their own record.
+    utterances:
+      - "{employee}'s learning profile"
+      - "what has {employee} completed"
+      - "{employee}'s certifications"
+      - "show {employee}'s skills"
+      - "learning record for {employee}"
+    slots:
+      - name: employee
+        entity: acme.directory#Employee
+        required: true
+        disambiguation:
+          strategy: card
+          rank_by: [direct_report, same_team, recent_interaction]
+    fulfillment:
+      mode: direct
+      operation: getLearnerProfile
+    surface_hint: inline
+    confidence:
+      min_route: 0.82
+
+  - id: view_team_skill_coverage
+    description: >
+      Show a manager's team skill map — which skills are covered, which
+      have gaps, and recommendations for closing them.
+    utterances:
+      - "skill coverage for {team}"
+      - "what skills does {team} have"
+      - "skill gaps on {team}"
+      - "team learning dashboard"
+      - "show {team}'s skill map"
+    slots:
+      - name: team
+        entity: acme.directory#Team
+        required: false
+        default: caller_primary_team
+        disambiguation:
+          strategy: auto
+          rank_by: [caller_manages_team, org_proximity]
+    fulfillment:
+      mode: direct
+      operation: getTeamSkillCoverage
+    surface_hint: inline
+    confidence:
+      min_route: 0.82
+
+  - id: record_external_certification
+    description: >
+      Record the completion of an external certification not available
+      in the internal catalogue. Requires evidence upload or HR approval.
+    utterances:
+      - "I completed {certification}"
+      - "record my {certification} cert"
+      - "I passed {certification}"
+      - "add certification {certification} to my profile"
+      - "log external cert {certification}"
+    slots:
+      - name: certification
+        entity: Certification
+        required: true
+        disambiguation:
+          strategy: card
+          rank_by: [name_match, issuer_match]
+    fulfillment:
+      mode: agent
+      task: learning.record_cert_flow   # handles evidence upload step
+    surface_hint: focus
+    confidence:
+      min_route: 0.85
+
+  - id: create_development_plan
+    description: >
+      Create or update a structured development plan for an employee,
+      linking goals, target skills, recommended courses, and milestones.
+      Cross-domain: optionally pulls evaluation competency gaps as input.
+    utterances:
+      - "create a development plan for {employee}"
+      - "set up {employee}'s learning plan"
+      - "build a growth plan for {employee}"
+      - "update my development plan"
+      - "what should {employee} learn next"
+    slots:
+      - name: employee
+        entity: acme.directory#Employee
+        required: true
+        disambiguation:
+          strategy: card
+          rank_by: [direct_report, self]
+    fulfillment:
+      mode: agent
+      task: learning.development_plan_flow
+    surface_hint: focus
+    confidence:
+      min_route: 0.83
+
+# ─────────────────────────────────────────────────────────────────────────────
+# ACTIONS
+# ─────────────────────────────────────────────────────────────────────────────
+actions:
+
+  - id: search_catalogue
+    operation: searchCatalogue
+    risk: read
+    scopes: [learning.read]
+    idempotency: not_applicable
+    audit:
+      retention_days: 30
+
+  - id: get_learner_profile
+    operation: getLearnerProfile
+    risk: read
+    scopes: [learning.read]
+    idempotency: not_applicable
+    audit:
+      retention_days: 90
+
+  - id: get_team_skill_coverage
+    operation: getTeamSkillCoverage
+    risk: read
+    scopes: [learning.team.read]
+    idempotency: not_applicable
+    audit:
+      retention_days: 30
+
+  - id: enrol_course
+    operation: enrolInCourse
+    risk: reversible
+    scopes: [learning.enrol]
+    idempotency: required
+    undo:
+      window_seconds: 3600    # can unenrol within 1 hour of enrolment
+    audit:
+      retention_days: 1825    # 5 years — learning records have long compliance tails
+
+  - id: nominate_employee
+    description: Manager nominates a direct report for a course.
+    operation: nominateEmployee
+    risk: reversible
+    scopes: [learning.nominate]
+    idempotency: required
+    undo:
+      window_seconds: 3600
+    audit:
+      retention_days: 1825
+
+  - id: record_certification
+    description: Record a completed certification with evidence.
+    operation: recordCertification
+    risk: consequential
+    scopes: [learning.certify]
+    idempotency: required
+    confirmation:
+      template: >
+        Record {{certification.name}} (issued by {{certification.issuer}})
+        for {{employee.full_name}} ({{employee.employee_id}}).
+        Issue date: {{issued_date}}. Expiry: {{expiry_date_or_none}}.
+        This will update {{employee.full_name}}'s skill profile and
+        notify their manager {{employee.manager.full_name}}.
+      show_fields:
+        - certification.name
+        - certification.issuer
+        - employee.full_name
+        - employee.employee_id
+        - issued_date
+        - expiry_date
+      requires: [explicit_tap]
+      voice_blocked: false    # certifications are not safety-critical; voice OK
+    undo:
+      window_seconds: 300
+    audit:
+      retention_days: 3650    # 10 years for compliance certifications
+
+  - id: save_development_plan
+    operation: saveDevelopmentPlan
+    risk: reversible
+    scopes: [learning.plan.write]
+    idempotency: required
+    undo:
+      window_seconds: 0       # plans are versioned; re-edit freely
+    audit:
+      retention_days: 1825
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SURFACES
+# ─────────────────────────────────────────────────────────────────────────────
+surfaces:
+  catalog: a2ui/core@2
+  bindings:
+    - entity: Course
+      card: CourseCard
+      detail: CourseDetail
+      list: CourseList
+    - entity: LearningPath
+      card: LearningPathCard
+      detail: LearningPathDetail
+    - entity: Certification
+      card: CertificationBadge        # visual badge style, not just a table row
+      list: CertificationList
+    - entity: LearnerProfile
+      card: LearnerProfileCard
+      detail: LearnerProfileDetail    # full profile: courses + certs + skills + plan
+    - entity: Skill
+      card: SkillChip
+      list: SkillMap
+    - intent: view_team_skill_coverage
+      layout: SkillCoverageGrid
+    - intent: create_development_plan
+      flow: GuidedFormFlow
+    - intent: record_external_certification
+      flow: GuidedFormFlow
+  layout:
+    stability: pinned
+    density_default: comfortable
+  accessibility:
+    requires: none
+
+# ─────────────────────────────────────────────────────────────────────────────
+# NOTIFICATIONS
+# ─────────────────────────────────────────────────────────────────────────────
+notifications:
+
+  - id: course_enrolment_confirmed
+    trigger: webhook
+    payload_schema: "#/components/schemas/EnrolmentEvent"
+    template: >
+      You're enrolled in {{course.title}} ({{course.format}},
+      {{course.duration_hours}}h). {{start_info}}.
+    actions:
+      - open:view_my_learning
+      - dismiss
+    priority: low
+    quiet_hours: respect_user
+
+  - id: certification_expiring_soon
+    trigger: webhook
+    payload_schema: "#/components/schemas/CertExpiryEvent"
+    template: >
+      {{certification.name}} expires in {{days_remaining}} days
+      ({{expiry_date}}). Renew to keep your profile current.
+    actions:
+      - open:find_course      # links to renewal course if one exists
+      - dismiss
+    priority: normal
+    quiet_hours: respect_user
+
+  - id: certification_expired
+    trigger: webhook
+    payload_schema: "#/components/schemas/CertExpiryEvent"
+    template: >
+      {{certification.name}} expired on {{expiry_date}}.
+      Update your profile or take the renewal course.
+    actions:
+      - open:find_course
+      - open:record_external_certification
+      - dismiss
+    priority: normal
+    quiet_hours: respect_user
+
+  - id: development_plan_review_due
+    trigger: webhook
+    payload_schema: "#/components/schemas/PlanReviewEvent"
+    template: >
+      {{employee.full_name}}'s development plan is due for review —
+      last updated {{last_updated_days}} days ago.
+    actions:
+      - open:create_development_plan
+      - snooze
+      - dismiss
+    priority: low
+    quiet_hours: respect_user
+
+  - id: team_skill_gap_alert
+    trigger: webhook
+    payload_schema: "#/components/schemas/SkillGapEvent"
+    template: >
+      {{team.name}} has a gap in {{skill.name}} —
+      {{gap_count}} of {{team_size}} members are unqualified.
+      {{recommended_course.title}} covers this.
+    actions:
+      - open:view_team_skill_coverage
+      - open:find_course
+      - dismiss
+    priority: normal
+    quiet_hours: respect_user
+
+  - id: learning_nominated
+    trigger: webhook
+    payload_schema: "#/components/schemas/NominationEvent"
+    template: >
+      {{nominator.full_name}} has nominated you for {{course.title}}
+      ({{course.duration_hours}}h, {{course.format}}).
+    actions:
+      - open:enrol_in_course
+      - dismiss
+    priority: normal
+    quiet_hours: respect_user
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CONTEXT HINTS
+# Composite view enrichment — when Pangaea builds a person's profile,
+# learning contributes the certifications and skills section.
+# When staffing matches candidates, learning contributes skill data.
+# ─────────────────────────────────────────────────────────────────────────────
+context_hints:
+  - for_entity: acme.directory#Employee
+    enrich_from:
+      - capability: acme.evaluations
+        fetch: competency_gaps
+        display_as: DevelopmentSuggestions
+        section_label: "Suggested development areas"
+        condition: caller_is_manager_or_self
+      - capability: acme.staffing
+        fetch: target_role_skills
+        display_as: RoleSkillAlignment
+        section_label: "Role skill alignment"
+        condition: development_plan_has_target_role
+
+# ─────────────────────────────────────────────────────────────────────────────
+# POLICY
+# ─────────────────────────────────────────────────────────────────────────────
+policy:
+  authorization: pep_local
+  data_classification: internal
+  pii:
+    - employee.full_name
+    - employee.employee_id
+    - development_plan_content
+    - performance_context_from_evals
+  residency: us-only
+  retention_default_days: 1825
+  visibility:
+    discoverable_by: "role:employee"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# OBSERVABILITY
+# ─────────────────────────────────────────────────────────────────────────────
+observability:
+  telemetry: opt_in_full
+  failed_intent_reports: weekly
+  slo_alerts:
+    - metric: read_p95_ms
+      threshold: 300
+      notify: pagerduty:learning-oncall
+    - metric: enrol_error_rate
+      threshold: 0.02
+      notify: "#learning-eng"

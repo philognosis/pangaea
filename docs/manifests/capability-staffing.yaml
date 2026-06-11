@@ -1,0 +1,508 @@
+manifest: "0.1"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# STAFFING CAPABILITY MANIFEST
+# Owns the full lifecycle of roles, placements, and staffing requests.
+# Source of record for who is on which team in what capacity and since when.
+# ─────────────────────────────────────────────────────────────────────────────
+
+capability:
+  id: acme.staffing
+  name: Staffing
+  description: >
+    Workforce staffing: open roles, placement requests, staffing history,
+    and team composition. Covers creating roles, matching candidates,
+    approving placements, requesting extensions, and tracking who is on
+    which team at any point in time. The source of record for staffing
+    history across the organisation.
+  owner:
+    team: workforce/staffing-platform
+    slack: "#staffing-eng"
+    oncall: pagerduty:staffing-oncall
+  lifecycle: ga
+  version: 3.0.1
+  tags: [staffing, workforce, roles, placements, teams, hiring]
+
+runtime:
+  fulfillment_modes: [agent, direct]
+  agent:
+    protocol: a2a/0.3
+    endpoint: https://staffing.internal.acme.com/a2a
+    card: https://staffing.internal.acme.com/.well-known/agent.json
+  api:
+    openapi: https://staffing.internal.acme.com/openapi.json
+    base_url: https://staffing.internal.acme.com/api/v3
+  health: https://staffing.internal.acme.com/healthz
+  slo:
+    read_p95_ms: 350
+    action_p95_ms: 700
+    availability_target: 99.9   # staffing is business-critical path
+
+auth:
+  idp: okta
+  audience: api://acme.staffing
+  flow: on_behalf_of
+  token_ttl_seconds: 300
+  scopes:
+    - id: staffing.read
+      description: >
+        Read staffing data visible to the caller. Managers see their team's
+        history, HR sees all, employees see their own history.
+    - id: staffing.request
+      description: >
+        Create a new staffing request or open a role. Available to managers
+        and above.
+    - id: staffing.recommend
+      description: >
+        Submit or view candidate recommendations for an open role.
+    - id: staffing.approve
+      description: >
+        Approve or deny placement requests and extension requests.
+        Restricted to the role's owning manager and HR.
+    - id: staffing.extend
+      description: >
+        Request an extension to an existing placement's end date.
+    - id: staffing.history.read
+      description: >
+        Read the full staffing history of any employee. Available to HR,
+        the employee themselves, and their current direct manager.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# ENTITIES — owns Role, Placement, StaffingRequest; references Employee, Team
+# ─────────────────────────────────────────────────────────────────────────────
+entities:
+
+  - type: Role
+    owns: true
+    description: >
+      A defined position on a team with a title, level, required skills,
+      and open/filled/closed status. A role may have multiple placements
+      over time as people rotate.
+    schema: "#/components/schemas/Role"
+    key: role_id
+    display:
+      title: "{{title}} · {{team.name}}"
+      subtitle: "{{status}} · L{{level}} · opened {{opened_date}}"
+    resolution:
+      search_endpoint: /roles/search
+      search_params: [title_query, team_id, status, level]
+      disambiguators:
+        - field: team.name
+          label: Team
+        - field: title
+          label: Title
+        - field: status
+          label: Status
+        - field: level
+          label: Level
+
+  - type: Placement
+    owns: true
+    description: >
+      A specific person filling a specific role for a defined period.
+      Tracks start date, end date, placement type (permanent, rotational,
+      backfill, extension), and status.
+    schema: "#/components/schemas/Placement"
+    key: placement_id
+    display:
+      title: "{{employee.full_name}} → {{role.title}} on {{team.name}}"
+      subtitle: "{{placement_type}} · {{start_date}} → {{end_date_or_present}}"
+    resolution:
+      search_endpoint: /placements/search
+      search_params: [employee_id, team_id, role_id, status, placement_type]
+      disambiguators:
+        - field: employee.employee_id
+          label: Employee ID
+        - field: role.title
+          label: Role
+        - field: team.name
+          label: Team
+        - field: start_date
+          label: Start date
+
+  - type: StaffingRequest
+    owns: true
+    description: >
+      A formal request to staff a role — either an open request awaiting
+      a candidate, or a pending extension/approval request.
+    schema: "#/components/schemas/StaffingRequest"
+    key: request_id
+    display:
+      title: "{{request_type}} · {{role.title}} on {{team.name}}"
+      subtitle: "{{status}} · requested by {{requester.full_name}} on {{created_at}}"
+    resolution:
+      search_endpoint: /requests/search
+      search_params: [team_id, role_id, status, request_type, requester_id]
+      disambiguators:
+        - field: role.title
+          label: Role
+        - field: team.name
+          label: Team
+        - field: request_type
+          label: Request type
+        - field: status
+          label: Status
+
+  # ── Federated references ─────────────────────────────────────────────────
+
+  - type: Employee
+    ref: acme.directory#Employee
+    role_in_domain: [placed_person, requester, approver, candidate]
+
+  - type: Team
+    ref: acme.directory#Team
+    role_in_domain: [owning_team, requesting_team]
+
+  # ── Cross-capability enrichment reference ───────────────────────────────
+  # When rendering a candidate's profile for a role match, the platform
+  # can enrich with evaluation ratings and learning completions.
+  # Staffing does not store or own this data — it requests it via syscall.
+
+  - type: EvaluationSummary
+    ref: acme.evaluations#Evaluation
+    role_in_domain: [candidate_performance_context]
+    enrichment_only: true   # never stored in staffing; fetched on demand
+
+  - type: LearningProfile
+    ref: acme.learning#LearnerProfile
+    role_in_domain: [candidate_skills_context]
+    enrichment_only: true
+
+# ─────────────────────────────────────────────────────────────────────────────
+# INTENTS
+# ─────────────────────────────────────────────────────────────────────────────
+intents:
+
+  - id: find_candidate_for_role
+    description: >
+      Find and rank candidates for an open role on a team, considering
+      skills, availability, and team fit. Cross-domain: enriches candidates
+      with evaluation ratings from acme.evaluations and completed learning
+      from acme.learning.
+    utterances:
+      - "find an engineer for {team}"
+      - "who can fill the {role} on {team}"
+      - "find a candidate for {role}"
+      - "staff {team} with a {role}"
+      - "show me candidates for the {title} role"
+      - "I need a {title} for {team}"
+      - "who's available for {role} on {team}"
+    slots:
+      - name: team
+        entity: acme.directory#Team
+        required: false
+        disambiguation:
+          strategy: card
+          rank_by: [caller_reports_to_team, org_proximity]
+      - name: role
+        entity: Role
+        required: false
+        disambiguation:
+          strategy: card
+          rank_by: [open_status, team_match]
+      - name: title
+        entity: Role
+        required: false
+    fulfillment:
+      mode: agent
+      task: staffing.find_candidates
+    surface_hint: focus
+    confidence:
+      min_route: 0.83
+
+  - id: view_staffing_history
+    description: >
+      Show the complete staffing history for an employee — every team,
+      role, and placement they've held in the organisation.
+    utterances:
+      - "{employee}'s staffing history"
+      - "show where {employee} has worked"
+      - "placement history for {employee}"
+      - "what teams has {employee} been on"
+      - "staffing record for {employee}"
+      - "show my staffing history"
+    slots:
+      - name: employee
+        entity: acme.directory#Employee
+        required: true
+        disambiguation:
+          strategy: card
+          rank_by: [direct_report, same_team, recent_interaction]
+    fulfillment:
+      mode: direct
+      operation: getStaffingHistory
+    surface_hint: inline
+    confidence:
+      min_route: 0.82
+
+  - id: open_role
+    description: >
+      Open a new role on a team, initiating the staffing request workflow.
+      Requires manager or above permissions on the target team.
+    utterances:
+      - "open a {title} role on {team}"
+      - "create a new role for {team}"
+      - "I need to hire a {title} for {team}"
+      - "post a {title} position on {team}"
+      - "raise a staffing request for {team}"
+    slots:
+      - name: team
+        entity: acme.directory#Team
+        required: true
+        disambiguation:
+          strategy: card
+          rank_by: [caller_manages_team, org_proximity]
+      - name: title
+        entity: Role
+        required: false
+    fulfillment:
+      mode: agent
+      task: staffing.open_role_flow
+    surface_hint: focus
+    confidence:
+      min_route: 0.87
+
+  - id: approve_extension
+    description: >
+      Approve or deny a pending placement extension request.
+      Consequential action — confirmation card shown before commit.
+    utterances:
+      - "approve extension for {employee}"
+      - "approve {employee}'s extension to {date}"
+      - "deny extension for {employee}"
+      - "review extension request for {employee}"
+      - "act on {employee}'s extension"
+    slots:
+      - name: employee
+        entity: acme.directory#Employee
+        required: true
+        disambiguation:
+          strategy: card
+          rank_by: [pending_extension_exists, direct_report]
+      - name: date
+        entity: StaffingRequest.requested_end_date
+        required: false
+    fulfillment:
+      mode: direct
+      operation: resolveExtensionRequest
+    surface_hint: inline
+    confidence:
+      min_route: 0.88
+
+  - id: view_team_composition
+    description: >
+      Show current team composition: who is on the team, in what role,
+      since when, and any open or pending requests.
+    utterances:
+      - "{team} team composition"
+      - "who is on {team}"
+      - "show {team}'s current staff"
+      - "team roster for {team}"
+      - "staffing status of {team}"
+    slots:
+      - name: team
+        entity: acme.directory#Team
+        required: true
+        disambiguation:
+          strategy: auto
+          rank_by: [caller_primary_team, org_proximity]
+    fulfillment:
+      mode: direct
+      operation: getTeamComposition
+    surface_hint: inline
+    confidence:
+      min_route: 0.82
+
+# ─────────────────────────────────────────────────────────────────────────────
+# ACTIONS
+# ─────────────────────────────────────────────────────────────────────────────
+actions:
+
+  - id: get_staffing_history
+    operation: getStaffingHistory
+    risk: read
+    scopes: [staffing.history.read]
+    idempotency: not_applicable
+    audit:
+      retention_days: 90
+
+  - id: get_team_composition
+    operation: getTeamComposition
+    risk: read
+    scopes: [staffing.read]
+    idempotency: not_applicable
+    audit:
+      retention_days: 30
+
+  - id: create_staffing_request
+    operation: createStaffingRequest
+    risk: reversible
+    scopes: [staffing.request]
+    idempotency: required
+    undo:
+      window_seconds: 600    # can cancel an open request within 10 minutes
+    audit:
+      retention_days: 730
+
+  - id: resolve_extension_request
+    description: Approve or deny a placement extension request.
+    operation: resolveExtensionRequest
+    risk: consequential
+    scopes: [staffing.approve]
+    idempotency: required
+    confirmation:
+      template: >
+        {{decision}} extension for {{employee.full_name}}
+        ({{employee.employee_id}}, {{current_team.name}})
+        — extending from {{current_end_date}} to {{requested_end_date}}.
+        This will notify {{employee.full_name}} and update the staffing record.
+      show_fields:
+        - employee.full_name
+        - employee.employee_id
+        - current_team.name
+        - current_end_date
+        - requested_end_date
+        - decision
+      requires: [explicit_tap]
+      voice_blocked: true
+    undo:
+      window_seconds: 120    # 2-minute undo window before employee is notified
+    audit:
+      retention_days: 2555
+
+  - id: submit_recommendation
+    operation: submitCandidateRecommendation
+    risk: reversible
+    scopes: [staffing.recommend]
+    idempotency: required
+    undo:
+      window_seconds: 300
+    audit:
+      retention_days: 365
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SURFACES
+# ─────────────────────────────────────────────────────────────────────────────
+surfaces:
+  catalog: a2ui/core@2
+  bindings:
+    - entity: Placement
+      card: PlacementCard
+      detail: PlacementDetail
+      list: StaffingTimeline       # chronological timeline view
+    - entity: Role
+      card: RoleCard
+      detail: RoleDetail
+      list: RoleList
+    - entity: StaffingRequest
+      card: StaffingRequestCard
+      list: RequestQueue
+    - intent: find_candidate_for_role
+      layout: CandidateRankingLayout  # shows scored candidate cards with enrichment
+    - intent: view_team_composition
+      layout: TeamRosterLayout
+  layout:
+    stability: pinned
+    density_default: comfortable
+  accessibility:
+    requires: none
+
+# ─────────────────────────────────────────────────────────────────────────────
+# NOTIFICATIONS
+# ─────────────────────────────────────────────────────────────────────────────
+notifications:
+
+  - id: extension_requested
+    trigger: webhook
+    payload_schema: "#/components/schemas/ExtensionRequestedEvent"
+    template: >
+      {{employee.full_name}} requests an extension to {{requested_end_date}}.
+      Current end: {{current_end_date}}. Team: {{team.name}}.
+    actions:
+      - open:approve_extension
+      - dismiss
+    priority: normal
+    quiet_hours: respect_user
+
+  - id: role_opened
+    trigger: webhook
+    payload_schema: "#/components/schemas/RoleOpenedEvent"
+    template: >
+      A new {{role.title}} role opened on {{team.name}}.
+      {{candidate_count}} potential matches found.
+    actions:
+      - open:find_candidate_for_role
+      - dismiss
+    priority: normal
+    quiet_hours: respect_user
+
+  - id: placement_ending_soon
+    trigger: webhook
+    payload_schema: "#/components/schemas/PlacementEndingSoonEvent"
+    template: >
+      {{employee.full_name}}'s placement on {{team.name}} ends in
+      {{days_remaining}} days ({{end_date}}).
+    actions:
+      - open:approve_extension
+      - open:find_candidate_for_role
+      - dismiss
+    priority: normal
+    quiet_hours: respect_user
+
+  - id: placement_confirmed
+    trigger: webhook
+    payload_schema: "#/components/schemas/PlacementConfirmedEvent"
+    template: >
+      Your placement on {{team.name}} as {{role.title}} has been confirmed.
+      Start date: {{start_date}}.
+    actions:
+      - dismiss
+    priority: normal
+    quiet_hours: respect_user
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CONTEXT HINTS
+# Composite view enrichment — when Pangaea builds a person's profile view,
+# staffing contributes the staffing history section.
+# ─────────────────────────────────────────────────────────────────────────────
+context_hints:
+  - for_entity: acme.directory#Employee
+    enrich_from:
+      - capability: acme.evaluations
+        fetch: recent_evaluation_summary
+        display_as: EvaluationSummaryCard
+        section_label: "Performance snapshot"
+      - capability: acme.learning
+        fetch: skills_and_certifications
+        display_as: SkillsSnapshot
+        section_label: "Skills & certifications"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# POLICY
+# ─────────────────────────────────────────────────────────────────────────────
+policy:
+  authorization: pep_local
+  data_classification: confidential-hr
+  pii:
+    - employee.full_name
+    - employee.employee_id
+    - placement details
+    - salary_band
+  residency: us-only
+  retention_default_days: 2555
+  visibility:
+    discoverable_by: "role:employee"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# OBSERVABILITY
+# ─────────────────────────────────────────────────────────────────────────────
+observability:
+  telemetry: opt_in_full
+  failed_intent_reports: weekly
+  slo_alerts:
+    - metric: read_p95_ms
+      threshold: 350
+      notify: pagerduty:staffing-oncall
+    - metric: approve_error_rate
+      threshold: 0.01
+      notify: "#staffing-eng"
