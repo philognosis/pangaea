@@ -1,0 +1,55 @@
+manifest: "0.1"
+capability:
+  id: acme.permissions
+  name: Permissions Service
+  description: Role-based access control checks for Pangaea platform actions
+  owner: security-team
+  lifecycle: ga
+  version: "1.0.0"
+runtime:
+  base_url: http://localhost:8103
+  health_url: /healthz
+  fulfillment_modes:
+    - direct
+auth:
+  idp: keycloak
+  audience: permissions-service
+  obo:
+    grant_type: "urn:ietf:params:oauth:grant-type:token-exchange"
+    token_ttl_seconds: 300
+  scopes:
+    - permissions.check
+    - permissions.read
+entities:
+  - type: Permission
+    owns: true
+    resolution:
+      search_endpoint: /permissions/user
+      disambiguators:
+        - user_id
+        - resource_type
+intents:
+  - id: check_permission
+    description: Check whether a user is permitted to perform an action on a resource
+    utterances:
+      - "can {user} {action}"
+      - "is {user} allowed to {action}"
+      - "check permission for {user}"
+    confidence:
+      min_route: 0.85
+actions:
+  - id: check_permission_action
+    intent: check_permission
+    risk: read
+    endpoint: POST /permissions/check
+    required_scopes:
+      - permissions.check
+surfaces:
+  catalog_version: "0.1"
+  components:
+    - intent: check_permission
+      component: StatusBadge
+policy:
+  visibility:
+    discoverable_by:
+      - role:any

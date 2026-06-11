@@ -1,0 +1,63 @@
+manifest: "0.1"
+capability:
+  id: acme.directory
+  name: People Directory
+  description: Canonical employee and team directory — the entity spine for all federated capabilities
+  owner: hr-platform-team
+  lifecycle: ga
+  version: "1.0.0"
+runtime:
+  base_url: http://localhost:8102
+  health_url: /healthz
+  fulfillment_modes:
+    - direct
+auth:
+  idp: keycloak
+  audience: directory-service
+  obo:
+    grant_type: "urn:ietf:params:oauth:grant-type:token-exchange"
+    token_ttl_seconds: 300
+  scopes:
+    - directory.read
+    - directory.search
+entities:
+  - type: Employee
+    owns: true
+    resolution:
+      search_endpoint: /employees/search
+      disambiguators:
+        - full_name
+        - email
+        - team_name
+  - type: Team
+    owns: true
+    resolution:
+      search_endpoint: /teams
+      disambiguators:
+        - name
+intents:
+  - id: find_employee
+    description: Look up an employee by name, email, or team
+    utterances:
+      - "find {employee}"
+      - "look up {employee}"
+      - "who is {employee}"
+      - "search for {employee}"
+    confidence:
+      min_route: 0.85
+actions:
+  - id: get_employee_profile
+    intent: find_employee
+    risk: read
+    endpoint: GET /employees/{employee_id}
+    required_scopes:
+      - directory.read
+surfaces:
+  catalog_version: "0.1"
+  components:
+    - intent: find_employee
+      component: EntityCard
+policy:
+  visibility:
+    discoverable_by:
+      - role:any

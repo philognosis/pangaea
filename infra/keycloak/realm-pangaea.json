@@ -1,0 +1,96 @@
+{
+  "realm": "pangaea",
+  "enabled": true,
+  "displayName": "Pangaea",
+  "sslRequired": "external",
+  "registrationAllowed": false,
+  "accessTokenLifespan": 300,
+  "clients": [
+    {
+      "clientId": "pangaea-platform",
+      "name": "Pangaea Platform (service account)",
+      "enabled": true,
+      "serviceAccountsEnabled": true,
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "secret": "pangaea-platform-secret"
+    },
+    {
+      "clientId": "timesheet-service",
+      "name": "Timesheet Service",
+      "enabled": true,
+      "serviceAccountsEnabled": true,
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "secret": "timesheet-service-secret"
+    },
+    {
+      "clientId": "directory-service",
+      "name": "People Directory Service",
+      "enabled": true,
+      "serviceAccountsEnabled": true,
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "secret": "directory-service-secret"
+    },
+    {
+      "clientId": "pangaea-shell",
+      "name": "Pangaea Shell (PWA)",
+      "enabled": true,
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "redirectUris": ["http://localhost:3000/*"],
+      "webOrigins": ["http://localhost:3000"]
+    }
+  ],
+  "users": [
+    {
+      "username": "alice",
+      "email": "alice@acme.com",
+      "firstName": "Alice",
+      "lastName": "Smith",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{"type": "password", "value": "dev", "temporary": false}],
+      "attributes": {"employee_id": ["E-10001"], "team_id": ["T-001"]}
+    },
+    {
+      "username": "bob",
+      "email": "bob@acme.com",
+      "firstName": "Bob",
+      "lastName": "Jones",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{"type": "password", "value": "dev", "temporary": false}],
+      "attributes": {"employee_id": ["E-10002"], "team_id": ["T-001"]}
+    },
+    {
+      "username": "carol",
+      "email": "carol@acme.com",
+      "firstName": "Carol",
+      "lastName": "White",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{"type": "password", "value": "dev", "temporary": false}],
+      "attributes": {"employee_id": ["E-10003"], "team_id": ["T-002"]}
+    },
+    {
+      "username": "diana",
+      "email": "diana@acme.com",
+      "firstName": "Diana",
+      "lastName": "Prince",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{"type": "password", "value": "dev", "temporary": false}],
+      "attributes": {"employee_id": ["E-10004"], "team_id": ["T-001"]},
+      "realmRoles": ["manager"]
+    }
+  ],
+  "roles": {
+    "realm": [
+      {"name": "manager", "description": "People manager — can approve timesheets and view reports"},
+      {"name": "engineer", "description": "Individual contributor"},
+      {"name": "hr-specialist", "description": "HR team member"}
+    ]
+  }
+}
