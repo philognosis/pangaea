@@ -1,0 +1,204 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="760" viewBox="0 0 1400 760">
+<style>
+  text { font-family: 'Courier New', monospace; }
+  .h  { font-size:13px; font-weight:bold; }
+  .s  { font-size:11px; }
+  .t  { font-size:10px; fill:#64748B; font-style:italic; }
+  .g  { font-size:10px; fill:#4ADE80; }
+</style>
+<rect width="1400" height="760" fill="#080C14"/>
+<text x="40" y="36" font-family="Courier New" font-size="15" font-weight="bold" fill="#E2E8F0">PANGAEA · build phases · each phase is independently testable and demonstrable</text>
+
+<!-- ═══ PHASE 0 ════════════════════ -->
+<rect x="20" y="56" width="248" height="678" rx="10" fill="#0D1322" stroke="#334155" stroke-width="1"/>
+<text x="144" y="80" class="h" fill="#475569" text-anchor="middle">PHASE 0</text>
+<text x="144" y="96" class="s" fill="#475569" text-anchor="middle">foundations</text>
+<line x1="40" y1="106" x2="248" y2="106" stroke="#1E293B" stroke-width="1"/>
+
+<text x="40" y="124" class="s" fill="#94A3B8">Monorepo scaffold</text>
+<text x="40" y="140" class="t">uv workspace · pnpm ws</text>
+<text x="40" y="162" class="s" fill="#94A3B8">manifest-schema pkg</text>
+<text x="40" y="178" class="t">JSON Schema v0.1</text>
+<text x="40" y="200" class="s" fill="#94A3B8">xp CLI  validate cmd</text>
+<text x="40" y="216" class="t">python/uv · CI action</text>
+<text x="40" y="238" class="s" fill="#94A3B8">Docker Compose base</text>
+<text x="40" y="254" class="t">postgres · redis · nats</text>
+<text x="40" y="276" class="s" fill="#94A3B8">mock domain stubs ×3</text>
+<text x="40" y="292" class="t">FastAPI · OpenAPI 3.1</text>
+<text x="40" y="314" class="s" fill="#94A3B8">capability.yaml ×3</text>
+<text x="40" y="330" class="t">staffing · evals · feedback</text>
+
+<text x="40" y="362" class="h" fill="#475569">✓ test gates</text>
+<text x="40" y="380" class="g">xp validate passes</text>
+<text x="40" y="396" class="g">compose up → all green</text>
+<text x="40" y="412" class="g">stub APIs return mock data</text>
+<text x="40" y="428" class="g">schema rejects bad manifests</text>
+
+<text x="40" y="460" class="h" fill="#475569">deliverable</text>
+<text x="40" y="476" class="s" fill="#64748B">Working monorepo.</text>
+<text x="40" y="492" class="s" fill="#64748B">3 fake domain teams.</text>
+<text x="40" y="508" class="s" fill="#64748B">Manifest schema that</text>
+<text x="40" y="524" class="s" fill="#64748B">validates &amp; rejects.</text>
+<text x="40" y="540" class="s" fill="#64748B">CI running.</text>
+
+<!-- ═══ PHASE 1 ════════════════════ -->
+<rect x="284" y="56" width="248" height="678" rx="10" fill="#0D1322" stroke="#4ADE80" stroke-width="1.5"/>
+<text x="408" y="80" class="h" fill="#86EFAC" text-anchor="middle">PHASE 1</text>
+<text x="408" y="96" class="s" fill="#4ADE80" text-anchor="middle">push · trust · render</text>
+<line x1="304" y1="106" x2="512" y2="106" stroke="#4ADE80" stroke-width="0.5"/>
+
+<text x="304" y="124" class="s" fill="#94A3B8">Registry service</text>
+<text x="304" y="140" class="t">FastAPI · Postgres · publish API</text>
+<text x="304" y="162" class="s" fill="#94A3B8">Token broker</text>
+<text x="304" y="178" class="t">Keycloak · RFC 8693 OBO</text>
+<text x="304" y="200" class="s" fill="#94A3B8">Session gateway</text>
+<text x="304" y="216" class="t">FastAPI WebSocket · Redis</text>
+<text x="304" y="238" class="s" fill="#94A3B8">A2UI catalog v0</text>
+<text x="304" y="254" class="t">10 components · Zod schema</text>
+<text x="304" y="276" class="s" fill="#94A3B8">Push notification service</text>
+<text x="304" y="292" class="t">pywebpush · VAPID · NATS</text>
+<text x="304" y="314" class="s" fill="#94A3B8">Provenance ledger</text>
+<text x="304" y="330" class="t">append-only Postgres table</text>
+<text x="304" y="352" class="s" fill="#94A3B8">Basic intent router v0</text>
+<text x="304" y="368" class="t">keyword + Claude fallback</text>
+<text x="304" y="390" class="s" fill="#94A3B8">Minimal shell (Next.js)</text>
+<text x="304" y="406" class="t">push permission · card render</text>
+
+<text x="304" y="438" class="h" fill="#4ADE80">✓ test gates</text>
+<text x="304" y="456" class="g">3 stubs publish to registry</text>
+<text x="304" y="472" class="g">OBO token minted + validated</text>
+<text x="304" y="488" class="g">push arrives on browser</text>
+<text x="304" y="504" class="g">approve tap → stub called</text>
+<text x="304" y="520" class="g">receipt written to ledger</text>
+<text x="304" y="536" class="g">A2UI card renders from JSON</text>
+
+<text x="304" y="568" class="h" fill="#4ADE80">deliverable</text>
+<text x="304" y="584" class="s" fill="#64748B">Live end-to-end demo:</text>
+<text x="304" y="600" class="s" fill="#64748B">push arrives → user taps</text>
+<text x="304" y="616" class="s" fill="#64748B">Approve → stub called →</text>
+<text x="304" y="632" class="s" fill="#64748B">receipt sealed. Full</text>
+<text x="304" y="648" class="s" fill="#64748B">trust chain visible.</text>
+
+<!-- ═══ PHASE 2 ════════════════════ -->
+<rect x="548" y="56" width="248" height="678" rx="10" fill="#0D1322" stroke="#22D3EE" stroke-width="1.5"/>
+<text x="672" y="80" class="h" fill="#67E8F9" text-anchor="middle">PHASE 2</text>
+<text x="672" y="96" class="s" fill="#22D3EE" text-anchor="middle">voice · routing · agents</text>
+<line x1="568" y1="106" x2="776" y2="106" stroke="#22D3EE" stroke-width="0.5"/>
+
+<text x="568" y="124" class="s" fill="#94A3B8">Intent router v1</text>
+<text x="568" y="140" class="t">Redis hot-paths · pgvector</text>
+<text x="568" y="162" class="s" fill="#94A3B8">Orchestrator</text>
+<text x="568" y="178" class="t">LangGraph · asyncio fan-out</text>
+<text x="568" y="200" class="s" fill="#94A3B8">Entity resolver</text>
+<text x="568" y="216" class="t">fuzzy match · disambig cards</text>
+<text x="568" y="238" class="s" fill="#94A3B8">A2A integration</text>
+<text x="568" y="254" class="t">python-a2a · domain agents</text>
+<text x="568" y="276" class="s" fill="#94A3B8">Voice pipeline</text>
+<text x="568" y="292" class="t">WebRTC · Whisper · ASR</text>
+<text x="568" y="314" class="s" fill="#94A3B8">Composite UI</text>
+<text x="568" y="330" class="t">multi-syscall assembly</text>
+<text x="568" y="352" class="s" fill="#94A3B8">PWA shell full</text>
+<text x="568" y="368" class="t">install · offline queue</text>
+<text x="568" y="390" class="s" fill="#94A3B8">Hot-path compiler</text>
+<text x="568" y="406" class="t">stable routes → Redis cache</text>
+
+<text x="568" y="438" class="h" fill="#22D3EE">✓ test gates</text>
+<text x="568" y="456" font-family="Courier New" font-size="10" fill="#22D3EE">"Evaluate John Doe" → routed</text>
+<text x="568" y="472" font-family="Courier New" font-size="10" fill="#22D3EE">ambiguous → disambig card</text>
+<text x="568" y="488" font-family="Courier New" font-size="10" fill="#22D3EE">voice → transcript → intent</text>
+<text x="568" y="504" font-family="Courier New" font-size="10" fill="#22D3EE">A2A agent task completes</text>
+<text x="568" y="520" font-family="Courier New" font-size="10" fill="#22D3EE">composite view ← 3 syscalls</text>
+<text x="568" y="536" font-family="Courier New" font-size="10" fill="#22D3EE">hot-path: 2nd call &lt;50ms</text>
+
+<text x="568" y="568" class="h" fill="#22D3EE">deliverable</text>
+<text x="568" y="584" class="s" fill="#64748B">Voice demo: say intent,</text>
+<text x="568" y="600" class="s" fill="#64748B">guided flow appears.</text>
+<text x="568" y="616" class="s" fill="#64748B">Mentee view: 3 systems</text>
+<text x="568" y="632" class="s" fill="#64748B">collated in one screen.</text>
+<text x="568" y="648" class="s" fill="#64748B">PWA installable.</text>
+
+<!-- ═══ PHASE 3 ════════════════════ -->
+<rect x="812" y="56" width="248" height="678" rx="10" fill="#0D1322" stroke="#E879F9" stroke-width="1.5"/>
+<text x="936" y="80" class="h" fill="#F0ABFC" text-anchor="middle">PHASE 3</text>
+<text x="936" y="96" class="s" fill="#E879F9" text-anchor="middle">concept graph · discovery</text>
+<line x1="832" y1="106" x2="1040" y2="106" stroke="#E879F9" stroke-width="0.5"/>
+
+<text x="832" y="124" class="s" fill="#94A3B8">Concept graph service</text>
+<text x="832" y="140" class="t">Oxigraph · JSON-LD · SPARQL</text>
+<text x="832" y="162" class="s" fill="#94A3B8">Manifest→graph ingestion</text>
+<text x="832" y="178" class="t">auto-populate on publish</text>
+<text x="832" y="200" class="s" fill="#94A3B8">Semantic intent routing</text>
+<text x="832" y="216" class="t">concept traversal → system</text>
+<text x="832" y="238" class="s" fill="#94A3B8">Undirected discovery</text>
+<text x="832" y="254" class="t">need → concept → capability</text>
+<text x="832" y="276" class="s" fill="#94A3B8">Home surface</text>
+<text x="832" y="292" class="t">ambient context · pending</text>
+<text x="832" y="314" class="s" fill="#94A3B8">Cross-domain composition</text>
+<text x="832" y="330" class="t">saga coordinator · joins</text>
+<text x="832" y="352" class="s" fill="#94A3B8">Intent analytics dashboard</text>
+<text x="832" y="368" class="t">ClickHouse · Grafana</text>
+<text x="832" y="390" class="s" fill="#94A3B8">Failed intent reports</text>
+<text x="832" y="406" class="t">weekly digest → teams</text>
+
+<text x="832" y="438" class="h" fill="#E879F9">✓ test gates</text>
+<text x="832" y="456" font-family="Courier New" font-size="10" fill="#E879F9">"something nice for team"</text>
+<text x="832" y="472" font-family="Courier New" font-size="10" fill="#E879F9">  → concept graph → 3 caps</text>
+<text x="832" y="488" font-family="Courier New" font-size="10" fill="#E879F9">new cap auto-appears</text>
+<text x="832" y="504" font-family="Courier New" font-size="10" fill="#E879F9">home surface personalised</text>
+<text x="832" y="520" font-family="Courier New" font-size="10" fill="#E879F9">cross-domain query resolved</text>
+<text x="832" y="536" font-family="Courier New" font-size="10" fill="#E879F9">failed intents tracked</text>
+
+<text x="832" y="568" class="h" fill="#E879F9">deliverable</text>
+<text x="832" y="584" class="s" fill="#64748B">Full OS: undirected need</text>
+<text x="832" y="600" class="s" fill="#64748B">finds right system. New</text>
+<text x="832" y="616" class="s" fill="#64748B">teams auto-discoverable.</text>
+<text x="832" y="632" class="s" fill="#64748B">Home screen. Telemetry</text>
+<text x="832" y="648" class="s" fill="#64748B">proves roadmap value.</text>
+
+<!-- ═══ PHASE 4 ════════════════════ -->
+<rect x="1076" y="56" width="304" height="678" rx="10" fill="#0D1322" stroke="#F59E0B" stroke-width="1.5"/>
+<text x="1228" y="80" class="h" fill="#FCD34D" text-anchor="middle">PHASE 4</text>
+<text x="1228" y="96" class="s" fill="#F59E0B" text-anchor="middle">harden · scale · grow</text>
+<line x1="1096" y1="106" x2="1360" y2="106" stroke="#F59E0B" stroke-width="0.5"/>
+
+<text x="1096" y="124" class="s" fill="#94A3B8">Real IdP integration</text>
+<text x="1096" y="140" class="t">Okta / Azure AD · prod OBO</text>
+<text x="1096" y="162" class="s" fill="#94A3B8">k8s production deploy</text>
+<text x="1096" y="178" class="t">Helm charts · Terraform</text>
+<text x="1096" y="200" class="s" fill="#94A3B8">Multi-tenant isolation</text>
+<text x="1096" y="216" class="t">namespace per capability</text>
+<text x="1096" y="238" class="s" fill="#94A3B8">SLO enforcement</text>
+<text x="1096" y="254" class="t">circuit breakers · budgets</text>
+<text x="1096" y="276" class="s" fill="#94A3B8">Catalog v1 (30+ components)</text>
+<text x="1096" y="292" class="t">accessibility audit · i18n</text>
+<text x="1096" y="314" class="s" fill="#94A3B8">Manifest migration tooling</text>
+<text x="1096" y="330" class="t">xp migrate · version compat</text>
+<text x="1096" y="352" class="s" fill="#94A3B8">Pilot team onboarding</text>
+<text x="1096" y="368" class="t">white-glove 3 real teams</text>
+<text x="1096" y="390" class="s" fill="#94A3B8">Real telemetry published</text>
+<text x="1096" y="406" class="t">before/after dashboard live</text>
+
+<text x="1096" y="438" class="h" fill="#F59E0B">✓ test gates</text>
+<text x="1096" y="456" font-family="Courier New" font-size="10" fill="#F59E0B">prod token round-trip</text>
+<text x="1096" y="472" font-family="Courier New" font-size="10" fill="#F59E0B">p95 read latency &lt;400ms</text>
+<text x="1096" y="488" font-family="Courier New" font-size="10" fill="#F59E0B">pen-test: no god tokens</text>
+<text x="1096" y="504" font-family="Courier New" font-size="10" fill="#F59E0B">WCAG 2.2 AA audit pass</text>
+<text x="1096" y="520" font-family="Courier New" font-size="10" fill="#F59E0B">3 real teams federated</text>
+<text x="1096" y="536" font-family="Courier New" font-size="10" fill="#F59E0B">numbers publicly posted</text>
+
+<text x="1096" y="568" class="h" fill="#F59E0B">deliverable</text>
+<text x="1096" y="584" class="s" fill="#64748B">Production-grade.</text>
+<text x="1096" y="600" class="s" fill="#64748B">Real teams on it.</text>
+<text x="1096" y="616" class="s" fill="#64748B">Actuals published:</text>
+<text x="1096" y="632" class="s" fill="#64748B">eng-hrs, approval</text>
+<text x="1096" y="648" class="s" fill="#64748B">time, review time.</text>
+
+<!-- bottom bar -->
+<rect x="20" y="710" width="1360" height="34" rx="6" fill="#0D1322" stroke="#1E293B"/>
+<text x="40" y="731" font-family="Courier New" font-size="10" fill="#4ADE80">P0: ~2 wks</text>
+<text x="180" y="731" font-family="Courier New" font-size="10" fill="#4ADE80">P1: ~6 wks</text>
+<text x="440" y="731" font-family="Courier New" font-size="10" fill="#22D3EE">P2: ~8 wks</text>
+<text x="700" y="731" font-family="Courier New" font-size="10" fill="#E879F9">P3: ~8 wks</text>
+<text x="960" y="731" font-family="Courier New" font-size="10" fill="#F59E0B">P4: ongoing</text>
+<text x="1200" y="731" font-family="Courier New" font-size="10" fill="#475569">each phase: build → test → demo → next</text>
+</svg>

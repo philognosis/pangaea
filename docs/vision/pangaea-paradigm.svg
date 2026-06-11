@@ -1,0 +1,233 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1600" viewBox="0 0 1400 1600">
+<style>
+  text { font-family: Arial, Helvetica, sans-serif; }
+  .h  { font-size:13px; font-weight:bold; }
+  .hb { font-size:16px; font-weight:bold; }
+  .s  { font-size:11px; }
+  .t  { font-size:10px; font-style:italic; }
+  .m  { font-size:10px; }
+  .big { font-size:20px; font-weight:bold; }
+</style>
+<rect width="1400" height="1600" fill="#080C14"/>
+<defs>
+  <marker id="a"  viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#334155" stroke-width="2"/></marker>
+  <marker id="ag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#4ADE80" stroke-width="2"/></marker>
+  <marker id="ac" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#22D3EE" stroke-width="2"/></marker>
+  <marker id="am" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#E879F9" stroke-width="2"/></marker>
+</defs>
+
+<!-- ═══ SECTION 1: PARADIGM SHIFT ════════════════════════════════════════ -->
+<text x="40" y="38" font-size="18" font-weight="bold" fill="#E2E8F0" font-family="Arial">The paradigm shift — apps were products you visited. Capabilities are services you invoke.</text>
+
+<!-- OLD WORLD -->
+<rect x="40" y="54" width="630" height="200" rx="10" fill="#0D1010" stroke="#F87171" stroke-width="1.5"/>
+<text x="355" y="80" class="hb" fill="#F87171" text-anchor="middle" font-family="Arial">The old world — apps as destinations</text>
+<text x="60" y="104" class="m" fill="#94A3B8" font-family="Arial">An app is: a URL · a codebase · a team · a frontend · a backend</text>
+<text x="60" y="122" class="m" fill="#94A3B8" font-family="Arial">          a security review · an onboarding doc · a bookmark</text>
+<text x="60" y="148" class="m" fill="#F87171" font-family="Arial">→  User must know it exists</text>
+<text x="60" y="166" class="m" fill="#F87171" font-family="Arial">→  User must navigate to it</text>
+<text x="60" y="184" class="m" fill="#F87171" font-family="Arial">→  User must learn it</text>
+<text x="60" y="202" class="m" fill="#F87171" font-family="Arial">→  User must remember to check it</text>
+<text x="60" y="220" class="m" fill="#F87171" font-family="Arial">→  Data from each app is siloed — no composition possible</text>
+<text x="60" y="238" class="m" fill="#F87171" font-family="Arial">→  30 apps = 30 security postures, 30 audit trails, 30 experiences</text>
+
+<!-- NEW WORLD -->
+<rect x="730" y="54" width="630" height="200" rx="10" fill="#0D1A10" stroke="#4ADE80" stroke-width="1.5"/>
+<text x="1045" y="80" class="hb" fill="#4ADE80" text-anchor="middle" font-family="Arial">The new world — capabilities as services</text>
+<text x="750" y="104" class="m" fill="#94A3B8" font-family="Arial">A capability is: a manifest · an API · a domain agent</text>
+<text x="750" y="122" class="m" fill="#94A3B8" font-family="Arial">                 Experience, identity, trust: platform's job</text>
+<text x="750" y="148" class="m" fill="#4ADE80" font-family="Arial">→  Capability is discovered by intent, not URL</text>
+<text x="750" y="166" class="m" fill="#4ADE80" font-family="Arial">→  Work arrives at the user via push</text>
+<text x="750" y="184" class="m" fill="#4ADE80" font-family="Arial">→  Natural language replaces navigation</text>
+<text x="750" y="202" class="m" fill="#4ADE80" font-family="Arial">→  Data composable across all systems at query time</text>
+<text x="750" y="220" class="m" fill="#4ADE80" font-family="Arial">→  One security posture, one audit trail, one experience</text>
+<text x="750" y="238" class="m" fill="#4ADE80" font-family="Arial">→  New capability: publish manifest → instantly discoverable</text>
+
+<!-- AOP banner -->
+<rect x="40" y="266" width="1320" height="34" rx="8" fill="#0D1322" stroke="#22D3EE" stroke-width="1"/>
+<text x="700" y="287" class="h" fill="#67E8F9" text-anchor="middle" font-family="Arial">AOP extracted cross-cutting concerns from classes. Pangaea extracts them from the entire organisation's software ecosystem.</text>
+
+<!-- ═══ SECTION 2: WHAT ONE APP SOLVES ═══════════════════════════════════ -->
+<text x="40" y="334" font-size="16" font-weight="bold" fill="#E2E8F0" font-family="Arial">What the one app solves — beyond saving team time</text>
+
+<!-- 3-column grid -->
+<!-- Col 1: Individual -->
+<rect x="40" y="350" width="420" height="260" rx="10" fill="#0D1322" stroke="#22D3EE" stroke-width="1.5"/>
+<text x="250" y="374" class="h" fill="#67E8F9" text-anchor="middle" font-family="Arial">For the individual</text>
+<text x="60" y="398" class="m" fill="#94A3B8" font-family="Arial">✓  One identity. One place. Always.</text>
+<text x="60" y="418" class="m" fill="#94A3B8" font-family="Arial">✓  Work arrives — no checking required</text>
+<text x="60" y="438" class="m" fill="#94A3B8" font-family="Arial">✓  Natural language replaces navigation</text>
+<text x="60" y="458" class="m" fill="#94A3B8" font-family="Arial">✓  Composite views across any systems</text>
+<text x="60" y="478" class="m" fill="#94A3B8" font-family="Arial">✓  Custom dashboards + pinned views</text>
+<text x="60" y="498" class="m" fill="#94A3B8" font-family="Arial">✓  Same experience: phone, laptop, voice</text>
+<text x="60" y="518" class="m" fill="#94A3B8" font-family="Arial">✓  No cognitive load of 30 systems</text>
+<text x="60" y="538" class="m" fill="#94A3B8" font-family="Arial">✓  Saves 30–60 min/day per knowledge worker</text>
+<text x="60" y="570" class="t" fill="#475569" font-family="Arial">Realistic. Not every interaction, every day.</text>
+<text x="60" y="586" class="t" fill="#475569" font-family="Arial">High-value tasks (approvals, reviews, lookup)</text>
+<text x="60" y="602" class="t" fill="#475569" font-family="Arial">are where the time is recovered.</text>
+
+<!-- Col 2: Organisation -->
+<rect x="490" y="350" width="420" height="260" rx="10" fill="#0D1322" stroke="#4ADE80" stroke-width="1.5"/>
+<text x="700" y="374" class="h" fill="#86EFAC" text-anchor="middle" font-family="Arial">For the organisation</text>
+<text x="510" y="398" class="m" fill="#94A3B8" font-family="Arial">✓  One audit trail across all systems</text>
+<text x="510" y="418" class="m" fill="#94A3B8" font-family="Arial">✓  One security surface to protect</text>
+<text x="510" y="438" class="m" fill="#94A3B8" font-family="Arial">✓  One accessibility standard</text>
+<text x="510" y="458" class="m" fill="#94A3B8" font-family="Arial">✓  Real compliance posture, not patchwork</text>
+<text x="510" y="478" class="m" fill="#94A3B8" font-family="Arial">✓  Observable capability usage</text>
+<text x="510" y="498" class="m" fill="#94A3B8" font-family="Arial">✓  Failed intents = roadmap signal</text>
+<text x="510" y="518" class="m" fill="#94A3B8" font-family="Arial">✓  Approval cycle times measurable + reducible</text>
+<text x="510" y="538" class="m" fill="#94A3B8" font-family="Arial">✓  New capability: 3 wks not 6 months</text>
+<text x="510" y="570" class="t" fill="#475569" font-family="Arial">The org gets a nervous system. Not just</text>
+<text x="510" y="586" class="t" fill="#475569" font-family="Arial">a better app. A way to see itself.</text>
+
+<!-- Col 3: Teams -->
+<rect x="940" y="350" width="420" height="260" rx="10" fill="#0D1322" stroke="#E879F9" stroke-width="1.5"/>
+<text x="1150" y="374" class="h" fill="#F0ABFC" text-anchor="middle" font-family="Arial">For product teams</text>
+<text x="960" y="398" class="m" fill="#94A3B8" font-family="Arial">✓  Build capabilities, not experiences</text>
+<text x="960" y="418" class="m" fill="#94A3B8" font-family="Arial">✓  ~35% of sprint time reclaimed</text>
+<text x="960" y="438" class="m" fill="#94A3B8" font-family="Arial">✓  Security review: months → weeks</text>
+<text x="960" y="458" class="m" fill="#94A3B8" font-family="Arial">✓  Focus on domain agents + intelligence</text>
+<text x="960" y="478" class="m" fill="#94A3B8" font-family="Arial">✓  Data becomes a first-class asset</text>
+<text x="960" y="498" class="m" fill="#94A3B8" font-family="Arial">✓  Manifest scanner: auto-sync on deploy</text>
+<text x="960" y="518" class="m" fill="#94A3B8" font-family="Arial">✓  Telemetry: first real product analytics</text>
+<text x="960" y="538" class="m" fill="#94A3B8" font-family="Arial">✓  In agentic era: build reasoning, not UI</text>
+<text x="960" y="570" class="t" fill="#475569" font-family="Arial">Teams are freed to do what only they</text>
+<text x="960" y="586" class="t" fill="#475569" font-family="Arial">can do. The rest is platform.</text>
+
+<!-- ═══ SECTION 3: COMPOSITE SYSCALL — ANGIE CHEN ════════════════════════ -->
+<text x="40" y="644" font-size="16" font-weight="bold" fill="#E2E8F0" font-family="Arial">Chained requests — five systems, one surface, one sentence</text>
+
+<!-- utterance -->
+<rect x="40" y="660" width="1320" height="44" rx="8" fill="#0D1322" stroke="#22D3EE" stroke-width="1.5"/>
+<text x="700" y="678" class="h" fill="#67E8F9" text-anchor="middle" font-family="Arial">"Show me Angie Chen's staffing history, learning profile, feedback for this year and last, current goals, and GitHub contributions"</text>
+<text x="700" y="696" class="t" fill="#475569" text-anchor="middle" font-family="Arial">One sentence. Five systems. User does not know or care which systems exist.</text>
+
+<!-- resolve entity -->
+<rect x="580" y="718" width="240" height="36" rx="8" fill="#131B2A" stroke="#4ADE80" stroke-width="1.5"/>
+<text x="700" y="740" class="h" fill="#86EFAC" text-anchor="middle" font-family="Arial">Entity resolver → Angie Chen = E-29183</text>
+<line x1="700" y1="756" x2="700" y2="774" stroke="#4ADE80" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ag)"/>
+
+<!-- fan out -->
+<rect x="560" y="780" width="280" height="30" rx="6" fill="#131B2A" stroke="#4ADE80" stroke-width="1"/>
+<text x="700" y="799" class="h" fill="#86EFAC" text-anchor="middle" font-family="Arial">Orchestrator — fan_out_parallel(5 syscalls)</text>
+
+<!-- 5 syscall boxes -->
+<line x1="620" y1="812" x2="160" y2="852" stroke="#334155" stroke-width="1" marker-end="url(#a)"/>
+<line x1="650" y1="812" x2="420" y2="852" stroke="#334155" stroke-width="1" marker-end="url(#a)"/>
+<line x1="700" y1="812" x2="700" y2="852" stroke="#334155" stroke-width="1" marker-end="url(#a)"/>
+<line x1="750" y1="812" x2="980" y2="852" stroke="#334155" stroke-width="1" marker-end="url(#a)"/>
+<line x1="780" y1="812" x2="1240" y2="852" stroke="#334155" stroke-width="1" marker-end="url(#a)"/>
+
+<rect x="40"   y="858" width="240" height="56" rx="8" fill="#0D1322" stroke="#2DD4BF" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="160" y="879" class="h" fill="#5EEAD4" text-anchor="middle" font-family="Arial">syscall 1</text>
+<text x="160" y="897" class="m" fill="#94A3B8" text-anchor="middle" font-family="Arial">acme.staffing</text>
+<text x="160" y="910" class="t" fill="#475569" text-anchor="middle" font-family="Arial">GET /staff/history?emp=E-29183</text>
+
+<rect x="300"  y="858" width="240" height="56" rx="8" fill="#0D1322" stroke="#2DD4BF" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="420" y="879" class="h" fill="#5EEAD4" text-anchor="middle" font-family="Arial">syscall 2</text>
+<text x="420" y="897" class="m" fill="#94A3B8" text-anchor="middle" font-family="Arial">acme.learning</text>
+<text x="420" y="910" class="t" fill="#475569" text-anchor="middle" font-family="Arial">GET /profiles/E-29183</text>
+
+<rect x="560"  y="858" width="280" height="56" rx="8" fill="#0D1322" stroke="#2DD4BF" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="700" y="879" class="h" fill="#5EEAD4" text-anchor="middle" font-family="Arial">syscall 3</text>
+<text x="700" y="897" class="m" fill="#94A3B8" text-anchor="middle" font-family="Arial">acme.feedback</text>
+<text x="700" y="910" class="t" fill="#475569" text-anchor="middle" font-family="Arial">query { feedback(subject:E-29183, years:[2024,2025]) }</text>
+
+<rect x="860"  y="858" width="240" height="56" rx="8" fill="#0D1322" stroke="#2DD4BF" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="980" y="879" class="h" fill="#5EEAD4" text-anchor="middle" font-family="Arial">syscall 4</text>
+<text x="980" y="897" class="m" fill="#94A3B8" text-anchor="middle" font-family="Arial">acme.goals</text>
+<text x="980" y="910" class="t" fill="#475569" text-anchor="middle" font-family="Arial">GET /goals?emp=E-29183&amp;cycle=current</text>
+
+<rect x="1120" y="858" width="240" height="56" rx="8" fill="#0D1322" stroke="#2DD4BF" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="1240" y="879" class="h" fill="#5EEAD4" text-anchor="middle" font-family="Arial">syscall 5</text>
+<text x="1240" y="897" class="m" fill="#94A3B8" text-anchor="middle" font-family="Arial">acme.github</text>
+<text x="1240" y="910" class="t" fill="#475569" text-anchor="middle" font-family="Arial">GET /contributions?user=E-29183</text>
+
+<!-- converge -->
+<line x1="160"  y1="916" x2="630" y2="952" stroke="#334155" stroke-width="1" marker-end="url(#ag)"/>
+<line x1="420"  y1="916" x2="660" y2="952" stroke="#334155" stroke-width="1" marker-end="url(#ag)"/>
+<line x1="700"  y1="916" x2="700" y2="952" stroke="#334155" stroke-width="1" marker-end="url(#ag)"/>
+<line x1="980"  y1="916" x2="740" y2="952" stroke="#334155" stroke-width="1" marker-end="url(#ag)"/>
+<line x1="1240" y1="916" x2="770" y2="952" stroke="#334155" stroke-width="1" marker-end="url(#ag)"/>
+
+<!-- assemble -->
+<rect x="480" y="958" width="440" height="36" rx="8" fill="#131B2A" stroke="#4ADE80" stroke-width="1.5"/>
+<text x="700" y="980" class="h" fill="#86EFAC" text-anchor="middle" font-family="Arial">normalize_entities() → assemble_composite()</text>
+<line x1="700" y1="996" x2="700" y2="1014" stroke="#4ADE80" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ag)"/>
+
+<!-- composite surface -->
+<rect x="200" y="1020" width="1000" height="160" rx="10" fill="#0D1322" stroke="#22D3EE" stroke-width="1.5"/>
+<text x="700" y="1042" class="h" fill="#67E8F9" text-anchor="middle" font-family="Arial">CompositeLayout — Angie Chen · E-29183</text>
+<rect x="220" y="1056" width="180" height="50" rx="6" fill="#131B2A" stroke="#2DD4BF" stroke-width="1"/>
+<text x="310" y="1076" class="m" fill="#5EEAD4" text-anchor="middle" font-family="Arial">Staffing</text>
+<text x="310" y="1092" class="t" fill="#475569" text-anchor="middle" font-family="Arial">4 placements</text>
+<rect x="414" y="1056" width="180" height="50" rx="6" fill="#131B2A" stroke="#E879F9" stroke-width="1"/>
+<text x="504" y="1076" class="m" fill="#F0ABFC" text-anchor="middle" font-family="Arial">Learning</text>
+<text x="504" y="1092" class="t" fill="#475569" text-anchor="middle" font-family="Arial">3 certs · 7 courses</text>
+<rect x="608" y="1056" width="180" height="50" rx="6" fill="#131B2A" stroke="#4ADE80" stroke-width="1"/>
+<text x="698" y="1076" class="m" fill="#86EFAC" text-anchor="middle" font-family="Arial">Feedback</text>
+<text x="698" y="1092" class="t" fill="#475569" text-anchor="middle" font-family="Arial">2024 + 2025</text>
+<rect x="802" y="1056" width="180" height="50" rx="6" fill="#131B2A" stroke="#FCD34D" stroke-width="1"/>
+<text x="892" y="1076" class="m" fill="#FCD34D" text-anchor="middle" font-family="Arial">Goals</text>
+<text x="892" y="1092" class="t" fill="#475569" text-anchor="middle" font-family="Arial">5 active OKRs</text>
+<rect x="996" y="1056" width="184" height="50" rx="6" fill="#131B2A" stroke="#F59E0B" stroke-width="1"/>
+<text x="1088" y="1076" class="m" fill="#F59E0B" text-anchor="middle" font-family="Arial">GitHub</text>
+<text x="1088" y="1092" class="t" fill="#475569" text-anchor="middle" font-family="Arial">847 contribs</text>
+<text x="700" y="1158" class="t" fill="#334155" text-anchor="middle" font-family="Arial">5 OBO tokens · 5 syscalls · 1 receipt · ProvenanceFooter shows all sources</text>
+<text x="700" y="1173" class="t" fill="#475569" text-anchor="middle" font-family="Arial">Actions derived from combined payload: Write feedback · Suggest for role · Nominate cert renewal</text>
+
+<!-- ═══ SECTION 4: CUSTOM DASHBOARDS ════════════════════════════════════ -->
+<text x="40" y="1220" font-size="16" font-weight="bold" fill="#E2E8F0" font-family="Arial">Custom dashboards + pinned views — user-owned, live data</text>
+
+<rect x="40" y="1236" width="620" height="140" rx="10" fill="#0D1322" stroke="#4ADE80" stroke-width="1.5"/>
+<text x="350" y="1260" class="h" fill="#86EFAC" text-anchor="middle" font-family="Arial">How it works</text>
+<text x="60" y="1284" class="m" fill="#94A3B8" font-family="Arial">A saved view = a saved intent composition. Not a data snapshot.</text>
+<text x="60" y="1304" class="m" fill="#94A3B8" font-family="Arial">When opened: syscalls fire live. Data is always current.</text>
+<text x="60" y="1324" class="m" fill="#94A3B8" font-family="Arial">User pins quick-actions, composite queries, capability shortcuts.</text>
+<text x="60" y="1344" class="m" fill="#94A3B8" font-family="Arial">View definitions shareable: "here's the team lead dashboard".</text>
+<text x="60" y="1364" class="m" fill="#94A3B8" font-family="Arial">Permissions enforced at syscall time — not at view save time.</text>
+
+<rect x="730" y="1236" width="630" height="140" rx="10" fill="#0D1322" stroke="#22D3EE" stroke-width="1.5"/>
+<text x="1045" y="1260" class="h" fill="#67E8F9" text-anchor="middle" font-family="Arial">Example pinned views</text>
+<text x="750" y="1284" class="m" fill="#94A3B8" font-family="Arial">📌  "My team" — staffing + learning gaps + open roles</text>
+<text x="750" y="1304" class="m" fill="#94A3B8" font-family="Arial">📌  "Pending approvals" — all actions awaiting me across all systems</text>
+<text x="750" y="1324" class="m" fill="#94A3B8" font-family="Arial">📌  "Angie Chen profile" — saved composite query, one tap</text>
+<text x="750" y="1344" class="m" fill="#94A3B8" font-family="Arial">📌  "Team health" — evals + feedback + goals + github · all reports</text>
+<text x="750" y="1364" class="m" fill="#94A3B8" font-family="Arial">📌  "Engineering learning" — my path + team gaps + new content</text>
+
+<!-- ═══ SECTION 5: FEDERATED DATA GRAPH ═════════════════════════════════ -->
+<text x="40" y="1412" font-size="16" font-weight="bold" fill="#E2E8F0" font-family="Arial">The federated data graph — the northstar for the data layer</text>
+<text x="40" y="1432" font-size="11" fill="#475569" font-family="Arial">Data never moves to Pangaea. The graph describes where it lives and how it connects. Queries traverse and pull in transit.</text>
+
+<rect x="40" y="1446" width="320" height="100" rx="8" fill="#0D1322" stroke="#4ADE80" stroke-width="1.5"/>
+<text x="200" y="1468" class="h" fill="#86EFAC" text-anchor="middle" font-family="Arial">Phase 3 (now)</text>
+<text x="60" y="1490" class="m" fill="#94A3B8" font-family="Arial">Concept graph</text>
+<text x="60" y="1508" class="m" fill="#94A3B8" font-family="Arial">concepts → capabilities</text>
+<text x="60" y="1526" class="m" fill="#94A3B8" font-family="Arial">entity spine + entity refs</text>
+
+<line x1="362" y1="1496" x2="398" y2="1496" stroke="#334155" stroke-width="1.5" marker-end="url(#a)"/>
+
+<rect x="400" y="1446" width="320" height="100" rx="8" fill="#0D1322" stroke="#22D3EE" stroke-width="1.5"/>
+<text x="560" y="1468" class="h" fill="#67E8F9" text-anchor="middle" font-family="Arial">Phase 4</text>
+<text x="420" y="1490" class="m" fill="#94A3B8" font-family="Arial">Entity relationship graph</text>
+<text x="420" y="1508" class="m" fill="#94A3B8" font-family="Arial">cross-domain joins at query time</text>
+<text x="420" y="1526" class="m" fill="#94A3B8" font-family="Arial">emerges from manifests</text>
+
+<line x1="722" y1="1496" x2="758" y2="1496" stroke="#334155" stroke-width="1.5" marker-end="url(#a)"/>
+
+<rect x="760" y="1446" width="360" height="100" rx="8" fill="#0D1322" stroke="#E879F9" stroke-width="1.5"/>
+<text x="940" y="1468" class="h" fill="#F0ABFC" text-anchor="middle" font-family="Arial">Northstar</text>
+<text x="780" y="1490" class="m" fill="#94A3B8" font-family="Arial">Every data asset: addressable,</text>
+<text x="780" y="1508" class="m" fill="#94A3B8" font-family="Arial">composable, queryable by any</text>
+<text x="780" y="1526" class="m" fill="#94A3B8" font-family="Arial">permitted agent — without moving data</text>
+
+<rect x="1160" y="1446" width="200" height="100" rx="8" fill="#0D1322" stroke="#FCD34D" stroke-width="1.2"/>
+<text x="1260" y="1468" class="h" fill="#FCD34D" text-anchor="middle" font-family="Arial">How it grows</text>
+<text x="1180" y="1490" class="m" fill="#94A3B8" font-family="Arial">Every new manifest</text>
+<text x="1180" y="1508" class="m" fill="#94A3B8" font-family="Arial">adds nodes + edges.</text>
+<text x="1180" y="1526" class="m" fill="#94A3B8" font-family="Arial">No central effort.</text>
+
+<!-- bottom banner -->
+<rect x="40" y="1562" width="1320" height="20" rx="6" fill="#0D1322" stroke="#334155"/>
+<text x="700" y="1576" class="m" fill="#475569" text-anchor="middle" font-family="Arial">Teams build capabilities + agents. Platform builds experience + trust + graph. Users get one surface that knows everything they're permitted to know.</text>
+</svg>

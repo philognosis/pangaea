@@ -1,0 +1,326 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1080" viewBox="0 0 1400 1080">
+<style>
+  text { font-family: 'Courier New', monospace; }
+  .label { font-size: 11px; fill: #94A3B8; }
+  .title { font-size: 13px; font-weight: bold; }
+  .sub   { font-size: 10px; fill: #64748B; }
+  .tech  { font-size: 9px;  fill: #475569; font-style: italic; }
+  .phase { font-size: 10px; font-weight: bold; }
+</style>
+<rect width="1400" height="1080" fill="#080C14"/>
+
+<!-- ═══ PHASE LEGEND ══════════════════════════════════════════ -->
+<text x="40" y="30" class="title" fill="#E2E8F0" font-size="16">PANGAEA  ·  full system architecture</text>
+<rect x="700" y="14" width="14" height="14" rx="3" fill="#4ADE80" fill-opacity="0.25" stroke="#4ADE80"/>
+<text x="720" y="25" class="phase" fill="#86EFAC">Phase 1</text>
+<rect x="800" y="14" width="14" height="14" rx="3" fill="#22D3EE" fill-opacity="0.25" stroke="#22D3EE"/>
+<text x="820" y="25" class="phase" fill="#67E8F9">Phase 2</text>
+<rect x="900" y="14" width="14" height="14" rx="3" fill="#E879F9" fill-opacity="0.25" stroke="#E879F9"/>
+<text x="920" y="25" class="phase" fill="#F0ABFC">Phase 3</text>
+<rect x="1000" y="14" width="14" height="14" rx="3" fill="#2DD4BF" fill-opacity="0.25" stroke="#2DD4BF" stroke-dasharray="4 2"/>
+<text x="1020" y="25" class="phase" fill="#5EEAD4">Teams own</text>
+
+<defs>
+  <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M1 1L9 5L1 9" fill="none" stroke="#334155" stroke-width="2"/>
+  </marker>
+  <marker id="ag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M1 1L9 5L1 9" fill="none" stroke="#4ADE80" stroke-width="2"/>
+  </marker>
+  <marker id="ac" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M1 1L9 5L1 9" fill="none" stroke="#22D3EE" stroke-width="2"/>
+  </marker>
+</defs>
+
+<!-- ═══ ROW 1 — SURFACES ══════════════════════════════════════ -->
+<text x="40" y="64" class="sub" fill="#475569">── SURFACES ──────────────────────────────────────────────────────────────────</text>
+
+<!-- PWA Shell -->
+<rect x="40" y="74" width="180" height="72" rx="8" fill="#0D1322" stroke="#22D3EE" stroke-width="1.5"/>
+<text x="130" y="96" class="title" fill="#67E8F9" text-anchor="middle">PWA Shell</text>
+<text x="130" y="112" class="tech" text-anchor="middle">Next.js 15 · Tailwind</text>
+<text x="130" y="126" class="tech" text-anchor="middle">Serwist SW · pnpm</text>
+<rect x="172" y="78" width="42" height="16" rx="8" fill="#22D3EE" fill-opacity="0.15" stroke="#22D3EE" stroke-width="0.8"/>
+<text x="193" y="90" class="phase" fill="#67E8F9" text-anchor="middle" font-size="8">P2</text>
+
+<!-- Voice -->
+<rect x="236" y="74" width="160" height="72" rx="8" fill="#0D1322" stroke="#22D3EE" stroke-width="1.5"/>
+<text x="316" y="96" class="title" fill="#67E8F9" text-anchor="middle">Voice</text>
+<text x="316" y="112" class="tech" text-anchor="middle">WebRTC · Whisper</text>
+<text x="316" y="126" class="tech" text-anchor="middle">streaming ASR</text>
+<rect x="368" y="78" width="22" height="16" rx="8" fill="#22D3EE" fill-opacity="0.15" stroke="#22D3EE" stroke-width="0.8"/>
+<text x="379" y="90" class="phase" fill="#67E8F9" text-anchor="middle" font-size="8">P2</text>
+
+<!-- Push Notifications -->
+<rect x="412" y="74" width="190" height="72" rx="8" fill="#0D1322" stroke="#4ADE80" stroke-width="1.5"/>
+<text x="507" y="96" class="title" fill="#86EFAC" text-anchor="middle">Push Notifications</text>
+<text x="507" y="112" class="tech" text-anchor="middle">web-push · VAPID</text>
+<text x="507" y="126" class="tech" text-anchor="middle">pywebpush · SW intercept</text>
+<rect x="568" y="78" width="28" height="16" rx="8" fill="#4ADE80" fill-opacity="0.15" stroke="#4ADE80" stroke-width="0.8"/>
+<text x="582" y="90" class="phase" fill="#86EFAC" text-anchor="middle" font-size="8">P1</text>
+
+<!-- A2UI Renderer -->
+<rect x="618" y="74" width="200" height="72" rx="8" fill="#0D1322" stroke="#4ADE80" stroke-width="1.5"/>
+<text x="718" y="96" class="title" fill="#86EFAC" text-anchor="middle">A2UI Renderer</text>
+<text x="718" y="112" class="tech" text-anchor="middle">React 19 · shadcn/ui</text>
+<text x="718" y="126" class="tech" text-anchor="middle">Zod schema-bind · SSE stream</text>
+<rect x="782" y="78" width="28" height="16" rx="8" fill="#4ADE80" fill-opacity="0.15" stroke="#4ADE80" stroke-width="0.8"/>
+<text x="796" y="90" class="phase" fill="#86EFAC" text-anchor="middle" font-size="8">P1</text>
+
+<!-- Chat -->
+<rect x="834" y="74" width="160" height="72" rx="8" fill="#0D1322" stroke="#22D3EE" stroke-width="1.5"/>
+<text x="914" y="96" class="title" fill="#67E8F9" text-anchor="middle">Chat UI</text>
+<text x="914" y="112" class="tech" text-anchor="middle">Next.js · AI SDK</text>
+<text x="914" y="126" class="tech" text-anchor="middle">streaming responses</text>
+<rect x="966" y="78" width="22" height="16" rx="8" fill="#22D3EE" fill-opacity="0.15" stroke="#22D3EE" stroke-width="0.8"/>
+<text x="977" y="90" class="phase" fill="#67E8F9" text-anchor="middle" font-size="8">P2</text>
+
+<!-- ═══ ROW 2 — PLATFORM CORE ═════════════════════════════════ -->
+<text x="40" y="176" class="sub" fill="#475569">── PLATFORM CORE ─────────────────────────────────────────────────────────────</text>
+
+<!-- Session Gateway -->
+<rect x="40" y="186" width="190" height="86" rx="8" fill="#0D1322" stroke="#4ADE80" stroke-width="1.5"/>
+<text x="135" y="208" class="title" fill="#86EFAC" text-anchor="middle">Session Gateway</text>
+<text x="135" y="224" class="tech" text-anchor="middle">FastAPI · WebSocket</text>
+<text x="135" y="238" class="tech" text-anchor="middle">Redis sessions</text>
+<text x="135" y="252" class="tech" text-anchor="middle">uvicorn · httpx</text>
+<rect x="196" y="190" width="28" height="16" rx="8" fill="#4ADE80" fill-opacity="0.15" stroke="#4ADE80" stroke-width="0.8"/>
+<text x="210" y="202" class="phase" fill="#86EFAC" text-anchor="middle" font-size="8">P1</text>
+
+<!-- Intent Router -->
+<rect x="246" y="186" width="210" height="86" rx="8" fill="#0D1322" stroke="#4ADE80" stroke-width="1.5"/>
+<text x="351" y="208" class="title" fill="#86EFAC" text-anchor="middle">Intent Router</text>
+<text x="351" y="224" class="tech" text-anchor="middle">FastAPI · Redis hot-paths</text>
+<text x="351" y="238" class="tech" text-anchor="middle">Claude API cold-path</text>
+<text x="351" y="252" class="tech" text-anchor="middle">pgvector similarity</text>
+<rect x="418" y="190" width="32" height="16" rx="8" fill="#4ADE80" fill-opacity="0.15" stroke="#4ADE80" stroke-width="0.8"/>
+<text x="434" y="202" class="phase" fill="#86EFAC" text-anchor="middle" font-size="8">P1/2</text>
+
+<!-- Orchestrator -->
+<rect x="472" y="186" width="210" height="86" rx="8" fill="#0D1322" stroke="#22D3EE" stroke-width="1.5"/>
+<text x="577" y="208" class="title" fill="#67E8F9" text-anchor="middle">Orchestrator</text>
+<text x="577" y="224" class="tech" text-anchor="middle">LangGraph · python-a2a</text>
+<text x="577" y="238" class="tech" text-anchor="middle">asyncio fan-out</text>
+<text x="577" y="252" class="tech" text-anchor="middle">result normalizer</text>
+<rect x="644" y="190" width="32" height="16" rx="8" fill="#22D3EE" fill-opacity="0.15" stroke="#22D3EE" stroke-width="0.8"/>
+<text x="660" y="202" class="phase" fill="#67E8F9" text-anchor="middle" font-size="8">P2</text>
+
+<!-- Trust Fabric -->
+<rect x="698" y="186" width="210" height="86" rx="8" fill="#0D1322" stroke="#4ADE80" stroke-width="1.5"/>
+<text x="803" y="208" class="title" fill="#86EFAC" text-anchor="middle">Trust Fabric</text>
+<text x="803" y="224" class="tech" text-anchor="middle">python-jose · RFC 8693</text>
+<text x="803" y="238" class="tech" text-anchor="middle">OPA (open-policy-agent)</text>
+<text x="803" y="252" class="tech" text-anchor="middle">append-only Postgres ledger</text>
+<rect x="870" y="190" width="28" height="16" rx="8" fill="#4ADE80" fill-opacity="0.15" stroke="#4ADE80" stroke-width="0.8"/>
+<text x="884" y="202" class="phase" fill="#86EFAC" text-anchor="middle" font-size="8">P1</text>
+
+<!-- Concept Graph -->
+<rect x="924" y="186" width="220" height="86" rx="8" fill="#0D1322" stroke="#E879F9" stroke-width="1.5"/>
+<text x="1034" y="208" class="title" fill="#F0ABFC" text-anchor="middle">Concept Graph</text>
+<text x="1034" y="224" class="tech" text-anchor="middle">Apache Jena / Oxigraph</text>
+<text x="1034" y="238" class="tech" text-anchor="middle">JSON-LD · SPARQL-lite</text>
+<text x="1034" y="252" class="tech" text-anchor="middle">pgvector concept embeds</text>
+<rect x="1102" y="190" width="36" height="16" rx="8" fill="#E879F9" fill-opacity="0.15" stroke="#E879F9" stroke-width="0.8"/>
+<text x="1120" y="202" class="phase" fill="#F0ABFC" text-anchor="middle" font-size="8">P2/3</text>
+
+<!-- ═══ ROW 3 — FEDERATION LAYER ══════════════════════════════ -->
+<text x="40" y="302" class="sub" fill="#475569">── FEDERATION LAYER ───────────────────────────────────────────────────────────</text>
+
+<!-- Registry -->
+<rect x="40" y="312" width="230" height="86" rx="8" fill="#0D1322" stroke="#4ADE80" stroke-width="1.5"/>
+<text x="155" y="334" class="title" fill="#86EFAC" text-anchor="middle">Registry</text>
+<text x="155" y="350" class="tech" text-anchor="middle">FastAPI · Postgres</text>
+<text x="155" y="364" class="tech" text-anchor="middle">jsonschema validation</text>
+<text x="155" y="378" class="tech" text-anchor="middle">openapi-core ref resolver</text>
+<rect x="228" y="316" width="36" height="16" rx="8" fill="#4ADE80" fill-opacity="0.15" stroke="#4ADE80" stroke-width="0.8"/>
+<text x="246" y="328" class="phase" fill="#86EFAC" text-anchor="middle" font-size="8">P1</text>
+
+<!-- Manifest CI -->
+<rect x="286" y="312" width="200" height="86" rx="8" fill="#0D1322" stroke="#4ADE80" stroke-width="1.5"/>
+<text x="386" y="334" class="title" fill="#86EFAC" text-anchor="middle">Manifest CI</text>
+<text x="386" y="350" class="tech" text-anchor="middle">xp CLI (Python/uv)</text>
+<text x="386" y="364" class="tech" text-anchor="middle">jsonschema · openapi-core</text>
+<text x="386" y="378" class="tech" text-anchor="middle">GitHub Actions webhook</text>
+<rect x="446" y="316" width="34" height="16" rx="8" fill="#4ADE80" fill-opacity="0.15" stroke="#4ADE80" stroke-width="0.8"/>
+<text x="463" y="328" class="phase" fill="#86EFAC" text-anchor="middle" font-size="8">P1</text>
+
+<!-- Token Broker -->
+<rect x="502" y="312" width="210" height="86" rx="8" fill="#0D1322" stroke="#4ADE80" stroke-width="1.5"/>
+<text x="607" y="334" class="title" fill="#86EFAC" text-anchor="middle">Token Broker</text>
+<text x="607" y="350" class="tech" text-anchor="middle">FastAPI · python-jose</text>
+<text x="607" y="364" class="tech" text-anchor="middle">Keycloak OBO (RFC 8693)</text>
+<text x="607" y="378" class="tech" text-anchor="middle">Redis token cache (TTL)</text>
+<rect x="672" y="316" width="34" height="16" rx="8" fill="#4ADE80" fill-opacity="0.15" stroke="#4ADE80" stroke-width="0.8"/>
+<text x="689" y="328" class="phase" fill="#86EFAC" text-anchor="middle" font-size="8">P1</text>
+
+<!-- Entity Resolver -->
+<rect x="728" y="312" width="210" height="86" rx="8" fill="#0D1322" stroke="#22D3EE" stroke-width="1.5"/>
+<text x="833" y="334" class="title" fill="#67E8F9" text-anchor="middle">Entity Resolver</text>
+<text x="833" y="350" class="tech" text-anchor="middle">FastAPI · pgvector</text>
+<text x="833" y="364" class="tech" text-anchor="middle">fuzzy match · dedupe</text>
+<text x="833" y="378" class="tech" text-anchor="middle">disambiguation cards</text>
+<rect x="896" y="316" width="34" height="16" rx="8" fill="#22D3EE" fill-opacity="0.15" stroke="#22D3EE" stroke-width="0.8"/>
+<text x="913" y="328" class="phase" fill="#67E8F9" text-anchor="middle" font-size="8">P2</text>
+
+<!-- Event Bus -->
+<rect x="954" y="312" width="200" height="86" rx="8" fill="#0D1322" stroke="#4ADE80" stroke-width="1.5"/>
+<text x="1054" y="334" class="title" fill="#86EFAC" text-anchor="middle">Event Bus</text>
+<text x="1054" y="350" class="tech" text-anchor="middle">NATS JetStream</text>
+<text x="1054" y="364" class="tech" text-anchor="middle">capability inboxes</text>
+<text x="1054" y="378" class="tech" text-anchor="middle">durable · replay</text>
+<rect x="1110" y="316" width="34" height="16" rx="8" fill="#4ADE80" fill-opacity="0.15" stroke="#4ADE80" stroke-width="0.8"/>
+<text x="1127" y="328" class="phase" fill="#86EFAC" text-anchor="middle" font-size="8">P1</text>
+
+<!-- ═══ ROW 4 — DATA LAYER ═════════════════════════════════════ -->
+<text x="40" y="428" class="sub" fill="#475569">── DATA / STORAGE ────────────────────────────────────────────────────────────</text>
+
+<rect x="40"  y="438" width="170" height="70" rx="8" fill="#0D1322" stroke="#334155" stroke-width="1.2"/>
+<text x="125" y="460" class="title" fill="#94A3B8" text-anchor="middle">Postgres</text>
+<text x="125" y="476" class="tech" text-anchor="middle">registry · ledger</text>
+<text x="125" y="490" class="tech" text-anchor="middle">manifests · sessions</text>
+
+<rect x="226" y="438" width="170" height="70" rx="8" fill="#0D1322" stroke="#334155" stroke-width="1.2"/>
+<text x="311" y="460" class="title" fill="#94A3B8" text-anchor="middle">pgvector</text>
+<text x="311" y="476" class="tech" text-anchor="middle">intent embeddings</text>
+<text x="311" y="490" class="tech" text-anchor="middle">concept similarity</text>
+
+<rect x="412" y="438" width="170" height="70" rx="8" fill="#0D1322" stroke="#334155" stroke-width="1.2"/>
+<text x="497" y="460" class="title" fill="#94A3B8" text-anchor="middle">Redis</text>
+<text x="497" y="476" class="tech" text-anchor="middle">hot-path routes</text>
+<text x="497" y="490" class="tech" text-anchor="middle">token TTL cache</text>
+
+<rect x="598" y="438" width="170" height="70" rx="8" fill="#0D1322" stroke="#334155" stroke-width="1.2"/>
+<text x="683" y="460" class="title" fill="#94A3B8" text-anchor="middle">Oxigraph</text>
+<text x="683" y="476" class="tech" text-anchor="middle">concept graph</text>
+<text x="683" y="490" class="tech" text-anchor="middle">JSON-LD triples</text>
+
+<rect x="784" y="438" width="170" height="70" rx="8" fill="#0D1322" stroke="#334155" stroke-width="1.2"/>
+<text x="869" y="460" class="title" fill="#94A3B8" text-anchor="middle">ClickHouse</text>
+<text x="869" y="476" class="tech" text-anchor="middle">intent telemetry</text>
+<text x="869" y="490" class="tech" text-anchor="middle">analytics queries</text>
+
+<rect x="970" y="438" width="170" height="70" rx="8" fill="#0D1322" stroke="#334155" stroke-width="1.2"/>
+<text x="1055" y="460" class="title" fill="#94A3B8" text-anchor="middle">MinIO / S3</text>
+<text x="1055" y="476" class="tech" text-anchor="middle">manifest artifacts</text>
+<text x="1055" y="490" class="tech" text-anchor="middle">openapi docs cache</text>
+
+<!-- ═══ ROW 5 — OBSERVABILITY ═════════════════════════════════ -->
+<text x="40" y="538" class="sub" fill="#475569">── OBSERVABILITY ─────────────────────────────────────────────────────────────</text>
+
+<rect x="40"  y="548" width="200" height="60" rx="8" fill="#0D1322" stroke="#334155" stroke-width="1.2"/>
+<text x="140" y="570" class="title" fill="#94A3B8" text-anchor="middle">OpenTelemetry</text>
+<text x="140" y="586" class="tech" text-anchor="middle">traces · metrics · logs</text>
+
+<rect x="256" y="548" width="200" height="60" rx="8" fill="#0D1322" stroke="#334155" stroke-width="1.2"/>
+<text x="356" y="570" class="title" fill="#94A3B8" text-anchor="middle">Grafana + Tempo</text>
+<text x="356" y="586" class="tech" text-anchor="middle">dashboards · trace UI</text>
+
+<rect x="472" y="548" width="200" height="60" rx="8" fill="#0D1322" stroke="#334155" stroke-width="1.2"/>
+<text x="572" y="570" class="title" fill="#94A3B8" text-anchor="middle">Prometheus</text>
+<text x="572" y="586" class="tech" text-anchor="middle">SLO metrics · alerting</text>
+
+<rect x="688" y="548" width="240" height="60" rx="8" fill="#0D1322" stroke="#334155" stroke-width="1.2"/>
+<text x="808" y="570" class="title" fill="#94A3B8" text-anchor="middle">Intent Analytics</text>
+<text x="808" y="586" class="tech" text-anchor="middle">ClickHouse · Grafana · failed intents</text>
+
+<!-- ═══ ROW 6 — DOMAIN TEAMS ══════════════════════════════════ -->
+<text x="40" y="640" class="sub" fill="#475569">── FEDERATED DOMAIN TEAMS (team-owned, dashed border) ───────────────────────</text>
+
+<rect x="40"  y="650" width="190" height="86" rx="8" fill="#0D1322" stroke="#2DD4BF" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="135" y="673" class="title" fill="#5EEAD4" text-anchor="middle">Staffing agent</text>
+<text x="135" y="689" class="tech" text-anchor="middle">FastAPI (uv)</text>
+<text x="135" y="703" class="tech" text-anchor="middle">python-a2a</text>
+<text x="135" y="717" class="tech" text-anchor="middle">capability.yaml</text>
+
+<rect x="246" y="650" width="190" height="86" rx="8" fill="#0D1322" stroke="#2DD4BF" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="341" y="673" class="title" fill="#5EEAD4" text-anchor="middle">Evals agent</text>
+<text x="341" y="689" class="tech" text-anchor="middle">FastAPI (uv)</text>
+<text x="341" y="703" class="tech" text-anchor="middle">python-a2a</text>
+<text x="341" y="717" class="tech" text-anchor="middle">capability.yaml</text>
+
+<rect x="452" y="650" width="190" height="86" rx="8" fill="#0D1322" stroke="#2DD4BF" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="547" y="673" class="title" fill="#5EEAD4" text-anchor="middle">Feedback API</text>
+<text x="547" y="689" class="tech" text-anchor="middle">any language/framework</text>
+<text x="547" y="703" class="tech" text-anchor="middle">OpenAPI 3.1 doc</text>
+<text x="547" y="717" class="tech" text-anchor="middle">capability.yaml</text>
+
+<rect x="658" y="650" width="190" height="86" rx="8" fill="#0D1322" stroke="#2DD4BF" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="753" y="673" class="title" fill="#5EEAD4" text-anchor="middle">Credentials API</text>
+<text x="753" y="689" class="tech" text-anchor="middle">any language/framework</text>
+<text x="753" y="703" class="tech" text-anchor="middle">OpenAPI 3.1 doc</text>
+<text x="753" y="717" class="tech" text-anchor="middle">capability.yaml</text>
+
+<rect x="864" y="650" width="190" height="86" rx="8" fill="#0D1322" stroke="#2DD4BF" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="959" y="673" class="title" fill="#5EEAD4" text-anchor="middle">Directory (spine)</text>
+<text x="959" y="689" class="tech" text-anchor="middle">Keycloak (OIDC)</text>
+<text x="959" y="703" class="tech" text-anchor="middle">entity spine</text>
+<text x="959" y="717" class="tech" text-anchor="middle">mandatory federated</text>
+
+<!-- ═══ ROW 7 — INFRA ══════════════════════════════════════════ -->
+<text x="40" y="766" class="sub" fill="#475569">── INFRA / DEVOPS ────────────────────────────────────────────────────────────</text>
+
+<rect x="40"  y="776" width="160" height="56" rx="8" fill="#0D1322" stroke="#1E293B" stroke-width="1.2"/>
+<text x="120" y="798" class="title" fill="#64748B" text-anchor="middle">Docker Compose</text>
+<text x="120" y="814" class="tech" text-anchor="middle">local dev stack</text>
+
+<rect x="216" y="776" width="160" height="56" rx="8" fill="#0D1322" stroke="#1E293B" stroke-width="1.2"/>
+<text x="296" y="798" class="title" fill="#64748B" text-anchor="middle">k3s / k8s</text>
+<text x="296" y="814" class="tech" text-anchor="middle">production cluster</text>
+
+<rect x="392" y="776" width="160" height="56" rx="8" fill="#0D1322" stroke="#1E293B" stroke-width="1.2"/>
+<text x="472" y="798" class="title" fill="#64748B" text-anchor="middle">GitHub Actions</text>
+<text x="472" y="814" class="tech" text-anchor="middle">CI · manifest CI</text>
+
+<rect x="568" y="776" width="160" height="56" rx="8" fill="#0D1322" stroke="#1E293B" stroke-width="1.2"/>
+<text x="648" y="798" class="title" fill="#64748B" text-anchor="middle">Terraform</text>
+<text x="648" y="814" class="tech" text-anchor="middle">IaC · secrets</text>
+
+<rect x="744" y="776" width="160" height="56" rx="8" fill="#0D1322" stroke="#1E293B" stroke-width="1.2"/>
+<text x="824" y="798" class="title" fill="#64748B" text-anchor="middle">pytest · jest</text>
+<text x="824" y="814" class="tech" text-anchor="middle">test harness each phase</text>
+
+<!-- ═══ CONNECTIONS ════════════════════════════════════════════ -->
+<!-- surfaces → gateway -->
+<line x1="200" y1="146" x2="200" y2="184" stroke="#4ADE80" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#ag)"/>
+<line x1="507" y1="146" x2="507" y2="184" stroke="#4ADE80" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#ag)"/>
+<line x1="718" y1="146" x2="718" y2="184" stroke="#4ADE80" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#ag)"/>
+
+<!-- gateway → router -->
+<line x1="232" y1="229" x2="244" y2="229" stroke="#334155" stroke-width="1" marker-end="url(#a)"/>
+<!-- router → orchestrator -->
+<line x1="458" y1="229" x2="470" y2="229" stroke="#334155" stroke-width="1" marker-end="url(#a)"/>
+<!-- orchestrator → trust -->
+<line x1="684" y1="229" x2="696" y2="229" stroke="#334155" stroke-width="1" marker-end="url(#a)"/>
+<!-- trust → concept -->
+<line x1="910" y1="229" x2="922" y2="229" stroke="#334155" stroke-width="1" marker-end="url(#a)"/>
+
+<!-- platform → federation -->
+<line x1="155" y1="274" x2="155" y2="310" stroke="#4ADE80" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#ag)"/>
+<line x1="607" y1="274" x2="607" y2="310" stroke="#4ADE80" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#ag)"/>
+<line x1="1034" y1="274" x2="1054" y2="310" stroke="#4ADE80" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#ag)"/>
+
+<!-- federation → domain teams -->
+<line x1="155" y1="400" x2="135" y2="648" stroke="#2DD4BF" stroke-width="1" stroke-dasharray="5 4" marker-end="url(#a)"/>
+<line x1="607" y1="400" x2="547" y2="648" stroke="#2DD4BF" stroke-width="1" stroke-dasharray="5 4" marker-end="url(#a)"/>
+<line x1="833" y1="400" x2="753" y2="648" stroke="#2DD4BF" stroke-width="1" stroke-dasharray="5 4" marker-end="url(#a)"/>
+
+<!-- platform → data -->
+<line x1="351" y1="274" x2="311" y2="436" stroke="#334155" stroke-width="0.8" stroke-dasharray="3 4"/>
+<line x1="803" y1="274" x2="683" y2="436" stroke="#334155" stroke-width="0.8" stroke-dasharray="3 4"/>
+
+<!-- ═══ REPO MAP ════════════════════════════════════════════════ -->
+<rect x="40" y="860" width="1310" height="185" rx="12" fill="#080C14" stroke="#1E293B" stroke-width="1.5"/>
+<text x="60" y="884" class="title" fill="#E2E8F0" font-size="13">Repository map  ·  monorepo  (uv workspaces + pnpm workspaces)</text>
+
+<text x="60"  y="910" class="tech" fill="#86EFAC">pangaea/</text>
+<text x="60"  y="928" class="tech" fill="#64748B">  services/</text>
+<text x="60"  y="944" class="tech" fill="#94A3B8">    gateway/          registry/         router/           broker/</text>
+<text x="60"  y="960" class="tech" fill="#94A3B8">    orchestrator/     entity-resolver/  concept-graph/    telemetry/</text>
+<text x="60"  y="976" class="tech" fill="#64748B">  apps/</text>
+<text x="60"  y="992" class="tech" fill="#94A3B8">    pangaea-shell/    (Next.js PWA)      pangaea-dashboard/  (Grafana config)</text>
+<text x="60" y="1008" class="tech" fill="#64748B">  packages/</text>
+<text x="60" y="1024" class="tech" fill="#94A3B8">    a2ui-catalog/     manifest-schema/  xp-cli/           mock-domain-stubs/</text>
+<text x="60" y="1040" class="tech" fill="#64748B">  infra/</text>
+<text x="60" y="1056" class="tech" fill="#94A3B8">    docker-compose.yml   k8s/   terraform/   .github/workflows/</text>
+
+</svg>

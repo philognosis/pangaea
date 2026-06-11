@@ -1,0 +1,183 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="740" viewBox="0 0 1100 740">
+<style>
+  text { font-family: 'Courier New', monospace; }
+  .h  { font-size:13px; font-weight:bold; }
+  .s  { font-size:11px; }
+  .t  { font-size:10px; font-style:italic; }
+  .m  { font-size:10px; }
+</style>
+<rect width="1100" height="740" fill="#080C14"/>
+<defs>
+  <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M1 1L9 5L1 9" fill="none" stroke="#334155" stroke-width="2"/></marker>
+  <marker id="ag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M1 1L9 5L1 9" fill="none" stroke="#4ADE80" stroke-width="2"/></marker>
+  <marker id="ac" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M1 1L9 5L1 9" fill="none" stroke="#22D3EE" stroke-width="2"/></marker>
+  <marker id="am" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M1 1L9 5L1 9" fill="none" stroke="#E879F9" stroke-width="2"/></marker>
+  <marker id="at" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M1 1L9 5L1 9" fill="none" stroke="#2DD4BF" stroke-width="2"/></marker>
+</defs>
+
+<!-- title -->
+<text x="40" y="32" font-family="Courier New" font-size="15" font-weight="bold" fill="#E2E8F0">Three capability manifests · federation map</text>
+<text x="40" y="50" class="t" fill="#475569">owns = entity type declared in this manifest · ref = references another manifest's entity · enrichment = read-only context hint</text>
+
+<!-- ═══ ENTITY SPINE (directory) ═══════════════════════════════════════════ -->
+<rect x="390" y="68" width="320" height="76" rx="10" fill="#0D1322" stroke="#2DD4BF" stroke-width="2" stroke-dasharray="5 3"/>
+<text x="550" y="92" class="h" fill="#5EEAD4" text-anchor="middle">acme.directory (entity spine)</text>
+<text x="550" y="112" class="s" fill="#94A3B8" text-anchor="middle">Employee · Team · OrgNode</text>
+<text x="550" y="130" class="t" fill="#475569" text-anchor="middle">mandatory federated · all others ref here</text>
+
+<!-- ═══ EVALUATIONS ═════════════════════════════════════════════════════════ -->
+<rect x="40" y="200" width="300" height="430" rx="10" fill="#0D1322" stroke="#4ADE80" stroke-width="1.5"/>
+<text x="190" y="228" class="h" fill="#86EFAC" text-anchor="middle">acme.evaluations</text>
+
+<!-- entities owned -->
+<rect x="60" y="244" width="260" height="22" rx="4" fill="#131B2A"/>
+<text x="72" y="259" class="m" fill="#4ADE80">OWNS</text>
+<text x="130" y="259" class="m" fill="#94A3B8">Evaluation</text>
+<text x="220" y="259" class="m" fill="#94A3B8">ReviewCycle</text>
+
+<!-- refs -->
+<rect x="60" y="274" width="260" height="22" rx="4" fill="#0D1322" stroke="#334155" stroke-width="0.8"/>
+<text x="72" y="289" class="m" fill="#475569">REF</text>
+<text x="110" y="289" class="m" fill="#64748B">directory#Employee</text>
+<text x="237" y="289" class="m" fill="#64748B">directory#Team</text>
+
+<!-- enriches from -->
+<rect x="60" y="304" width="260" height="44" rx="4" fill="#0D1322" stroke="#334155" stroke-width="0.8"/>
+<text x="72" y="319" class="m" fill="#475569">ENRICHES FROM</text>
+<text x="72" y="335" class="m" fill="#64748B">staffing → staffing_history (StaffingTimeline)</text>
+<text x="72" y="351" class="m" fill="#64748B">learning → completed_courses (LearningSnapshot)</text>
+
+<!-- intents -->
+<rect x="60" y="358" width="260" height="100" rx="4" fill="#131B2A"/>
+<text x="72" y="374" class="m" fill="#4ADE80">INTENTS</text>
+<text x="72" y="390" class="m" fill="#94A3B8">evaluate_person</text>
+<text x="72" y="406" class="m" fill="#94A3B8">view_my_pending_evaluations</text>
+<text x="72" y="422" class="m" fill="#94A3B8">view_team_evaluations</text>
+<text x="72" y="438" class="m" fill="#94A3B8">request_peer_feedback</text>
+<text x="72" y="454" class="m" fill="#94A3B8">view_evaluation</text>
+
+<!-- key actions -->
+<rect x="60" y="468" width="260" height="70" rx="4" fill="#131B2A"/>
+<text x="72" y="484" class="m" fill="#4ADE80">KEY ACTIONS · risk tiers</text>
+<text x="72" y="500" class="m" fill="#F87171">CONSEQUENTIAL  submit_evaluation</text>
+<text x="72" y="516" class="m" fill="#FCD34D">REVERSIBLE     save_draft  request_feedback</text>
+<text x="72" y="532" class="m" fill="#64748B">READ           get_evaluation  list_pending</text>
+
+<!-- notifications -->
+<rect x="60" y="548" width="260" height="64" rx="4" fill="#131B2A"/>
+<text x="72" y="564" class="m" fill="#4ADE80">PUSH NOTIFICATIONS</text>
+<text x="72" y="580" class="m" fill="#94A3B8">eval_due_reminder · eval_overdue</text>
+<text x="72" y="596" class="m" fill="#94A3B8">feedback_requested · eval_released</text>
+
+<!-- ═══ STAFFING ════════════════════════════════════════════════════════════ -->
+<rect x="400" y="200" width="300" height="430" rx="10" fill="#0D1322" stroke="#22D3EE" stroke-width="1.5"/>
+<text x="550" y="228" class="h" fill="#67E8F9" text-anchor="middle">acme.staffing</text>
+
+<rect x="420" y="244" width="260" height="22" rx="4" fill="#131B2A"/>
+<text x="432" y="259" class="m" fill="#22D3EE">OWNS</text>
+<text x="480" y="259" class="m" fill="#94A3B8">Role · Placement · StaffingRequest</text>
+
+<rect x="420" y="274" width="260" height="22" rx="4" fill="#0D1322" stroke="#334155" stroke-width="0.8"/>
+<text x="432" y="289" class="m" fill="#475569">REF</text>
+<text x="470" y="289" class="m" fill="#64748B">directory#Employee · directory#Team</text>
+
+<rect x="420" y="304" width="260" height="44" rx="4" fill="#0D1322" stroke="#334155" stroke-width="0.8"/>
+<text x="432" y="319" class="m" fill="#475569">ENRICHES FROM</text>
+<text x="432" y="335" class="m" fill="#64748B">evals → recent_evaluation_summary</text>
+<text x="432" y="351" class="m" fill="#64748B">learning → skills_and_certifications</text>
+
+<rect x="420" y="358" width="260" height="100" rx="4" fill="#131B2A"/>
+<text x="432" y="374" class="m" fill="#22D3EE">INTENTS</text>
+<text x="432" y="390" class="m" fill="#94A3B8">find_candidate_for_role</text>
+<text x="432" y="406" class="m" fill="#94A3B8">view_staffing_history</text>
+<text x="432" y="422" class="m" fill="#94A3B8">open_role</text>
+<text x="432" y="438" class="m" fill="#94A3B8">approve_extension</text>
+<text x="432" y="454" class="m" fill="#94A3B8">view_team_composition</text>
+
+<rect x="420" y="468" width="260" height="70" rx="4" fill="#131B2A"/>
+<text x="432" y="484" class="m" fill="#22D3EE">KEY ACTIONS · risk tiers</text>
+<text x="432" y="500" class="m" fill="#F87171">CONSEQUENTIAL  resolve_extension_request</text>
+<text x="432" y="516" class="m" fill="#FCD34D">REVERSIBLE     create_staffing_request</text>
+<text x="432" y="532" class="m" fill="#64748B">READ           get_history  get_composition</text>
+
+<rect x="420" y="548" width="260" height="64" rx="4" fill="#131B2A"/>
+<text x="432" y="564" class="m" fill="#22D3EE">PUSH NOTIFICATIONS</text>
+<text x="432" y="580" class="m" fill="#94A3B8">extension_requested · role_opened</text>
+<text x="432" y="596" class="m" fill="#94A3B8">placement_ending_soon · placement_confirmed</text>
+
+<!-- ═══ LEARNING ════════════════════════════════════════════════════════════ -->
+<rect x="760" y="200" width="300" height="430" rx="10" fill="#0D1322" stroke="#E879F9" stroke-width="1.5"/>
+<text x="910" y="228" class="h" fill="#F0ABFC" text-anchor="middle">acme.learning</text>
+
+<rect x="780" y="244" width="260" height="22" rx="4" fill="#131B2A"/>
+<text x="792" y="259" class="m" fill="#E879F9">OWNS</text>
+<text x="840" y="259" class="m" fill="#94A3B8">Course · LearningPath · Certification</text>
+<text x="840" y="275" class="m" fill="#94A3B8" font-size="9">LearnerProfile · Skill</text>
+
+<rect x="780" y="278" width="260" height="22" rx="4" fill="#0D1322" stroke="#334155" stroke-width="0.8"/>
+<text x="792" y="293" class="m" fill="#475569">REF</text>
+<text x="830" y="293" class="m" fill="#64748B">directory#Employee · staffing#Role</text>
+
+<rect x="780" y="308" width="260" height="44" rx="4" fill="#0D1322" stroke="#334155" stroke-width="0.8"/>
+<text x="792" y="323" class="m" fill="#475569">ENRICHES FROM</text>
+<text x="792" y="339" class="m" fill="#64748B">evals → competency_gaps (dev plan)</text>
+<text x="792" y="355" class="m" fill="#64748B">staffing → target_role_skills</text>
+
+<rect x="780" y="362" width="260" height="100" rx="4" fill="#131B2A"/>
+<text x="792" y="378" class="m" fill="#E879F9">INTENTS</text>
+<text x="792" y="394" class="m" fill="#94A3B8">find_course</text>
+<text x="792" y="410" class="m" fill="#94A3B8">enrol_in_course</text>
+<text x="792" y="426" class="m" fill="#94A3B8">view_my_learning · view_employee_learning</text>
+<text x="792" y="442" class="m" fill="#94A3B8">view_team_skill_coverage</text>
+<text x="792" y="458" class="m" fill="#94A3B8">record_external_certification</text>
+
+<rect x="780" y="472" width="260" height="70" rx="4" fill="#131B2A"/>
+<text x="792" y="488" class="m" fill="#E879F9">KEY ACTIONS · risk tiers</text>
+<text x="792" y="504" class="m" fill="#F87171">CONSEQUENTIAL  record_certification</text>
+<text x="792" y="520" class="m" fill="#FCD34D">REVERSIBLE     enrol_course  nominate</text>
+<text x="792" y="536" class="m" fill="#64748B">READ           search  get_profile  coverage</text>
+
+<rect x="780" y="552" width="260" height="64" rx="4" fill="#131B2A"/>
+<text x="792" y="568" class="m" fill="#E879F9">PUSH NOTIFICATIONS</text>
+<text x="792" y="584" class="m" fill="#94A3B8">cert_expiring · cert_expired</text>
+<text x="792" y="600" class="m" fill="#94A3B8">team_skill_gap · nominated · plan_due</text>
+
+<!-- ═══ ARROWS — directory refs ═════════════════════════════════════════════ -->
+<path d="M190 198 C 190 170, 490 160, 490 146" fill="none" stroke="#2DD4BF" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#at)"/>
+<path d="M550 198 L 550 146" fill="none" stroke="#2DD4BF" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#at)"/>
+<path d="M910 198 C 910 170, 610 160, 610 146" fill="none" stroke="#2DD4BF" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#at)"/>
+
+<!-- ═══ ARROWS — enrichment ══════════════════════════════════════════════════ -->
+<!-- evals ← staffing (enrichment) -->
+<path d="M400 360 C 360 360, 360 380, 340 380" fill="none" stroke="#22D3EE" stroke-width="1" stroke-dasharray="3 4" marker-end="url(#ac)"/>
+<!-- evals ← learning -->
+<path d="M400 370 C 370 370, 370 400, 340 400" fill="none" stroke="#E879F9" stroke-width="1" stroke-dasharray="3 4" marker-end="url(#am)"/>
+
+<!-- staffing ← evals (enrichment) -->
+<path d="M700 360 C 730 360, 730 380, 760 380" fill="none" stroke="#4ADE80" stroke-width="1" stroke-dasharray="3 4" marker-end="url(#ag)"/>
+<!-- staffing ← learning -->
+<path d="M700 380 C 730 380, 730 400, 760 400" fill="none" stroke="#E879F9" stroke-width="1" stroke-dasharray="3 4" marker-end="url(#am)"/>
+
+<!-- learning ← evals (enrichment for dev plan) -->
+<path d="M340 420 C 300 420, 300 680, 780 680 C 820 680, 830 450, 778 430" fill="none" stroke="#4ADE80" stroke-width="1" stroke-dasharray="3 4" marker-end="url(#ag)"/>
+<!-- learning ← staffing (role skills for path) -->
+<path d="M700 430 C 730 430, 750 430, 778 430" fill="none" stroke="#22D3EE" stroke-width="1" stroke-dasharray="3 4" marker-end="url(#ac)"/>
+
+<!-- ═══ LEGEND ═══════════════════════════════════════════════════════════════ -->
+<rect x="40" y="650" width="1020" height="72" rx="8" fill="#0D1322" stroke="#1E293B"/>
+<text x="60" y="673" class="h" fill="#E2E8F0">Federation rules shown in these manifests</text>
+<line x1="60"  y1="692" x2="110" y2="692" stroke="#2DD4BF" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#at)"/>
+<text x="116" y="696" class="m" fill="#5EEAD4">ref → directory#Entity (entity spine)</text>
+<line x1="340" y1="692" x2="390" y2="692" stroke="#4ADE80" stroke-width="1" stroke-dasharray="3 4" marker-end="url(#ag)"/>
+<text x="396" y="696" class="m" fill="#86EFAC">enriches from: evals</text>
+<line x1="560" y1="692" x2="610" y2="692" stroke="#22D3EE" stroke-width="1" stroke-dasharray="3 4" marker-end="url(#ac)"/>
+<text x="616" y="696" class="m" fill="#67E8F9">enriches from: staffing</text>
+<line x1="780" y1="692" x2="830" y2="692" stroke="#E879F9" stroke-width="1" stroke-dasharray="3 4" marker-end="url(#am)"/>
+<text x="836" y="696" class="m" fill="#F0ABFC">enriches from: learning</text>
+<text x="60" y="714" class="m" fill="#475569">Enrichment = read-only context hint fetched by platform on demand. No capability stores another's data at rest.</text>
+</svg>

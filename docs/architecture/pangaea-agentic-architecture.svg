@@ -1,0 +1,238 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1020" viewBox="0 0 1200 1020">
+<style>
+  text { font-family: 'Courier New', monospace; }
+  .h  { font-size:13px; font-weight:bold; }
+  .s  { font-size:11px; }
+  .t  { font-size:10px; font-style:italic; }
+  .m  { font-size:10px; }
+  .c  { font-size:10px; font-family:'Courier New',monospace; }
+</style>
+<rect width="1200" height="1020" fill="#080C14"/>
+<defs>
+  <marker id="a"  viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#334155" stroke-width="2"/></marker>
+  <marker id="ag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#4ADE80" stroke-width="2"/></marker>
+  <marker id="ac" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#22D3EE" stroke-width="2"/></marker>
+  <marker id="am" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#E879F9" stroke-width="2"/></marker>
+  <marker id="at" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#F59E0B" stroke-width="2"/></marker>
+</defs>
+
+<!-- ═══════════════════════════ TITLE ════════════════════════════════════════ -->
+<text x="40" y="34" font-family="Courier New" font-size="15" font-weight="bold" fill="#E2E8F0">Pangaea · agentic architecture · where agency lives and why</text>
+
+<!-- ═══════════════════════════ TIER LABELS ══════════════════════════════════ -->
+<rect x="20" y="50" width="140" height="24" rx="4" fill="#0D1322" stroke="#334155"/>
+<text x="90" y="66" class="m" fill="#475569" text-anchor="middle">TIER 1 · kernel</text>
+<rect x="20" y="340" width="170" height="24" rx="4" fill="#0D1322" stroke="#4ADE80"/>
+<text x="105" y="356" class="m" fill="#86EFAC" text-anchor="middle">TIER 2 · platform agents</text>
+<rect x="20" y="680" width="180" height="24" rx="4" fill="#0D1322" stroke="#E879F9"/>
+<text x="110" y="696" class="m" fill="#F0ABFC" text-anchor="middle">TIER 3 · domain agents</text>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     TIER 1 — DETERMINISTIC KERNEL
+     ════════════════════════════════════════════════════════════════════════════ -->
+<rect x="20" y="80" width="1160" height="248" rx="10" fill="#0D1322" stroke="#334155" stroke-width="1.2"/>
+<text x="600" y="104" class="h" fill="#64748B" text-anchor="middle">Deterministic kernel — no LLM, always predictable, always fast</text>
+
+<!-- Trust fabric -->
+<rect x="44" y="118" width="200" height="186" rx="8" fill="#080C14" stroke="#4ADE80" stroke-width="1.5"/>
+<text x="144" y="140" class="h" fill="#86EFAC" text-anchor="middle">Trust fabric</text>
+<text x="60" y="160" class="c" fill="#4ADE80">tools:</text>
+<text x="60" y="176" class="c" fill="#94A3B8">  mint_obo_token()</text>
+<text x="60" y="192" class="c" fill="#94A3B8">  validate_scope()</text>
+<text x="60" y="208" class="c" fill="#94A3B8">  check_rbac()</text>
+<text x="60" y="224" class="c" fill="#94A3B8">  write_receipt()</text>
+<text x="60" y="240" class="c" fill="#94A3B8">  verify_chain()</text>
+<text x="60" y="268" class="t" fill="#334155">never agentic · zero model calls</text>
+<text x="60" y="284" class="t" fill="#334155">invariants enforced here</text>
+
+<!-- A2UI Renderer -->
+<rect x="260" y="118" width="200" height="186" rx="8" fill="#080C14" stroke="#4ADE80" stroke-width="1.5"/>
+<text x="360" y="140" class="h" fill="#86EFAC" text-anchor="middle">A2UI renderer</text>
+<text x="276" y="160" class="c" fill="#4ADE80">tools:</text>
+<text x="276" y="176" class="c" fill="#94A3B8">  render(componentId, props)</text>
+<text x="276" y="192" class="c" fill="#94A3B8">  validate_schema()</text>
+<text x="276" y="208" class="c" fill="#94A3B8">  stream_to_ws()</text>
+<text x="276" y="224" class="c" fill="#94A3B8">  build_confirm_card()</text>
+<text x="276" y="240" class="c" fill="#94A3B8">  freeze_card()</text>
+<text x="276" y="268" class="t" fill="#334155">catalog components only</text>
+<text x="276" y="284" class="t" fill="#334155">no model writes any card</text>
+
+<!-- Hot-path router -->
+<rect x="476" y="118" width="200" height="186" rx="8" fill="#080C14" stroke="#4ADE80" stroke-width="1.5"/>
+<text x="576" y="140" class="h" fill="#86EFAC" text-anchor="middle">Hot-path router</text>
+<text x="492" y="160" class="c" fill="#4ADE80">tools:</text>
+<text x="492" y="176" class="c" fill="#94A3B8">  lookup_compiled(hash)</text>
+<text x="492" y="192" class="c" fill="#94A3B8">  write_compiled(route)</text>
+<text x="492" y="208" class="c" fill="#94A3B8">  embed_utterance()</text>
+<text x="492" y="224" class="c" fill="#94A3B8">  similarity_search()</text>
+<text x="492" y="240" class="c" fill="#94A3B8">  compile_route()</text>
+<text x="492" y="268" class="t" fill="#334155">&lt;50ms · Redis lookup</text>
+<text x="492" y="284" class="t" fill="#334155">learns from every cold call</text>
+
+<!-- Entity resolver -->
+<rect x="692" y="118" width="200" height="186" rx="8" fill="#080C14" stroke="#4ADE80" stroke-width="1.5"/>
+<text x="792" y="140" class="h" fill="#86EFAC" text-anchor="middle">Entity resolver</text>
+<text x="708" y="160" class="c" fill="#4ADE80">tools:</text>
+<text x="708" y="176" class="c" fill="#94A3B8">  search_directory()</text>
+<text x="708" y="192" class="c" fill="#94A3B8">  rank_candidates()</text>
+<text x="708" y="208" class="c" fill="#94A3B8">  build_disambig_card()</text>
+<text x="708" y="224" class="c" fill="#94A3B8">  resolve_by_id()</text>
+<text x="708" y="240" class="c" fill="#94A3B8">  score_by_context()</text>
+<text x="708" y="268" class="t" fill="#334155">deterministic scoring</text>
+<text x="708" y="284" class="t" fill="#334155">never guesses</text>
+
+<!-- Registry -->
+<rect x="908" y="118" width="248" height="186" rx="8" fill="#080C14" stroke="#4ADE80" stroke-width="1.5"/>
+<text x="1032" y="140" class="h" fill="#86EFAC" text-anchor="middle">Registry + concept graph</text>
+<text x="924" y="160" class="c" fill="#4ADE80">tools:</text>
+<text x="924" y="176" class="c" fill="#94A3B8">  publish_manifest()</text>
+<text x="924" y="192" class="c" fill="#94A3B8">  compose_supergraph()</text>
+<text x="924" y="208" class="c" fill="#94A3B8">  traverse_concepts()</text>
+<text x="924" y="224" class="c" fill="#94A3B8">  embed_concepts()</text>
+<text x="924" y="240" class="c" fill="#94A3B8">  get_capability(id)</text>
+<text x="924" y="268" class="t" fill="#334155">auto-populated from manifests</text>
+<text x="924" y="284" class="t" fill="#334155">no human curation ever</text>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     TIER 2 — PLATFORM AGENTS
+     ════════════════════════════════════════════════════════════════════════════ -->
+<rect x="20" y="366" width="1160" height="300" rx="10" fill="#0D1322" stroke="#4ADE80" stroke-width="1.5"/>
+<text x="600" y="390" class="h" fill="#86EFAC" text-anchor="middle">Platform agents — LangGraph · agentic with guardrails · orchestrate syscalls</text>
+
+<!-- Intent agent -->
+<rect x="44" y="406" width="260" height="240" rx="8" fill="#080C14" stroke="#22D3EE" stroke-width="1.5"/>
+<text x="174" y="428" class="h" fill="#67E8F9" text-anchor="middle">Intent agent</text>
+<text x="60" y="446" class="c" fill="#22D3EE">model: claude-3-5-haiku</text>
+<text x="60" y="462" class="c" fill="#22D3EE">tools:</text>
+<text x="60" y="478" class="c" fill="#94A3B8">  query_concept_graph()</text>
+<text x="60" y="494" class="c" fill="#94A3B8">  get_capability_intents()</text>
+<text x="60" y="510" class="c" fill="#94A3B8">  classify_intent()</text>
+<text x="60" y="526" class="c" fill="#94A3B8">  extract_slots()</text>
+<text x="60" y="542" class="c" fill="#94A3B8">  generate_clarification()</text>
+<text x="60" y="558" class="c" fill="#94A3B8">  compile_hot_path()</text>
+<text x="60" y="578" class="t" fill="#475569">when: cold-path only</text>
+<text x="60" y="594" class="t" fill="#475569">guardrail: confidence &lt;0.85 → clarify</text>
+<text x="60" y="610" class="t" fill="#475569">never routes to unregistered cap</text>
+<text x="60" y="626" class="t" fill="#475569">writes compiled path on success</text>
+
+<!-- Orchestrator agent -->
+<rect x="322" y="406" width="300" height="240" rx="8" fill="#080C14" stroke="#22D3EE" stroke-width="1.5"/>
+<text x="472" y="428" class="h" fill="#67E8F9" text-anchor="middle">Orchestrator agent</text>
+<text x="338" y="446" class="c" fill="#22D3EE">model: claude-3-5-sonnet</text>
+<text x="338" y="462" class="c" fill="#22D3EE">tools (syscall set):</text>
+<text x="338" y="478" class="c" fill="#94A3B8">  dispatch_direct(cap, op, token)</text>
+<text x="338" y="494" class="c" fill="#94A3B8">  dispatch_agent(cap, task, token)</text>
+<text x="338" y="510" class="c" fill="#94A3B8">  fan_out_parallel(syscalls[])</text>
+<text x="338" y="526" class="c" fill="#94A3B8">  normalize_entities(results)</text>
+<text x="338" y="542" class="c" fill="#94A3B8">  assemble_composite(sections)</text>
+<text x="338" y="558" class="c" fill="#94A3B8">  request_confirmation(action)</text>
+<text x="338" y="578" class="t" fill="#475569">LangGraph: resumable checkpoints</text>
+<text x="338" y="594" class="t" fill="#475569">guardrail: never dispatches</text>
+<text x="338" y="610" class="t" fill="#475569">  consequential without receipt slot</text>
+<text x="338" y="626" class="t" fill="#475569">partial failures → degraded render</text>
+
+<!-- Discovery agent -->
+<rect x="640" y="406" width="260" height="240" rx="8" fill="#080C14" stroke="#22D3EE" stroke-width="1.5"/>
+<text x="770" y="428" class="h" fill="#67E8F9" text-anchor="middle">Discovery agent</text>
+<text x="656" y="446" class="c" fill="#22D3EE">model: claude-3-5-haiku</text>
+<text x="656" y="462" class="c" fill="#22D3EE">tools:</text>
+<text x="656" y="478" class="c" fill="#94A3B8">  semantic_search_concepts()</text>
+<text x="656" y="494" class="c" fill="#94A3B8">  traverse_concept_graph()</text>
+<text x="656" y="510" class="c" fill="#94A3B8">  get_related_capabilities()</text>
+<text x="656" y="526" class="c" fill="#94A3B8">  score_capability_fit()</text>
+<text x="656" y="542" class="c" fill="#94A3B8">  generate_exploration_card()</text>
+<text x="656" y="558" class="c" fill="#94A3B8">  suggest_next_actions()</text>
+<text x="656" y="578" class="t" fill="#475569">when: undirected need or</text>
+<text x="656" y="594" class="t" fill="#475569">  tier 1+2 routing fails</text>
+<text x="656" y="610" class="t" fill="#475569">powers home surface suggestions</text>
+<text x="656" y="626" class="t" fill="#475569">output: ExplorationCard (A2UI)</text>
+
+<!-- Home surface agent -->
+<rect x="918" y="406" width="238" height="240" rx="8" fill="#080C14" stroke="#22D3EE" stroke-width="1.5"/>
+<text x="1037" y="428" class="h" fill="#67E8F9" text-anchor="middle">Home surface agent</text>
+<text x="934" y="446" class="c" fill="#22D3EE">model: claude-3-5-haiku</text>
+<text x="934" y="462" class="c" fill="#22D3EE">tools:</text>
+<text x="934" y="478" class="c" fill="#94A3B8">  get_pending_actions(user)</text>
+<text x="934" y="494" class="c" fill="#94A3B8">  get_role_capabilities()</text>
+<text x="934" y="510" class="c" fill="#94A3B8">  query_peer_patterns()</text>
+<text x="934" y="526" class="c" fill="#94A3B8">  rank_suggestions()</text>
+<text x="934" y="542" class="c" fill="#94A3B8">  prefetch_surface(intent)</text>
+<text x="934" y="558" class="c" fill="#94A3B8">  personalise_layout()</text>
+<text x="934" y="578" class="t" fill="#475569">runs on session open</text>
+<text x="934" y="594" class="t" fill="#475569">output: HomeSurface (A2UI)</text>
+<text x="934" y="610" class="t" fill="#475569">caches suggestions 15 min</text>
+<text x="934" y="626" class="t" fill="#475569">never reads PII cross-user</text>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     TIER 3 — DOMAIN AGENTS
+     ════════════════════════════════════════════════════════════════════════════ -->
+<rect x="20" y="706" width="1160" height="290" rx="10" fill="#0D1322" stroke="#E879F9" stroke-width="1.5"/>
+<text x="600" y="730" class="h" fill="#F0ABFC" text-anchor="middle">Domain agents — team-owned · full autonomy within their domain · A2A protocol</text>
+
+<!-- Evals agent -->
+<rect x="44" y="748" width="260" height="228" rx="8" fill="#080C14" stroke="#2DD4BF" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="174" y="770" class="h" fill="#5EEAD4" text-anchor="middle">Evaluations agent</text>
+<text x="60" y="788" class="c" fill="#2DD4BF">task: author_flow</text>
+<text x="60" y="804" class="c" fill="#2DD4BF">tools (own domain only):</text>
+<text x="60" y="820" class="c" fill="#94A3B8">  get_eval_template(cycle)</text>
+<text x="60" y="836" class="c" fill="#94A3B8">  load_draft(eval_id)</text>
+<text x="60" y="852" class="c" fill="#94A3B8">  save_section(section)</text>
+<text x="60" y="868" class="c" fill="#94A3B8">  validate_completeness()</text>
+<text x="60" y="884" class="c" fill="#94A3B8">  stream_a2ui(FormFlow)</text>
+<text x="60" y="900" class="c" fill="#94A3B8">  suggest_rating(context)</text>
+<text x="60" y="924" class="t" fill="#334155">team-owned model + tools</text>
+<text x="60" y="940" class="t" fill="#334155">streams A2UI refs, not markup</text>
+<text x="60" y="956" class="t" fill="#334155">OBO token: evals.write only</text>
+
+<!-- Staffing agent -->
+<rect x="322" y="748" width="280" height="228" rx="8" fill="#080C14" stroke="#2DD4BF" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="462" y="770" class="h" fill="#5EEAD4" text-anchor="middle">Staffing agent</text>
+<text x="338" y="788" class="c" fill="#2DD4BF">task: find_candidates</text>
+<text x="338" y="804" class="c" fill="#2DD4BF">tools:</text>
+<text x="338" y="820" class="c" fill="#94A3B8">  search_available_employees()</text>
+<text x="338" y="836" class="c" fill="#94A3B8">  score_skill_match(role)</text>
+<text x="338" y="852" class="c" fill="#94A3B8">  fetch_eval_summary()  ← syscall</text>
+<text x="338" y="868" class="c" fill="#94A3B8">  fetch_learning_profile() ← syscall</text>
+<text x="338" y="884" class="c" fill="#94A3B8">  rank_candidates(weights)</text>
+<text x="338" y="900" class="c" fill="#94A3B8">  stream_a2ui(RankingLayout)</text>
+<text x="338" y="924" class="t" fill="#334155">makes cross-domain syscalls</text>
+<text x="338" y="940" class="t" fill="#334155">OBO: staffing.read + enrichment</text>
+<text x="338" y="956" class="t" fill="#334155">A2UI output only — no raw text</text>
+
+<!-- Learning agent -->
+<rect x="620" y="748" width="280" height="228" rx="8" fill="#080C14" stroke="#2DD4BF" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="760" y="770" class="h" fill="#5EEAD4" text-anchor="middle">Learning agent</text>
+<text x="636" y="788" class="c" fill="#2DD4BF">task: development_plan_flow</text>
+<text x="636" y="804" class="c" fill="#2DD4BF">tools:</text>
+<text x="636" y="820" class="c" fill="#94A3B8">  get_learner_profile(emp)</text>
+<text x="636" y="836" class="c" fill="#94A3B8">  fetch_eval_gaps() ← syscall</text>
+<text x="636" y="852" class="c" fill="#94A3B8">  fetch_role_skills() ← syscall</text>
+<text x="636" y="868" class="c" fill="#94A3B8">  recommend_courses(gaps)</text>
+<text x="636" y="884" class="c" fill="#94A3B8">  build_milestone_plan()</text>
+<text x="636" y="900" class="c" fill="#94A3B8">  stream_a2ui(GuidedFormFlow)</text>
+<text x="636" y="924" class="t" fill="#334155">pulls eval + staffing context</text>
+<text x="636" y="940" class="t" fill="#334155">recommends, never decides</text>
+<text x="636" y="956" class="t" fill="#334155">OBO: learning.plan.write</text>
+
+<!-- Future agents -->
+<rect x="918" y="748" width="238" height="228" rx="8" fill="#080C14" stroke="#1E293B" stroke-width="1" stroke-dasharray="4 4"/>
+<text x="1037" y="790" class="h" fill="#334155" text-anchor="middle">future domain agents</text>
+<text x="1037" y="820" class="s" fill="#1E293B" text-anchor="middle">HR agent</text>
+<text x="1037" y="846" class="s" fill="#1E293B" text-anchor="middle">Rewards agent</text>
+<text x="1037" y="872" class="s" fill="#1E293B" text-anchor="middle">Onboarding agent</text>
+<text x="1037" y="898" class="s" fill="#1E293B" text-anchor="middle">Finance agent</text>
+<text x="1037" y="938" class="t" fill="#1E293B" text-anchor="middle">each: xp publish → auto-</text>
+<text x="1037" y="954" class="t" fill="#1E293B" text-anchor="middle">discoverable in concept graph</text>
+
+<!-- ═══ VERTICAL FLOW ARROWS ═════════════════════════════════════════════════ -->
+<!-- tier1 → tier2 -->
+<line x1="600" y1="330" x2="600" y2="364" stroke="#4ADE80" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ag)"/>
+<text x="612" y="350" class="t" fill="#334155">hot-path miss</text>
+<!-- tier2 → tier3 -->
+<line x1="600" y1="668" x2="600" y2="704" stroke="#E879F9" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#am)"/>
+<text x="612" y="690" class="t" fill="#334155">A2A task dispatch</text>
+<!-- tier3 syscall back up -->
+<path d="M462 748 C 462 720, 470 700, 472 666" fill="none" stroke="#F59E0B" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#at)"/>
+<text x="360" y="720" class="t" fill="#475569">cross-domain syscall (staffing → evals)</text>
+
+</svg>

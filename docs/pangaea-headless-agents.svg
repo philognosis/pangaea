@@ -1,0 +1,194 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="880" viewBox="0 0 1200 880">
+<style>
+  text { font-family: 'Courier New', monospace; }
+  .h  { font-size:13px; font-weight:bold; }
+  .s  { font-size:11px; }
+  .t  { font-size:10px; font-style:italic; }
+  .m  { font-size:10px; }
+  .c  { font-size:10px; font-family:'Courier New',monospace; }
+</style>
+<rect width="1200" height="880" fill="#080C14"/>
+<defs>
+  <marker id="a"  viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#334155" stroke-width="2"/></marker>
+  <marker id="ag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#4ADE80" stroke-width="2"/></marker>
+  <marker id="ac" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#22D3EE" stroke-width="2"/></marker>
+  <marker id="am" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#E879F9" stroke-width="2"/></marker>
+  <marker id="at" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#F59E0B" stroke-width="2"/></marker>
+</defs>
+
+<text x="40" y="34" font-family="Courier New" font-size="15" font-weight="bold" fill="#E2E8F0">Pangaea · headless agents · background intelligence layer</text>
+<text x="40" y="52" class="t" fill="#475569">headless = event/schedule triggered · no active user session · output is push or A2A handoff</text>
+
+<!-- ═══ TRIGGERS (left column) ══════════════════════════════════════════════ -->
+<text x="40" y="84" class="h" fill="#64748B">TRIGGERS</text>
+
+<rect x="20" y="94" width="200" height="36" rx="8" fill="#0D1322" stroke="#334155"/>
+<text x="120" y="116" class="m" fill="#94A3B8" text-anchor="middle">⏱  cron schedule</text>
+
+<rect x="20" y="142" width="200" height="36" rx="8" fill="#0D1322" stroke="#334155"/>
+<text x="120" y="164" class="m" fill="#94A3B8" text-anchor="middle">📡  NATS event</text>
+
+<rect x="20" y="190" width="200" height="36" rx="8" fill="#0D1322" stroke="#334155"/>
+<text x="120" y="212" class="m" fill="#94A3B8" text-anchor="middle">🔔  domain webhook</text>
+
+<rect x="20" y="238" width="200" height="36" rx="8" fill="#0D1322" stroke="#334155"/>
+<text x="120" y="260" class="m" fill="#94A3B8" text-anchor="middle">🤖  A2A from agent</text>
+
+<rect x="20" y="286" width="200" height="36" rx="8" fill="#0D1322" stroke="#334155"/>
+<text x="120" y="308" class="m" fill="#94A3B8" text-anchor="middle">📖  session open</text>
+
+<rect x="20" y="334" width="200" height="36" rx="8" fill="#0D1322" stroke="#334155"/>
+<text x="120" y="356" class="m" fill="#94A3B8" text-anchor="middle">⚡  threshold crossed</text>
+
+<!-- ═══ HEADLESS AGENTS (center) ════════════════════════════════════════════ -->
+<text x="310" y="84" class="h" fill="#F59E0B">HEADLESS AGENTS</text>
+
+<!-- Concept graph ingestion -->
+<rect x="290" y="94" width="280" height="110" rx="8" fill="#0D1322" stroke="#4ADE80" stroke-width="1.5"/>
+<text x="430" y="116" class="h" fill="#86EFAC" text-anchor="middle">Concept graph ingestion</text>
+<text x="306" y="134" class="c" fill="#94A3B8">trigger: capability.published (NATS)</text>
+<text x="306" y="150" class="c" fill="#94A3B8">tools: extract_concepts(manifest)</text>
+<text x="306" y="166" class="c" fill="#94A3B8">       embed_and_store(concepts)</text>
+<text x="306" y="182" class="c" fill="#94A3B8">       update_supergraph()</text>
+<text x="306" y="198" class="t" fill="#334155">no model · pure pipeline · &lt;5s</text>
+
+<!-- Home surface agent -->
+<rect x="290" y="218" width="280" height="110" rx="8" fill="#0D1322" stroke="#22D3EE" stroke-width="1.5"/>
+<text x="430" y="240" class="h" fill="#67E8F9" text-anchor="middle">Home surface agent</text>
+<text x="306" y="258" class="c" fill="#94A3B8">trigger: session open</text>
+<text x="306" y="274" class="c" fill="#94A3B8">model: claude-3-5-haiku</text>
+<text x="306" y="290" class="c" fill="#94A3B8">tools: get_pending() rank_suggest()</text>
+<text x="306" y="306" class="c" fill="#94A3B8">       prefetch_surface()</text>
+<text x="306" y="322" class="t" fill="#334155">output: HomeSurface A2UI · cached 15m</text>
+
+<!-- Proactive watch agent -->
+<rect x="290" y="342" width="280" height="130" rx="8" fill="#0D1322" stroke="#F59E0B" stroke-width="1.5"/>
+<text x="430" y="364" class="h" fill="#FCD34D" text-anchor="middle">Proactive watch agent  ★ new</text>
+<text x="306" y="382" class="c" fill="#94A3B8">trigger: cron (every 15 min)</text>
+<text x="306" y="398" class="c" fill="#94A3B8">model: claude-3-5-haiku</text>
+<text x="306" y="414" class="c" fill="#94A3B8">tools: scan_thresholds()</text>
+<text x="306" y="430" class="c" fill="#94A3B8">       evaluate_conditions()</text>
+<text x="306" y="446" class="c" fill="#94A3B8">       decide_notify(risk_tier)</text>
+<text x="306" y="462" class="t" fill="#334155">output: push event via NATS</text>
+
+<!-- Intent telemetry agent -->
+<rect x="290" y="486" width="280" height="110" rx="8" fill="#0D1322" stroke="#E879F9" stroke-width="1.5"/>
+<text x="430" y="508" class="h" fill="#F0ABFC" text-anchor="middle">Intent telemetry agent</text>
+<text x="306" y="526" class="c" fill="#94A3B8">trigger: cron weekly (Monday 08:00)</text>
+<text x="306" y="542" class="c" fill="#94A3B8">model: claude-3-5-haiku</text>
+<text x="306" y="558" class="c" fill="#94A3B8">tools: query_failed_intents()</text>
+<text x="306" y="574" class="c" fill="#94A3B8">       cluster_by_concept()</text>
+<text x="306" y="590" class="c" fill="#94A3B8">       compose_digest()</text>
+<text x="306" y="606" class="t" fill="#334155">output: Slack digest per capability team</text>
+
+<!-- Cross-domain watch agent -->
+<rect x="290" y="610" width="280" height="130" rx="8" fill="#0D1322" stroke="#F59E0B" stroke-width="1.5"/>
+<text x="430" y="632" class="h" fill="#FCD34D" text-anchor="middle">Cross-domain watch  ★ new</text>
+<text x="306" y="650" class="c" fill="#94A3B8">trigger: A2A from domain agent</text>
+<text x="306" y="666" class="c" fill="#94A3B8">         OR cron (daily)</text>
+<text x="306" y="682" class="c" fill="#94A3B8">model: claude-3-5-sonnet</text>
+<text x="306" y="698" class="c" fill="#94A3B8">tools: detect_cross_domain_signal()</text>
+<text x="306" y="714" class="c" fill="#94A3B8">       compose_insight()</text>
+<text x="306" y="730" class="c" fill="#94A3B8">       notify_or_suggest()</text>
+<text x="306" y="750" class="t" fill="#334155">example: eval gap → learning suggestion</text>
+
+<!-- ═══ OUTPUTS (right column) ══════════════════════════════════════════════ -->
+<text x="680" y="84" class="h" fill="#64748B">OUTPUTS</text>
+
+<!-- push -->
+<rect x="660" y="94" width="240" height="60" rx="8" fill="#0D1322" stroke="#4ADE80" stroke-width="1.2"/>
+<text x="780" y="120" class="h" fill="#86EFAC" text-anchor="middle">Web push notification</text>
+<text x="780" y="140" class="t" fill="#475569" text-anchor="middle">VAPID · lock screen card</text>
+
+<!-- A2UI surface -->
+<rect x="660" y="170" width="240" height="60" rx="8" fill="#0D1322" stroke="#22D3EE" stroke-width="1.2"/>
+<text x="780" y="196" class="h" fill="#67E8F9" text-anchor="middle">A2UI surface (cached)</text>
+<text x="780" y="216" class="t" fill="#475569" text-anchor="middle">HomeSurface · ExplorationCard</text>
+
+<!-- NATS event -->
+<rect x="660" y="246" width="240" height="60" rx="8" fill="#0D1322" stroke="#F59E0B" stroke-width="1.2"/>
+<text x="780" y="272" class="h" fill="#FCD34D" text-anchor="middle">NATS event</text>
+<text x="780" y="292" class="t" fill="#475569" text-anchor="middle">triggers other agents downstream</text>
+
+<!-- Slack digest -->
+<rect x="660" y="322" width="240" height="60" rx="8" fill="#0D1322" stroke="#E879F9" stroke-width="1.2"/>
+<text x="780" y="348" class="h" fill="#F0ABFC" text-anchor="middle">Slack digest</text>
+<text x="780" y="368" class="t" fill="#475569" text-anchor="middle">weekly failed-intent report</text>
+
+<!-- A2A handoff -->
+<rect x="660" y="398" width="240" height="60" rx="8" fill="#0D1322" stroke="#2DD4BF" stroke-width="1.2"/>
+<text x="780" y="424" class="h" fill="#5EEAD4" text-anchor="middle">A2A task handoff</text>
+<text x="780" y="444" class="t" fill="#475569" text-anchor="middle">headless → headed (when human needed)</text>
+
+<!-- ═══ CONNECT TRIGGERS TO AGENTS ══════════════════════════════════════════ -->
+<!-- cron → concept graph -->
+<line x1="222" y1="112" x2="288" y2="142" stroke="#334155" stroke-width="1" marker-end="url(#a)"/>
+<!-- NATS → concept graph -->
+<line x1="222" y1="160" x2="288" y2="168" stroke="#334155" stroke-width="1" marker-end="url(#a)"/>
+<!-- session → home surface -->
+<line x1="222" y1="304" x2="288" y2="268" stroke="#334155" stroke-width="1" marker-end="url(#a)"/>
+<!-- cron → proactive watch -->
+<line x1="222" y1="112" x2="288" y2="390" stroke="#334155" stroke-width="0.8" stroke-dasharray="3 3" marker-end="url(#a)"/>
+<!-- threshold → proactive watch -->
+<line x1="222" y1="352" x2="288" y2="420" stroke="#334155" stroke-width="1" marker-end="url(#a)"/>
+<!-- cron → telemetry -->
+<line x1="222" y1="112" x2="288" y2="536" stroke="#334155" stroke-width="0.8" stroke-dasharray="3 3" marker-end="url(#a)"/>
+<!-- webhook → cross-domain -->
+<line x1="222" y1="208" x2="288" y2="672" stroke="#334155" stroke-width="1" marker-end="url(#a)"/>
+<!-- A2A → cross-domain -->
+<line x1="222" y1="256" x2="288" y2="680" stroke="#334155" stroke-width="1" marker-end="url(#a)"/>
+
+<!-- ═══ CONNECT AGENTS TO OUTPUTS ════════════════════════════════════════════ -->
+<!-- concept graph → NATS -->
+<line x1="572" y1="148" x2="658" y2="270" stroke="#4ADE80" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#ag)"/>
+<!-- home surface → A2UI -->
+<line x1="572" y1="273" x2="658" y2="200" stroke="#22D3EE" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#ac)"/>
+<!-- proactive watch → push -->
+<line x1="572" y1="400" x2="658" y2="124" stroke="#F59E0B" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#at)"/>
+<!-- proactive watch → NATS -->
+<line x1="572" y1="410" x2="658" y2="275" stroke="#F59E0B" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#at)"/>
+<!-- telemetry → slack -->
+<line x1="572" y1="541" x2="658" y2="348" stroke="#E879F9" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#am)"/>
+<!-- cross-domain → push -->
+<line x1="572" y1="675" x2="658" y2="150" stroke="#F59E0B" stroke-width="0.8" stroke-dasharray="3 3" marker-end="url(#at)"/>
+<!-- cross-domain → A2A handoff -->
+<line x1="572" y1="690" x2="658" y2="428" stroke="#2DD4BF" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+
+<!-- ═══ HEADLESS → HEADED HANDOFF ════════════════════════════════════════════ -->
+<rect x="940" y="370" width="240" height="130" rx="10" fill="#0D1322" stroke="#2DD4BF" stroke-width="1.5"/>
+<text x="1060" y="394" class="h" fill="#5EEAD4" text-anchor="middle">headless → headed</text>
+<text x="1060" y="412" class="s" fill="#94A3B8" text-anchor="middle">the handoff pattern</text>
+<text x="956" y="434" class="c" fill="#94A3B8">1. headless detects condition</text>
+<text x="956" y="450" class="c" fill="#94A3B8">2. emits push notification</text>
+<text x="956" y="466" class="c" fill="#94A3B8">3. user taps → session opens</text>
+<text x="956" y="482" class="c" fill="#94A3B8">4. prefetched surface loads</text>
+<text x="956" y="498" class="t" fill="#334155">headless did the thinking</text>
+<text x="956" y="514" class="t" fill="#334155">human does the deciding</text>
+<line x1="902" y1="428" x2="938" y2="428" stroke="#2DD4BF" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+
+<!-- ═══ CROSS-DOMAIN EXAMPLE ═════════════════════════════════════════════════ -->
+<rect x="940" y="540" width="240" height="170" rx="10" fill="#0D1322" stroke="#F59E0B" stroke-width="1.2"/>
+<text x="1060" y="562" class="h" fill="#FCD34D" text-anchor="middle">cross-domain example</text>
+<text x="956" y="582" class="t" fill="#94A3B8">evals agent finishes an eval.</text>
+<text x="956" y="598" class="t" fill="#94A3B8">emits eval.submitted to NATS.</text>
+<text x="956" y="616" class="t" fill="#475569">↓</text>
+<text x="956" y="634" class="t" fill="#94A3B8">cross-domain watch sees it.</text>
+<text x="956" y="650" class="t" fill="#94A3B8">detects dev gap in ratings.</text>
+<text x="956" y="666" class="t" fill="#475569">↓</text>
+<text x="956" y="684" class="t" fill="#94A3B8">pushes: "Based on this eval,</text>
+<text x="956" y="700" class="t" fill="#94A3B8">Alex could use a course in X."</text>
+
+<!-- ═══ LEGEND ════════════════════════════════════════════════════════════════ -->
+<rect x="20" y="790" width="1160" height="70" rx="8" fill="#0D1322" stroke="#1E293B"/>
+<text x="40" y="814" class="h" fill="#E2E8F0">agent types in this diagram</text>
+<rect x="40"  y="830" width="10" height="10" rx="2" fill="#4ADE80"/>
+<text x="56"  y="839" class="m" fill="#86EFAC">pipeline (no model)</text>
+<rect x="200" y="830" width="10" height="10" rx="2" fill="#22D3EE"/>
+<text x="216" y="839" class="m" fill="#67E8F9">haiku agent (session-triggered)</text>
+<rect x="460" y="830" width="10" height="10" rx="2" fill="#F59E0B"/>
+<text x="476" y="839" class="m" fill="#FCD34D">haiku/sonnet agent (proactive) ★ new</text>
+<rect x="760" y="830" width="10" height="10" rx="2" fill="#E879F9"/>
+<text x="776" y="839" class="m" fill="#F0ABFC">haiku agent (scheduled)</text>
+<rect x="960" y="830" width="10" height="10" rx="2" fill="#2DD4BF"/>
+<text x="976" y="839" class="m" fill="#5EEAD4">handoff surface (headed)</text>
+</svg>
